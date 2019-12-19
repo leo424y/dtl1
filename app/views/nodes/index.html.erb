@@ -1,0 +1,7 @@
+<% @nodes.each do |node| %>
+    <% node.posts.each do |post| %>
+        <%= post.title %>
+        <%= post.node.name %>
+        <%= post.archive['pa'] %>
+    <% end %>
+<% end %>
