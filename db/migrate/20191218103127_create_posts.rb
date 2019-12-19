@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
     create_table :posts, id: :uuid do |t|
       t.string :url
       t.string :title
-      t.jsonb :archive
+      t.jsonb :archive, null: false, default: '{}'
       t.uuid :node_id
 
       t.timestamps

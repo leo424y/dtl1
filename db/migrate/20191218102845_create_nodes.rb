@@ -4,7 +4,7 @@ class CreateNodes < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :source
       t.string :url
-      t.jsonb :archive
+      t.jsonb :archive, null: false, default: '{}'
       
       t.timestamps
     end
