@@ -9,8 +9,9 @@
 <% @posts.each do |post| %>
 <tr>
     <td> <%= post.node.name %></td>
-   <td><%= post.title %></td>
-    <td> <%= post.url %></td>
+      <td><%= post.title %></td>
+      <td> <%= post.url %></td>
+      <td> <%= post.link %></td>
     </tr>
 <% end %>
 </table>

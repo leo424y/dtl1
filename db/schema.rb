@@ -27,12 +27,14 @@ ActiveRecord::Schema.define(version: 2019_12_18_103127) do
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
+    t.string "link"
     t.string "title"
     t.jsonb "archive", default: "{}", null: false
     t.uuid "node_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_at"], name: "index_posts_on_created_at"
+    t.index ["link"], name: "index_posts_on_link"
     t.index ["node_id"], name: "index_posts_on_node_id"
   end
 
