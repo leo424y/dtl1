@@ -1,5 +1,16 @@
-<% @posts.each do |post| %>
-    <%= post.title %>
-    <%= post.node.name %>
-    <%= post.archive['pa'] %>
+<%= flash[:notice] %>
+<h4>Import</h4>
+<%= form_tag import_posts_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import CSV" %>
 <% end %>
+
+<table>
+<% @posts.each do |post| %>
+<tr>
+    <td> <%= post.node.name %></td>
+   <td><%= post.title %></td>
+    <td> <%= post.url %></td>
+    </tr>
+<% end %>
+</table>

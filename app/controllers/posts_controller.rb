@@ -7,4 +7,9 @@ class PostsController < ApplicationController
             format.json { render json: @posts }
         end
     end
+
+    def import
+        Post.import(params[:file])
+        redirect_to root_url, notice: 'Post imported'
+    end
 end

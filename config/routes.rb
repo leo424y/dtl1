@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   resources :nodes do
     resources :posts
   end
-  resources :posts
+  resources :posts do
+    collection {post :import}
+  end
+  root to: "posts#index"
 end
