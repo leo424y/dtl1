@@ -9,6 +9,9 @@ class Post < ApplicationRecord
                 name: row_hash['Facebook Id'], 
                 source: 'facebook', 
                 url: "https://www.facebook.com/#{row_hash['Facebook Id']}",
+                archive: {
+                    user_name: row_hash['User Name'],
+                }
             )
             node.posts.create!(
                 archive: row_hash, 

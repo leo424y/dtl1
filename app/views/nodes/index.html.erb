@@ -1,7 +1,7 @@
+<table>
 <% @nodes.each do |node| %>
-    <% node.posts.each do |post| %>
-        <%= post.title %>
-        <%= post.node.name %>
-        <%= post.archive['pa'] %>
-    <% end %>
+<tr>
+    <td><%= link_to node.archive['user_name'] || node.name, node.url %></td>
+</tr>
 <% end %>
+</table>
