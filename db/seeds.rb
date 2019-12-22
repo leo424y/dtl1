@@ -9,3 +9,4 @@
 Node.create(name: 'n1', archive: {na: "n1a"})
 Node.last.posts.create(title: 'n1p1', archive: {pa: "n1p1a"})
 Node.last.posts.create(title: 'n1p2', archive: {pa: "n1p2a"})
+Post.last.links.create(url: 'http://love.com')

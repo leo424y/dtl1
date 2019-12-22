@@ -10,8 +10,10 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
+    add_index :posts, :url
+    add_index :posts, :link
+    add_index :posts, :title
     add_index :posts, :node_id
     add_index :posts, :created_at
-    add_index :posts, :link
   end
 end

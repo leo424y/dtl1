@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_103127) do
+ActiveRecord::Schema.define(version: 2019_12_22_035620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "url"
+    t.jsonb "archive", default: "{}", null: false
+    t.uuid "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_links_on_created_at"
+    t.index ["post_id"], name: "index_links_on_post_id"
+    t.index ["url"], name: "index_links_on_url"
+  end
 
   create_table "nodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -36,6 +47,8 @@ ActiveRecord::Schema.define(version: 2019_12_18_103127) do
     t.index ["created_at"], name: "index_posts_on_created_at"
     t.index ["link"], name: "index_posts_on_link"
     t.index ["node_id"], name: "index_posts_on_node_id"
+    t.index ["title"], name: "index_posts_on_title"
+    t.index ["url"], name: "index_posts_on_url"
   end
 
 end

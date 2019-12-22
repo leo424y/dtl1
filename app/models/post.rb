@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
     belongs_to :node
+    has_many :links
 
     def self.import(file)
         require 'csv'
