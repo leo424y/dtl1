@@ -14,12 +14,17 @@ class Post < ApplicationRecord
                     user_name: row_hash['User Name'],
                 }
             )
-            node.posts.create!(
+
+            post = node.posts.create!(
                 archive: row_hash, 
                 url: row_hash['URL'], 
                 title: row_hash['Message'], 
                 link: row_hash['Link'], 
             )
+
+            post.links.create!(
+                url: row_hash['Link'], 
+            ) if row_hash['Link']
         end
     end
 end
