@@ -5,7 +5,7 @@ class Link < ApplicationRecord
         if search
           where(url: search).order(updated_at: :desc).includes(:post)
         else
-          all.order(updated_at: :desc).includes(:post)
+          order(updated_at: :desc).includes(:post).limit(1000)
         end
     end
 end

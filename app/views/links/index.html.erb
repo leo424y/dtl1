@@ -8,6 +8,8 @@
 <table>
 <% @links.each do |link| %>
 <tr>
+    <td><%= link.post.updated || link.post.date %></td>
+    <td><%# link_to link.post.node.name, link.post.node.url, target: "_blank" %></td>
     <td><%= link_to link.post.title, link.post.url, target: "_blank" %></td>
 </tr>
 <% end %>

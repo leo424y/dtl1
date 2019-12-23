@@ -6,14 +6,13 @@
 <% end %>
 <br>
 <%= button_to "CrowdTangle API UPDATE", api_posts_path, method: :get %>
-
+<br>
 <table>
 <% @posts.each do |post| %>
 <tr>
-    <td> <%= post.node.name %></td>
-      <td><%= post.title %></td>
-      <td> <%= post.url %></td>
-      <td> <%= post.link %></td>
+    <td> <%= link_to post.node.name, post.node.url, target: '_blank' %></td>
+      <td><%= link_to post.title ? post.title.truncate(20) : 'post', post.url, target: '_blank' %></td>
+      <td><%= link_to post.links.first.description ? post.links.first.description.truncate(20) : 'link', post.link, target: '_blank' if post.links.first %></td>
     </tr>
 <% end %>
 </table>

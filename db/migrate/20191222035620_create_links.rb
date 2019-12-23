@@ -2,6 +2,7 @@ class CreateLinks < ActiveRecord::Migration[6.0]
   def change
     create_table :links, id: :uuid do |t|
       t.string :url
+      t.string :description
       t.jsonb :archive, null: false, default: '{}'
       t.uuid :post_id
       t.timestamps

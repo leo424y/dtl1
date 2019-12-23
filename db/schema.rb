@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_12_22_035620) do
 
   create_table "links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
+    t.string "description"
     t.jsonb "archive", default: "{}", null: false
     t.uuid "post_id"
     t.datetime "created_at", precision: 6, null: false
@@ -40,13 +41,17 @@ ActiveRecord::Schema.define(version: 2019_12_22_035620) do
     t.string "url"
     t.string "link"
     t.string "title"
+    t.string "date"
+    t.string "updated"
     t.jsonb "archive", default: "{}", null: false
     t.uuid "node_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_at"], name: "index_posts_on_created_at"
+    t.index ["date"], name: "index_posts_on_date"
     t.index ["link"], name: "index_posts_on_link"
     t.index ["node_id"], name: "index_posts_on_node_id"
+    t.index ["updated"], name: "index_posts_on_updated"
     t.index ["url"], name: "index_posts_on_url"
   end
 

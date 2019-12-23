@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     def index
-        @posts = Post.none
+        @posts = Post.includes(:node).order(created_at: :desc).limit(100)
         respond_to do |format|
             format.html # index.html.erb
             format.xml  { render xml: @posts }
@@ -9,8 +9,12 @@ class PostsController < ApplicationController
     end
 
     def import
-        Post.import(params[:file])
-        redirect_to root_url, notice: 'Post imported'
+        if params[:file]
+            Post.import(params[:file]) 
+            redirect_to root_url, notice: 'Post imported'
+        else
+            redirect_to root_url, notice: 'No CSV'
+        end
     end
 
     def api
