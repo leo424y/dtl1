@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
   resources :posts do
     collection {post :import}
+    collection {get :api}
   end
   resources :links
   root to: "posts#index"
