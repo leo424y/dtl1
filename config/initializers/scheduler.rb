@@ -10,7 +10,7 @@ s = Rufus::Scheduler.singleton
 
 # Stupid recurrent task...
 #
-s.every '1h' do
+s.every '10m' do
 
   Rails.logger.info "hello, it's #{Time.now}"
   Rails.logger.flush
