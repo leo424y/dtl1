@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :posts do
     collection {post :import}
   end
+  resources :links
   root to: "posts#index"
 end

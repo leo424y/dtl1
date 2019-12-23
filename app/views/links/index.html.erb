@@ -1,0 +1,14 @@
+<%= form_tag links_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<table>
+<% @links.each do |link| %>
+<tr>
+    <td><%= link_to link.post.title, link.url, target: "_blank" %></td>
+</tr>
+<% end %>
+</table>
