@@ -5,7 +5,7 @@ class Link < ApplicationRecord
         if search
           where(url: search)
         else
-          none
+          all
         end
     end
 end
