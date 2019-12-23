@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 2019_12_22_035620) do
     t.index ["created_at"], name: "index_posts_on_created_at"
     t.index ["link"], name: "index_posts_on_link"
     t.index ["node_id"], name: "index_posts_on_node_id"
-    t.index ["title"], name: "index_posts_on_title"
     t.index ["url"], name: "index_posts_on_url"
   end
 

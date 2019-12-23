@@ -8,7 +8,7 @@
 <table>
 <% @links.each do |link| %>
 <tr>
-    <td><%= link_to link.post.title, link.url, target: "_blank" %></td>
+    <td><%= link_to link.post.title, link.post.url, target: "_blank" %></td>
 </tr>
 <% end %>
 </table>

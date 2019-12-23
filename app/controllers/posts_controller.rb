@@ -14,12 +14,7 @@ class PostsController < ApplicationController
     end
 
     def api
-        require 'net/https'
-        token = ENV['CT_TOCKEN']
-        list_id = '1290974'
-        uri = URI("https://api.crowdtangle.com/posts?token=#{token}&listIds=#{list_id}")
-        request = Net::HTTP.get_response(uri)
-        puts request.body if request.is_a?(Net::HTTPSuccess)
+        Post.api_import
         
         redirect_to root_url, notice: 'Post imported'
     end
