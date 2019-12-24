@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
     def index
+        @link_tops = Link.group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| n[1]>4 }
         @links = Link.search(params[:url]).order(created_at: :desc).limit(100)
         respond_to do |format|
             format.html # index.html.erb

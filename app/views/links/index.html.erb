@@ -6,6 +6,14 @@
 <% end %>
 
 <table>
+<% @link_tops.each do |link| %>
+<tr>
+    <td><%= link_to link[1], posts_path(url: link[0]) %></td>
+    <td><%= link_to link[0] %></td>
+</tr>
+<% end %>
+</table>
+<table>
 <% @links.each do |link| %>
 <tr>
     <td><%= link.post.updated || link.post.date %></td>
@@ -14,3 +22,4 @@
 </tr>
 <% end %>
 </table>
+

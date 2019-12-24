@@ -2,6 +2,14 @@ class Post < ApplicationRecord
     belongs_to :node
     has_many :links
 
+    def self.search(search)
+        if search
+          where(link: search)
+        else
+          all
+        end
+    end
+
     def self.import(file)
         require 'csv'
         CSV.foreach(file.path, headers: true) do |row|
