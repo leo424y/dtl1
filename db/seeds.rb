@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Node.create(name: 'n1', archive: {na: "n1a"})
-Node.last.posts.create(title: 'n1p1', archive: {pa: "n1p1a"})
-Node.last.posts.create(title: 'n1p2', archive: {pa: "n1p2a"})
-Post.last.links.create(url: 'http://love.com')
+# Node.create(name: 'n1', archive: {na: "n1a"})
+# Node.last.posts.create(title: 'n1p1', archive: {pa: "n1p1a"})
+# Node.last.posts.create(title: 'n1p2', archive: {pa: "n1p2a"})
+# Post.last.links.create(url: 'http://love.com')
