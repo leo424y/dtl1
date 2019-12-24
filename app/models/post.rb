@@ -6,7 +6,7 @@ class Post < ApplicationRecord
         if search
           where(link: search)
         else
-          all
+          limit(50)
         end
     end
 

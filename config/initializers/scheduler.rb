@@ -11,8 +11,5 @@ s = Rufus::Scheduler.singleton
 # Stupid recurrent task...
 #
 s.every '30m' do
-
-  Rails.logger.info "hello, it's #{Time.now}"
-  Rails.logger.flush
   Post.api_import
 end

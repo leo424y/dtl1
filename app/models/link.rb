@@ -3,9 +3,9 @@ class Link < ApplicationRecord
 
     def self.search(search)
         if search
-          where(url: search).order(updated_at: :desc).includes(:post)
+          where(url: search)
         else
-          order(updated_at: :desc).includes(:post).limit(1000)
+          limit(50)
         end
     end
 end

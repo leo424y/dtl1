@@ -8,5 +8,5 @@ Rails.application.routes.draw do
     collection {get :api}
   end
   resources :links
-  root to: "posts#index"
+  root to: "links#index"
 end
