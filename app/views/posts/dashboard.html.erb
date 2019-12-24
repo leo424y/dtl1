@@ -1,0 +1,9 @@
+<%= flash[:notice] %>
+<h4>Import</h4>
+<%= form_tag import_posts_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import CSV from CrowdTangle" %>
+<% end %>
+<br>
+<%= button_to "CrowdTangle API UPDATE", api_posts_path, method: :get %>
+<br>

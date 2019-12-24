@@ -11,15 +11,18 @@ class PostsController < ApplicationController
     def import
         if params[:file]
             Post.import(params[:file]) 
-            redirect_to root_url, notice: 'Post imported'
+            redirect_to dashboard_posts_path, notice: 'Post from csv imported'
         else
-            redirect_to root_url, notice: 'No CSV'
+            redirect_to dashboard_posts_path, notice: 'No CSV'
         end
     end
 
     def api
         Post.api_import
         
-        redirect_to root_url, notice: 'Post imported'
+        redirect_to dashboard_posts_path, notice: 'Post from api imported'
+    end
+
+    def dashboard
     end
 end
