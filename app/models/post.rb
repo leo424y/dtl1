@@ -72,10 +72,19 @@ class Post < ApplicationRecord
             updated: updated,
         )
 
-        post.links.create!(
-            url: link, 
-            description: link_description,
-        ) if link
+        if row_hash['expandedLinks']
+            row_hash['expandedLinks'].each do |e|
+                post.links.create!(
+                    url: e['original'], 
+                ) 
+            end
+        else
+            post.links.create!(
+                url: link, 
+                description: link_description,
+            ) 
+        end
+
     end
 
 end
