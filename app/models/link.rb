@@ -10,7 +10,7 @@ class Link < ApplicationRecord
     end
 
     def self.top_group
-      group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| n[1]> 5 } 
+      group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| (n[1]> 5)&&(n[0] != nil) } 
     end
 
     def self.top_domain

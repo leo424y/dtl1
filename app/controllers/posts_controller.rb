@@ -25,4 +25,8 @@ class PostsController < ApplicationController
 
     def dashboard
     end
+
+    def show
+        @post=Post.find(params[:id])
+    end
 end
