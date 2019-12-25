@@ -26,7 +26,7 @@
 <table>
 <% @links.each do |link| %>
 <tr>
-    <td><%= link.post.updated || link.post.date %></td>
+    <td><%= tw_time link.post.updated || link.post.date %></td>
     <td><%# link_to link.post.node.name, link.post.node.url, target: "_blank" %></td>
     <% if link.url %>
     <td><%= link_to 'CT', url_on_ct(link.url), target: "_blank" %></td>
