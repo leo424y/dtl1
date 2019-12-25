@@ -75,7 +75,7 @@ class Post < ApplicationRecord
         if row_hash['expandedLinks']
             row_hash['expandedLinks'].each do |e|
                 post.links.create!(
-                    url: e['original'], 
+                    url: e['original'].delete!("^\u{0000}-\u{007F}"), 
                 ) 
             end
         else
