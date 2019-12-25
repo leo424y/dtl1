@@ -1,10 +1,12 @@
+<h4>link search in DB</h4>
+
 <%= form_tag links_path, :method => 'get' do %>
   <p>
     <%= text_field_tag :url, params[:url] %>
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
-
+<h4> Top shared domain</h4>
 <table>
 <% @link_domains.each do |link| %>
 <tr>
@@ -14,6 +16,7 @@
 <% end %>
 </table>
 
+<h4> Top shared links</h4>
 <table>
 <% @link_tops.each do |link| %>
 <tr>
