@@ -75,7 +75,7 @@ class Post < ApplicationRecord
         if row_hash['expandedLinks']
             row_hash['expandedLinks'].each do |e|
                 post.links.create!(
-                    url: e['original'], 
+                    url: e['expanded'], 
                 ) 
             end
         else
