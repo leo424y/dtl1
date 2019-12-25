@@ -21,7 +21,7 @@
 <% @link_tops.each do |link| %>
 <tr>
     <td><%= link_to link[1], posts_path(url: link[0]), target: "_blank" %></td>
-    <td><%= link_to link[0], link[0], target: "_blank" %></td>
+    <td><%= link_to link[0], link[0].dup.delete!("^\u{0000}-\u{007F}"), target: "_blank" if link[0] %></td>
 </tr>
 <% end %>
 </table>
