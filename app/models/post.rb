@@ -23,7 +23,7 @@ class Post < ApplicationRecord
                 row_hash['Link'], 
                 row_hash['User Name'],
                 row_hash['Created'],
-                '',
+                row_hash['Created'],
                 row_hash['Description']
             )
         end

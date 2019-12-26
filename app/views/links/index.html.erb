@@ -13,12 +13,12 @@
 <tr>
     <td><%= link_to '↖', "#{link.url}", target: "_blank" %></td>
     <%= render "layouts/ct", params: {ct: link.url} %>
-    <td><%= link_to (tw_time link.post.updated || link.post.date), post_path(id: link.post_id) %></td>
+    <td><%= link_to (tw_time link.created_at || link.post.updated || link.post.date), post_path(id: link.post_id) %></td>
     <td><%# link_to link.post.node.name, link.post.node.url, target: "_blank" %></td>
+    <td><%= link_to link.post.title.truncate(10), link.post.url, target: "_blank" if link.post.title %></td>
     <% if link.url %>
       <td><%= link_to link.url.truncate(30), links_path(url: link.url) %></td>
     <% end %>
-    <td><%= link_to link.post.title.truncate(10), link.post.url, target: "_blank" if link.post.title %></td>
 </tr>
 <% end %>
 </table>
