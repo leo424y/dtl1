@@ -11,6 +11,15 @@ class Link < ApplicationRecord
         end
     end
 
+    def self.search_context(description)
+      if description.present?
+        where("description LIKE :description", {:description => "%#{description}%"})
+      else
+        none
+      end
+  end
+
+
     def self.top_group
       group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| (n[1]> 5)&&(n[0] != nil) } 
     end

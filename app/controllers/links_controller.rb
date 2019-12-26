@@ -5,12 +5,9 @@ class LinksController < ApplicationController
             @link_tops = @links.top_group
             @link_domains = @links.top_domain
         elsif params[:description].present?
-            @links = Link.search(params[:description])
+            @links = Link.search_context(params[:description])
             @link_tops = @link_domains = Link.none
         else 
-            # @links = Link.search(params[:url])
-            # @link_tops = Link.top_group
-            # @link_domains = Link.top_domain
             @links = Link.limit(10)
             @link_tops = @link_domains = Link.none
         end
