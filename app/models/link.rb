@@ -3,9 +3,10 @@ class Link < ApplicationRecord
 
     def self.search(search)
         if search
-          where(url: search)
+          # where(url: search)
+          where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%"})
         else
-          limit(50)
+          limit(5)
         end
     end
 
