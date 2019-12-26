@@ -26,8 +26,9 @@
 <table>
 <% @link_domains.each do |link| %>
 <tr>
-    <td><%= link[1] %></td>
-    <td><%= link_to link[0], "http://#{link[0]}", target: "_blank" %></td>
+    <td><%= link_to '↖', "http://#{link[0]}", target: "_blank" %></td>
+    <td><%= link_to link[1] %></td>
+    <td><%= link_to link[0], links_path(url: link[0]) %></td>
 </tr>
 <% end %>
 </table>
@@ -36,6 +37,7 @@
 <table>
 <% @link_tops.each do |link| %>
 <tr>
+    <td><%= link_to '↖', "http://#{link[0]}", target: "_blank" %></td>
     <td><%= link_to link[1], posts_path(url: link[0]), target: "_blank" %></td>
     <td><%= link_to link[0], link[0].dup.delete!("^\u{0000}-\u{007F}"), target: "_blank" if link[0] %></td>
 </tr>

@@ -1,8 +1,8 @@
 <table>
 <% @posts.each do |post| %>
 <tr>
-      <td> <%= link_to tw_time(post.date), post_path(post) %></td>
-    <td> <%= link_to post.node.name, post.node.url, target: '_blank' %></td>
+      <td><%= link_to tw_time(post.date), post_path(post) %></td>
+      <td><%= link_to post.node.name, post.node.url, target: '_blank' %></td>
       <td><%= link_to post.title ? post.title.truncate(20) : 'post', post.url, target: '_blank' %></td>
       <td><%# link_to post.links.first.description ? post.links.first.description.truncate(20) : 'link', post.link, target: '_blank' if post.links.first %></td>
     </tr>
