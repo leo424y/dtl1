@@ -2,9 +2,9 @@ class Link < ApplicationRecord
     belongs_to :post
 
     def self.search(search)
-        if search
+        if search.present?
           # where(url: search)
-          where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%"})
+          where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls OR url LIKE :str", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%", :str => "%#{search}%"})
         else
           limit(5)
         end
