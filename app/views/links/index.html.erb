@@ -4,7 +4,6 @@
   <p>
     <%= text_field_tag :url, params[:url] %>
     <%= submit_tag "Search", :name => nil %>
-    <%= @links.count %>
   </p>
 <% end %>
 
@@ -14,11 +13,11 @@
   <p>
     <%= text_field_tag :description, params[:description] %>
     <%= submit_tag "Search", :name => nil %>
-    <%= @links.count %>
   </p>
 <% end %>
 
-<h4>Result</h4>
+<h4>Results | <%= @links.count %></h4>
+
 <table>
 <% @links.each do |link| %>
 <tr>
