@@ -1,12 +1,18 @@
 class LinksController < ApplicationController
     def index
-        @links = Link.search(params[:url])
         if params[:url].present?
+            @links = Link.search(params[:url])
             @link_tops = @links.top_group
             @link_domains = @links.top_domain
+        elsif params[:description].present?
+            @links = Link.search(params[:description])
+            @link_tops = @link_domains = Link.none
         else 
-            @link_tops = Link.top_group
-            @link_domains = Link.top_domain
+            # @links = Link.search(params[:url])
+            # @link_tops = Link.top_group
+            # @link_domains = Link.top_domain
+            @links = Link.limit(10)
+            @link_tops = @link_domains = Link.none
         end
         @links = @links.includes(:post).order(created_at: :desc)    
 

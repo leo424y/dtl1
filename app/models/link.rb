@@ -6,7 +6,8 @@ class Link < ApplicationRecord
           # where(url: search)
           where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls OR url LIKE :str", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%", :str => "%#{search}%"})
         else
-          limit(5)
+          # limit(5)
+          none
         end
     end
 

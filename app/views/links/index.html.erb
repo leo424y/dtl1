@@ -8,6 +8,16 @@
   </p>
 <% end %>
 
+<h4>link description in DB</h4>
+
+<%= form_tag links_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :description, params[:description] %>
+    <%= submit_tag "Search", :name => nil %>
+    <%= @links.count %>
+  </p>
+<% end %>
+
 <table>
 <% @links.each do |link| %>
 <tr>
