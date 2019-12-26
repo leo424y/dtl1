@@ -11,11 +11,12 @@
 <table>
 <% @links.each do |link| %>
 <tr>
+    <td><%= link_to '↖', "#{link.url}", target: "_blank" %></td>
+    <%= render "layouts/ct", params: {ct: link.url} %>
     <td><%= link_to (tw_time link.post.updated || link.post.date), post_path(id: link.post_id) %></td>
     <td><%# link_to link.post.node.name, link.post.node.url, target: "_blank" %></td>
     <% if link.url %>
-    <%= render "layouts/ct", params: {ct: link.url} %>
-    <td><%= link_to link.url.truncate(30), link.url, target: "_blank" %></td>
+      <td><%= link_to link.url.truncate(30), links_path(url: link.url) %></td>
     <% end %>
     <td><%= link_to link.post.title.truncate(10), link.post.url, target: "_blank" if link.post.title %></td>
 </tr>
@@ -41,7 +42,8 @@
     <td><%= link_to '↖', "http://#{link[0]}", target: "_blank" %></td>
     <%= render "layouts/ct", params: {ct: link[0]} %>
     <td><%= link_to link[1], posts_path(url: link[0]), target: "_blank" %></td>
-    <td><%= link_to link[0], link[0].dup.delete!("^\u{0000}-\u{007F}"), target: "_blank" if link[0] %></td>
+    <td><%# (link_to link[0], link[0].dup.delete!("^\u{0000}-\u{007F}"), target: "_blank") if link[0] %></td>
+    <td><%= link_to link[0], link[0], target: "_blank" %></td>
 </tr>
 <% end %>
 </table>
