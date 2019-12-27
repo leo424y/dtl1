@@ -10,6 +10,6 @@ s = Rufus::Scheduler.singleton
 
 # Stupid recurrent task...
 #
-s.every '30m' do
+s.every '10m' do
   Post.api_import
 end
