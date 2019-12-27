@@ -43,12 +43,12 @@ class Post < ApplicationRecord
                 row_hash['account']['platformId'],
                 'crowdtangle_api', 
                 row_hash['postUrl'], 
-                row_hash['message'] || row_hash['description'], 
+                row_hash['message'] || row_hash['title'], 
                 row_hash['link'], 
                 row_hash['account']['handle'],
                 row_hash['date'],
                 row_hash['updated'],
-                row_hash['description']
+                row_hash['title'] && row_hash['description'] ? (row_hash['title'] + row_hash['description']) : ''
             )
         end
     end
@@ -76,6 +76,7 @@ class Post < ApplicationRecord
             row_hash['expandedLinks'].each do |e|
                 post.links.create!(
                     url: e['expanded'], 
+                    description: link_description,
                 ) 
             end
         else

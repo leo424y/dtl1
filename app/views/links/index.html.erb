@@ -1,3 +1,5 @@
+<h4>Dataset & Time Range</h4>
+[TODO:選擇資料集與日期]
 <h4>link search in DB</h4>
 
 <%= form_tag links_path, :method => 'get' do %>
@@ -16,23 +18,6 @@
   </p>
 <% end %>
 
-<h4>Results | <%= @links.count %></h4>
-
-<table>
-<% @links.each do |link| %>
-<tr>
-    <td><%= link_to '↖', "#{link.url}", target: "_blank" %></td>
-    <%= render "layouts/ct", params: {ct: link.url} %>
-    <td><%= link_to (tw_time link.created_at || link.post.updated || link.post.date), post_path(id: link.post_id) %></td>
-    <td><%# link_to link.post.node.name, link.post.node.url, target: "_blank" %></td>
-    <td><%= link_to link.post.title.truncate(30), link.post.url, target: "_blank" if link.post.title %></td>
-    <% if link.url %>
-      <td><%= link_to (link.description || link.url).truncate(30), links_path(url: link.url), title: (link.description || link.url) %></td>
-    <% end %>
-</tr>
-<% end %>
-</table>
-
 <h4> Top shared domain</h4>
 <table>
 <% @link_domains.each do |link| %>
@@ -49,7 +34,7 @@
 <table>
 <% @link_tops.each do |link| %>
 <tr>
-    <td><%= link_to '↖', "http://#{link[0]}", target: "_blank" %></td>
+    <td><%= link_to '↖', "#{link[0]}", target: "_blank" %></td>
     <%= render "layouts/ct", params: {ct: link[0]} %>
     <td><%= link_to link[1], posts_path(url: link[0]), target: "_blank" %></td>
     <td><%# (link_to link[0], link[0].dup.delete!("^\u{0000}-\u{007F}"), target: "_blank") if link[0] %></td>
@@ -58,3 +43,19 @@
 <% end %>
 </table>
 
+<h4>Results | <%= @links.count %></h4>
+
+<table>
+<% @links.each do |link| %>
+<tr>
+    <td><%= link_to '↖', "#{link.url}", target: "_blank" %></td>
+    <%= render "layouts/ct", params: {ct: link.url} %>
+    <td><%= link_to (tw_time link.created_at || link.post.updated || link.post.date), post_path(id: link.post_id) %></td>
+    <td><%# link_to link.post.node.name, link.post.node.url, target: "_blank" %></td>
+    <td><%= link_to link.post.title.truncate(30), link.post.url, target: "_blank" if link.post.title %></td>
+    <% if link.url %>
+      <td><%= link_to (link.description || link.url).truncate(30), links_path(url: link.url), title: (link.description || link.url) %></td>
+    <% end %>
+</tr>
+<% end %>
+</table>

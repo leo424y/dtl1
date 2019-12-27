@@ -8,8 +8,10 @@ class LinksController < ApplicationController
             @links = Link.search_context(params[:description])
             @link_tops = @link_domains = Link.none
         else 
-            @links = Link.limit(10)
-            @link_tops = @link_domains = Link.none
+            @links = Link.all
+            # @link_tops = @link_domains = Link.none
+            @link_tops = @links.top_group
+            @link_domains = @links.top_domain
         end
         @links = @links.includes(:post).order(created_at: :desc)    
 
