@@ -49,7 +49,7 @@ class Post < ApplicationRecord
                     row_hash['account']['handle'],
                     row_hash['date'],
                     row_hash['updated'],
-                    row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : '',
+                    row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : row_hash['message'],
                     row_hash['score']
                 )
             end
@@ -92,7 +92,7 @@ class Post < ApplicationRecord
             row_hash['expandedLinks'].each_with_index do |e,i|
                 post.links.create!(
                     url: e['expanded'], 
-                    description: (link_description if (i == -1))
+                    description: link_description
                 ) 
             end
         else
