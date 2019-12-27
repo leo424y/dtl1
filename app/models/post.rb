@@ -48,7 +48,7 @@ class Post < ApplicationRecord
                 row_hash['account']['handle'],
                 row_hash['date'],
                 row_hash['updated'],
-                row_hash['title'] && row_hash['description'] ? (row_hash['title'] + '-' + row_hash['description']) : ''
+                row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : ''
             )
         end
     end
