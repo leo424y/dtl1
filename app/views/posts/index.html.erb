@@ -2,10 +2,11 @@
 <% @posts.each do |post| %>
 <tr>
       <td><%= link_to '↖', post.url, target: '_blank' %></td>
-      <td><%= link_to tw_time(post.date), post_path(post) %></td>
+      <td><%= link_to tw_time(post.date), post_path(post), title: post.archive %></td>
       <td><%# link_to post.node.name, post.node.url, target: '_blank' %></td>
       <td><%= link_to post.title ? post.title.truncate(20) : 'post', post_path(post) %></td>
       <td><%= post.score %></td>
+      <td><%# post.title %></td>
     </tr>
 <% end %>
 </table>
