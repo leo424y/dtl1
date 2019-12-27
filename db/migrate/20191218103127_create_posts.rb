@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :updated
       t.jsonb :archive, null: false, default: '{}'
       t.uuid :node_id
+      t.decimal :score
 
       t.timestamps
     end
@@ -17,6 +18,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
     add_index :posts, :date
     add_index :posts, :updated
     add_index :posts, :node_id
+    add_index :posts, :score
     add_index :posts, :created_at
   end
 end

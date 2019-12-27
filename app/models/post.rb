@@ -24,7 +24,8 @@ class Post < ApplicationRecord
                 row_hash['User Name'],
                 row_hash['Created'],
                 row_hash['Created'],
-                row_hash['Description']
+                row_hash['Description'],
+                row_hash['Overperforming Score']
             )
         end
     end
@@ -48,12 +49,25 @@ class Post < ApplicationRecord
                 row_hash['account']['handle'],
                 row_hash['date'],
                 row_hash['updated'],
-                row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : ''
+                row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : '',
+                row_hash['score']
             )
         end
     end
 
-    def self.write_posts(row_hash, platform_id, source, url, message, link, user_name, date, updated, link_description)
+    def self.write_posts(
+        row_hash, 
+        platform_id, 
+        source, 
+        url, 
+        message, 
+        link, 
+        user_name, 
+        date, 
+        updated, 
+        link_description,
+        score
+    )
         node = Node.find_or_create_by(
             name: platform_id, 
             source: source, 
@@ -70,6 +84,7 @@ class Post < ApplicationRecord
             link: link, 
             date: date,
             updated: updated,
+            score: score
         )
 
         if row_hash['expandedLinks']
