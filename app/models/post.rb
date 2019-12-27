@@ -17,7 +17,7 @@ class Post < ApplicationRecord
             write_posts(
                 row_hash, 
                 row_hash['Facebook Id'], 
-                'crowdtangle_csv', 
+                'crowdtangle_csv_' + DateTime.now.strftime("%Y%m%d%H%M"), 
                 row_hash['URL'], 
                 row_hash['Message'], 
                 row_hash['Link'], 
@@ -33,25 +33,26 @@ class Post < ApplicationRecord
     def self.api_import
         require 'net/https'
         token = ENV['CT_TOCKEN']
-        list_id = '1290974'
-
-        uri = URI("https://api.crowdtangle.com/posts?token=#{token}&listIds=#{list_id}&startDate=#{Date.today.strftime("%Y-%m-%d")}&sortBy=date&count=100")
-        request = Net::HTTP.get_response(uri)
-        puts rows_hash = JSON.parse(request.body)['result']['posts'] if request.is_a?(Net::HTTPSuccess)
-        rows_hash.each do |row_hash|
-            write_posts(
-                row_hash, 
-                row_hash['account']['platformId'],
-                'crowdtangle_api', 
-                row_hash['postUrl'], 
-                row_hash['message'] || row_hash['title'], 
-                row_hash['link'], 
-                row_hash['account']['handle'],
-                row_hash['date'],
-                row_hash['updated'],
-                row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : '',
-                row_hash['score']
-            )
+        list_ids = ['1290974','1290972']
+        list_ids.each do |list_id|
+            uri = URI("https://api.crowdtangle.com/posts?token=#{token}&listIds=#{list_id}&startDate=#{Date.today.strftime("%Y-%m-%d")}&sortBy=date&count=100")
+            request = Net::HTTP.get_response(uri)
+            puts rows_hash = JSON.parse(request.body)['result']['posts'] if request.is_a?(Net::HTTPSuccess)
+            rows_hash.each do |row_hash|
+                write_posts(
+                    row_hash, 
+                    row_hash['account']['platformId'],
+                    'crowdtangle_api_'+ list_id + '_' + DateTime.now.strftime("%Y%m%d%H%M"), 
+                    row_hash['postUrl'], 
+                    row_hash['message'] || row_hash['title'], 
+                    row_hash['link'], 
+                    row_hash['account']['handle'],
+                    row_hash['date'],
+                    row_hash['updated'],
+                    row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : '',
+                    row_hash['score']
+                )
+            end
         end
     end
 

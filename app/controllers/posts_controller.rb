@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     def index
-        @posts = Post.search(params[:url]).includes(:node).order(date: :desc)
+        @posts = Post.search(params[:url]).includes(:node).order(score: :desc)
         respond_to do |format|
             format.html # index.html.erb
             format.xml  { render xml: @posts }
