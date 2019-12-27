@@ -3,6 +3,7 @@
 <tr>
     <td><%= link_to node.archive['user_name'] || node.name, node.url %></td>
     <td><%= node.posts.count %></td>
+    <td><%= node.posts.average(:score) %></td>
 </tr>
 <% end %>
 </table>
