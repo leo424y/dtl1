@@ -2,6 +2,7 @@
 <% @nodes.each do |node| %>
 <tr>
     <td><%= link_to node.archive['user_name'] || node.name, node.url %></td>
+    <td><%= node.posts.count %></td>
 </tr>
 <% end %>
 </table>
