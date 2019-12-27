@@ -89,10 +89,10 @@ class Post < ApplicationRecord
         )
 
         if row_hash['expandedLinks']
-            row_hash['expandedLinks'].each do |e|
+            row_hash['expandedLinks'].each_with_index do |e,i|
                 post.links.create!(
                     url: e['expanded'], 
-                    description: link_description,
+                    description: (link_description if (i == -1))
                 ) 
             end
         else
