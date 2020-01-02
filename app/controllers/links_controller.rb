@@ -8,8 +8,7 @@ class LinksController < ApplicationController
             @links = Link.search_context(params[:description])
             @link_tops = @link_domains = Link.none
         else 
-            @links = Link.all
-            # @link_tops = @link_domains = Link.none
+            @links = Link.limit(1000)
             @link_tops = @links.top_group
             @link_domains = @links.top_domain
         end

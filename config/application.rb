@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Dtl1
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.hosts << "4e2a73ba.ngrok.io"
+    config.hosts << "18.163.118.253"
     config.load_defaults 6.0
     config.time_zone = 'Asia/Taipei'
     config.before_configuration do
