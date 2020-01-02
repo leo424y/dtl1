@@ -8,11 +8,11 @@ default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  username: <%= ENV['RDS_USERNAME'] %>
 
 development:
   <<: *default
   database: dtl1_development
-  username: <%= ENV['RDS_USERNAME'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
