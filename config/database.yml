@@ -5,10 +5,10 @@
 #   gem 'sqlite3'
 #
 default: &default
+  username: <%= ENV['RDS_USERNAME'] %>
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: <%= ENV['RDS_USERNAME'] %>
 
 development:
   <<: *default
