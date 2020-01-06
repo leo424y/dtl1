@@ -30,6 +30,15 @@
 <% end %>
 </table>
 
+<h4>FB nodes not in our lists</h4>
+<table>
+<% @new_nodes.each do |new_node| %>
+<tr>
+  <td><%= link_to "https://facebook.com/#{new_node}", "https://facebook.com/#{new_node}", target: '_blank' %></td>
+</tr>
+<% end %>
+</table>
+
 <h4> Top shared links</h4>
 <table>
 <% @link_tops.each do |link| %>

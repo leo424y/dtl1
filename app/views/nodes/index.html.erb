@@ -4,6 +4,7 @@
     <td><%= link_to node.description['user_name'] || node.description['name'], node.url %></td>
     <td><%= node.posts.count %></td>
     <td><%= node.posts.average(:score) %></td>
+    <td><%= node.description['source'] %></td>
 </tr>
 <% end %>
 </table>
