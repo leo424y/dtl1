@@ -1,7 +1,9 @@
+# Based on Facebook, 'url' means postUrl, 'link' is the main Link the post shared, 'score' is calcualated by CrowdTangle,
 class CreatePosts < ActiveRecord::Migration[6.0]
   def change
     create_table :posts, id: :uuid do |t|
       t.string :url
+      t.jsonb :description, null: false, default: '{}'
       t.string :link
       t.string :title
       t.string :date
@@ -9,7 +11,6 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.jsonb :archive, null: false, default: '{}'
       t.uuid :node_id
       t.decimal :score
-
       t.timestamps
     end
 

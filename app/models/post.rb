@@ -17,7 +17,7 @@ class Post < ApplicationRecord
             write_posts(
                 row_hash, 
                 row_hash['Facebook Id'], 
-                'crowdtangle_csv_' + DateTime.now.strftime("%Y%m%d%H%M"), 
+                'facebook', 
                 row_hash['URL'], 
                 row_hash['Message'], 
                 row_hash['Link'], 
@@ -25,7 +25,8 @@ class Post < ApplicationRecord
                 row_hash['Created'],
                 row_hash['Created'],
                 row_hash['Description'],
-                row_hash['Overperforming Score']
+                row_hash['Overperforming Score'],
+                'csv'
             )
         end
     end
@@ -42,7 +43,7 @@ class Post < ApplicationRecord
                 write_posts(
                     row_hash, 
                     row_hash['account']['platformId'],
-                    'crowdtangle_api_'+ list_id + '_' + DateTime.now.strftime("%Y%m%d%H%M"), 
+                    'facebook', 
                     row_hash['postUrl'], 
                     row_hash['message'] || row_hash['title'], 
                     row_hash['link'], 
@@ -50,7 +51,8 @@ class Post < ApplicationRecord
                     row_hash['date'],
                     row_hash['updated'],
                     row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : row_hash['message'],
-                    row_hash['score']
+                    row_hash['score'],
+                    'api'
                 )
             end
         end
@@ -67,7 +69,8 @@ class Post < ApplicationRecord
         date, 
         updated, 
         link_description,
-        score
+        score,
+        import_type
     )
         node = Node.find_or_create_by(
             name: platform_id, 
@@ -77,7 +80,6 @@ class Post < ApplicationRecord
                 user_name: user_name,
             }
         )
-
         post = node.posts.create!(
             archive: row_hash, 
             url: url, 
@@ -85,20 +87,27 @@ class Post < ApplicationRecord
             link: link, 
             date: date,
             updated: updated,
-            score: score
+            score: score,
+            description: {
+                import_type: import_type
+            }
         )
 
         if row_hash['expandedLinks']
             row_hash['expandedLinks'].each_with_index do |e,i|
                 post.links.create!(
                     url: e['expanded'], 
-                    description: link_description
+                    description: {
+                        link_description: link_description
+                    }
                 ) 
             end
         else
             post.links.create!(
                 url: link, 
-                description: link_description,
+                description: {
+                    link_description: link_description
+                }
             ) 
         end
 
