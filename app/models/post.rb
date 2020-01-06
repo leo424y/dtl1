@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 
     def self.search(search)
         if search
-          where(link: search)
+          where('link LIKE :search' ,search: "%#{search}%")
         else
           limit(50)
         end

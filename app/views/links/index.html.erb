@@ -24,7 +24,7 @@
 <tr>
     <td><%= link_to '↖', "http://#{link[0]}", target: "_blank" %></td>
     <%= render "layouts/ct", params: {ct: link[0]} %>
-    <td><%= link_to link[1] %></td>
+    <td><%= link_to link[1], posts_path(url: link[0]), target: "_blank" %></td>
     <td><%= link_to link[0], links_path(url: link[0]) %></td>
 </tr>
 <% end %>
