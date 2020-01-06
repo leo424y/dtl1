@@ -73,11 +73,11 @@ class Post < ApplicationRecord
         import_type
     )
         node = Node.find_or_create_by(
-            name: platform_id, 
-            source: source, 
             url: "https://www.facebook.com/#{platform_id}",
-            archive: {
-                user_name: user_name,
+            description: {
+                name: platform_id, 
+                source: source, 
+                user_name: user_name
             }
         )
         post = node.posts.create!(
