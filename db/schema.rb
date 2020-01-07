@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2019_12_22_035620) do
 
   create_table "links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
-    t.jsonb "description", default: "{}", null: false
     t.jsonb "archive", default: "{}", null: false
     t.uuid "post_id"
     t.datetime "created_at", precision: 6, null: false
@@ -30,14 +29,13 @@ ActiveRecord::Schema.define(version: 2019_12_22_035620) do
 
   create_table "nodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
-    t.jsonb "description", default: "{}", null: false
+    t.jsonb "archive", default: "{}", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
-    t.jsonb "description", default: "{}", null: false
     t.string "link"
     t.string "title"
     t.string "date"

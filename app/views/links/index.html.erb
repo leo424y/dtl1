@@ -59,7 +59,7 @@
     <td><%= link_to '↖', "#{link.url}", target: "_blank" %></td>
     <%= render "layouts/ct", params: {ct: link.url} %>
     <td><%= link_to link.post.date, post_path(id: link.post_id), title: link.post.archive %></td>
-    <td><%= link_to link.post.title ? link.post.title.truncate(30) : link.post.node.description['name'], link.post.url, target: "_blank" %></td>
+    <td><%= link_to link.post.title ? link.post.title.truncate(30) : link.post.node.archive['name'], link.post.url, target: "_blank" %></td>
     <td><%= link_to (link.url ? link.url.truncate(30) : ''), (link.url ? link.url.truncate(30) : '') %></td>
 </tr>
 <% end %>

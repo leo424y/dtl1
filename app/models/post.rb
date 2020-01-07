@@ -74,30 +74,29 @@ class Post < ApplicationRecord
     )
         node = Node.find_or_create_by(
             url: "https://www.facebook.com/#{platform_id}",
-            description: {
+            archive: {
                 name: platform_id, 
                 source: source, 
                 user_name: user_name
             }
         )
         post = node.posts.create!(
-            archive: row_hash, 
+            archive: row_hash.merge({
+                import_type: import_type
+            }), 
             url: url, 
             title: message, 
             link: link, 
             date: date,
             updated: updated,
-            score: score,
-            description: {
-                import_type: import_type
-            }
+            score: score
         )
 
         if row_hash['expandedLinks']
             row_hash['expandedLinks'].each_with_index do |e,i|
                 post.links.create!(
                     url: e['expanded'], 
-                    description: {
+                    archive: {
                         link_description: link_description
                     }
                 ) 
@@ -105,7 +104,7 @@ class Post < ApplicationRecord
         else
             post.links.create!(
                 url: link, 
-                description: {
+                archive: {
                     link_description: link_description
                 }
             ) 

@@ -14,7 +14,7 @@ class LinksController < ApplicationController
             @links = Link.none
         end
         @links = @links.includes(:post).order(created_at: :desc) 
-        @nodes = Node.pluck(:description)
+        @nodes = Node.pluck(:archive)
 
         @old_nodes = []
         @new_nodes = []
