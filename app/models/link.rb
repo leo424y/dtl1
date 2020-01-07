@@ -13,7 +13,7 @@ class Link < ApplicationRecord
 
     def self.search_context(description)
       if description.present?
-        where("description LIKE :description", {:description => "%#{description}%"})
+        where("archive LIKE :description", {:description => "%#{description}%"})
       else
         none
       end
