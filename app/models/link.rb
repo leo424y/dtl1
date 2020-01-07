@@ -13,12 +13,12 @@ class Link < ApplicationRecord
 
     def self.search_context(description)
       if description.present?
-        where("archive LIKE :description", {:description => "%#{description}%"})
+        # TODO
+        none
       else
         none
       end
-  end
-
+    end
 
     def self.top_group
       group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| (n[1]> 7)&&(n[0] != nil) } 

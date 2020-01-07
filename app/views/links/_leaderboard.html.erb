@@ -1,0 +1,34 @@
+<%# TODO %>
+
+<h4> Top shared domain</h4>
+<table>
+<% @link_domains.each do |link| %>
+<tr>
+    <td><%= link_to '↖', "http://#{link[0]}", target: "_blank" %></td>
+    <%= render "layouts/ct", params: {ct: link[0]} %>
+    <td><%= link_to link[1], posts_path(url: link[0]), target: "_blank" %></td>
+    <td><%= link_to link[0], links_path(url: link[0]) %></td>
+</tr>
+<% end %>
+</table>
+
+<h4>FB nodes not in our lists</h4>
+<table>
+<% @new_nodes.each do |new_node| %>
+<tr>
+  <td><%= link_to "https://facebook.com/#{new_node}", "https://facebook.com/#{new_node}", target: '_blank' %></td>
+</tr>
+<% end %>
+</table>
+
+<h4> Top shared links</h4>
+<table>
+<% @link_tops.each do |link| %>
+<tr>
+    <td><%= link_to '↖', "#{link[0]}", target: "_blank" %></td>
+    <%= render "layouts/ct", params: {ct: link[0]} %>
+    <td><%= link_to link[1], posts_path(url: link[0]), target: "_blank" %></td>
+    <td><%= link_to link[0], link[0], target: "_blank" %></td>
+</tr>
+<% end %>
+</table>
