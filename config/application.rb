@@ -9,7 +9,6 @@ Bundler.require(*Rails.groups)
 module Dtl1
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.hosts << "04f3c92e.ngrok.io"
     config.load_defaults 6.0
     config.time_zone = 'Asia/Taipei'
     config.before_configuration do
@@ -18,7 +17,7 @@ module Dtl1
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
-    
+    config.hosts << ENV['ALLOW_DOMAIN']
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
