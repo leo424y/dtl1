@@ -38,7 +38,7 @@ class Post < ApplicationRecord
         list_ids.each do |list_id|
             uri = URI("https://api.crowdtangle.com/posts?token=#{token}&listIds=#{list_id}&startDate=#{Date.today.strftime("%Y-%m-%d")}&sortBy=date&count=100")
             request = Net::HTTP.get_response(uri)
-            puts rows_hash = JSON.parse(request.body)['result']['posts'] if request.is_a?(Net::HTTPSuccess)
+            rows_hash = JSON.parse(request.body)['result']['posts'] if request.is_a?(Net::HTTPSuccess)
             rows_hash.each do |row_hash|
                 write_posts(
                     row_hash, 
