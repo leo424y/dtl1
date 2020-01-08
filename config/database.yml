@@ -24,3 +24,13 @@ test:
 production:
   <<: *default
   database: dtl1_production
+
+farm:
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  host: ENV['FARM_IP']
+  username: ENV['FARM_NAME']
+  password: ENV['FARM_PWD']
+  port: 3306
+  database: ENV['FARM_DB']
