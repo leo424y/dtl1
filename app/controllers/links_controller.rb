@@ -1,11 +1,11 @@
 class LinksController < ApplicationController
     def index
-        if params[:url].present?
-            @links = Link.search(params[:url])
+        @links = if params[:url].present?
+            Link.search(params[:url])
         elsif params[:description].present?
-            @links = Link.search_context(params[:description])
+            Link.search_context(params[:description])
         else 
-            @links = Link.none
+            Link.none
         end
         @links = @links.includes(:post).order(created_at: :desc) 
 
