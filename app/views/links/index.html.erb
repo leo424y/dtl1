@@ -4,8 +4,8 @@
 
 <%= form_tag links_path, :method => 'get' do %>
   <p>
-    <%= text_field_tag :url, params[:url] %>
-    <%= text_field_tag :description, params[:description] %>
+    <%= text_field_tag :url, params[:url], placeholder: 'Url' %>
+    <%= text_field_tag :description, params[:description], placeholder: 'Link description' %>
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
