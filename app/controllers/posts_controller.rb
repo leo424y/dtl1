@@ -1,12 +1,19 @@
 class PostsController < ApplicationController
     def index
         @posts = Post.search(params[:url]).includes(:node).order(score: :desc)
+        
+        @posts = 
+        if params[:start_date].present?  || params[:end_date].present? 
+          @posts.search_date(params)
+        else
+          @posts
+        end        
         respond_to do |format|
-            format.html # index.html.erb
-            format.xml  { render xml: @posts }
-            format.json { render json: @posts }
+          format.html # index.html.erb
+          format.xml  { render xml: @posts }
+          format.json { render json: @posts }
         end
-    end
+    end    
 
     def import
         if params[:file]
