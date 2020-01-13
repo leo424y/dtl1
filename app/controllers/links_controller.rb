@@ -1,9 +1,8 @@
 class LinksController < ApplicationController
     def index
-        @links = if params[:url].present?
-            Link.search(params[:url])
-        elsif params[:description].present?
-            Link.search_context(params[:description])
+        @links = Link.all
+        @links = if params[:url].present? || params[:description].present?
+            @links.search(params[:url]).search_context(params[:description])
         else 
             Link.none
         end

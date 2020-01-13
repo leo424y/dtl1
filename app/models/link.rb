@@ -7,7 +7,7 @@ class Link < ApplicationRecord
           where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls OR url LIKE :str", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%", :str => "%#{search}%"})
         else
           # limit(5)
-          none
+          self
         end
     end
 
@@ -15,7 +15,7 @@ class Link < ApplicationRecord
       if description.present?
         where("archive ->> 'link_description' LIKE :language", language: "%#{description}%" )
       else
-        none
+        self
       end
     end
 

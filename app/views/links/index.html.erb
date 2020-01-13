@@ -1,18 +1,10 @@
 <h4>Dataset & Time Range</h4>
 [TODO:選擇資料集與日期]
-<h4>link search in DB</h4>
+<h4>search in DB</h4>
 
 <%= form_tag links_path, :method => 'get' do %>
   <p>
     <%= text_field_tag :url, params[:url] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
-
-<h4>link description in DB</h4>
-
-<%= form_tag links_path, :method => 'get' do %>
-  <p>
     <%= text_field_tag :description, params[:description] %>
     <%= submit_tag "Search", :name => nil %>
   </p>
