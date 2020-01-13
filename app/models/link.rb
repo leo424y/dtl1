@@ -19,6 +19,20 @@ class Link < ApplicationRecord
       end
     end
 
+    def self.search_date(params)
+      if params[:start_date].present? && params[:end_date].present? 
+        start_date = params[:start_date].to_date.beginning_of_day
+        end_date = params[:end_date].to_date.end_of_day
+        where(:created_at => start_date..end_date)
+      elsif params[:start_date].present?  
+        start_date = params[:start_date].to_date.beginning_of_day
+        where("created_at >= :start_date", start_date: start_date)
+      elsif params[:end_date].present? 
+        end_date = params[:end_date].to_date.end_of_day
+        where("created_at <= :end_date", end_date: end_date)
+      end
+    end
+
     # def self.top_group
     #   group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| (n[1]> 7)&&(n[0] != nil) } 
     # end
