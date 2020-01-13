@@ -1,20 +1,21 @@
 class LinksController < ApplicationController
     def index
-        @links = unless params[:url].present? || params[:description].present?
-          Link.none
-        else 
+        @links = if params[:url].present? || params[:description].present?
           Link.search(params[:url]).search_context(params[:description]) 
+        else 
+          Link.none
         end
-        @links = if params[:start_date] || params[:end_date]
-            @links.search_date(params)
-          else
-            @links
+        @links = if params[:start_date].present?  || params[:end_date].present? 
+          @links.search_date(params)
+        else
+          @links
         end
+
         @links = @links.includes(:post).order(created_at: :desc)
 
         respond_to do |format|
-            format.html # index.html.erb
-            format.json { render json: @links }
+          format.html # index.html.erb
+          format.json { render json: @links }
         end
     end
 end
