@@ -58,6 +58,34 @@ class Post < ApplicationRecord
         end
     end
 
+    def self.news_api_import
+        require 'net/http'
+        uri = URI.parse("#{ENV['NEWS_API_ENDPOINT']}/media.php")
+        request = Net::HTTP.get(uri)
+        medias = request.body.media.delete('[]"').split(',') if request.is_a?(Net::HTTPSuccess)   
+        medias.each do |media|
+            uri = URI.parse("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
+            request = Net::HTTP.get(uri)
+            rows_hash = JSON.parse(request)
+            rows_hash.each do |row_hash|
+                write_posts(
+                    row_hash, 
+                    row_hash['newsid'], 
+                    'news', 
+                    row_hash['url'], 
+                    row_hash['title'],
+                    row_hash['url'], 
+                    media,
+                    row_hash['create_time'],
+                    row_hash['ctime'],
+                    row_hash['description'],
+                    '',
+                    'api'
+                )
+            end
+        end
+    end
+
     def self.write_posts(
         row_hash, 
         platform_id, 
@@ -73,14 +101,14 @@ class Post < ApplicationRecord
         import_type
     )
         node = Node.find_or_create_by(
-            url: "https://www.facebook.com/#{platform_id}",
+            url: (source == 'facebook') ? "https://www.facebook.com/#{platform_id}" : user_name,
             archive: {
                 name: platform_id, 
                 source: source, 
                 user_name: user_name
             }
         )
-        post = node.posts.create!(
+        post = node.posts.find_or_create_by!(
             archive: row_hash.merge({
                 import_type: import_type
             }), 
@@ -97,7 +125,7 @@ class Post < ApplicationRecord
                 post.links.create!(
                     url: e['expanded'], 
                     archive: {
-                        link_description: link_description
+                        link_description: message && link_description ? "#{message}_#{link_description}" : message
                     }
                 ) 
             end
@@ -105,7 +133,7 @@ class Post < ApplicationRecord
             post.links.create!(
                 url: link, 
                 archive: {
-                    link_description: link_description
+                    link_description: message && link_description ? "#{message}_#{link_description}" : message
                 }
             ) 
         end

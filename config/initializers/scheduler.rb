@@ -12,5 +12,8 @@ s = Rufus::Scheduler.singleton
 #
 s.every '10m' do
   Post.ct_api_import
-  # Post.news_import
+end
+
+s.every '1h' do
+  Post.news_api_import
 end
