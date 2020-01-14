@@ -5,6 +5,7 @@ class LinksController < ApplicationController
         else 
           Link.none
         end
+        
         @links = 
         if params[:start_date].present?  || params[:end_date].present? 
           @links.search_date(params)
