@@ -12,7 +12,7 @@ class Link < ApplicationRecord
 
     def self.search_context(description)
       if description.present?
-        where("archive ->> 'link_description' LIKE :language", language: "%#{description}%" )
+        where("archive ->> 'link_description' LIKE :description", description: "%#{description}%" )
       else
         self
       end
