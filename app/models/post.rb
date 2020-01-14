@@ -31,7 +31,7 @@ class Post < ApplicationRecord
         end
     end
 
-    def self.api_import
+    def self.ct_api_import
         require 'net/https'
         token = ENV['CT_TOCKEN']
         list_ids = ['1290974','1290972']

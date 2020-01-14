@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     end
 
     def api
-        Post.api_import
+        Post.ct_api_import
         
         redirect_to dashboard_posts_path, notice: 'Post from api imported'
     end
