@@ -1,24 +1,17 @@
 class LinksController < ApplicationController
     def index
-        @links = if params[:url].present? || params[:description].present?
-          Link.search(params[:url]).search_context(params[:description]) 
-        else 
-          Link.none
-        end
-        
-        @links = 
-        if params[:start_date].present?  || params[:end_date].present? 
-          @links.search_date(params)
-        else
-          @links
-        end
+      # Post.news_api_import
+      @links = (params.present? ? Link.all : Link.none)
 
-        @links = @links.includes(:post).order(created_at: :desc)
+      @links = @links.search(params[:url]) if params[:url].present? 
+      @links = @links.search_context(params[:description]) if params[:description].present? 
+      @links = @links.search_date(params) if (params[:start_date].present? || params[:end_date].present? )
+      @links = @links.includes(:post).order(created_at: :desc)
         respond_to do |format|
           format.html # index.html.erb
           format.json { render json: @links }
         end
-    end 
+    end
 end
 
 # TODO 
