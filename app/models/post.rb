@@ -60,12 +60,15 @@ class Post < ApplicationRecord
 
     def self.news_api_import
         require 'net/http'
-        uri = URI.parse("#{ENV['NEWS_API_ENDPOINT']}/media.php")
-        request = Net::HTTP.get(uri)
-        medias = request.body.media.delete('[]"').split(',') if request.is_a?(Net::HTTPSuccess)   
+        # uri = URI.parse("#{ENV['NEWS_API_ENDPOINT']}/media.php")
+        # request = Net::HTTP.get(uri)
+        # medias = request.delete('[]"').split(',')
+        medias = ENV['GENE_NEWS'].split(',')
         medias.each do |media|
-            uri = URI.parse("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
-            request = Net::HTTP.get(uri)
+            begin
+                p media
+            uri = ("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
+            request =  HTTParty.get(uri, timeout: 120)
             rows_hash = JSON.parse(request)
             rows_hash.each do |row_hash|
                 write_posts(
@@ -82,6 +85,9 @@ class Post < ApplicationRecord
                     '',
                     'api'
                 )
+            end
+            rescue Net::ReadTimeout
+              p media+" timeout"
             end
         end
     end

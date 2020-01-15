@@ -1,7 +1,6 @@
 class LinksController < ApplicationController
     def index
-      # Post.news_api_import
-      @links = (params.present? ? Link.all : Link.none)
+      @links = (params[:url].present? || params[:description].present? ? Link.all : Link.none)
 
       @links = @links.search(params[:url]) if params[:url].present? 
       @links = @links.search_context(params[:description]) if params[:description].present? 
