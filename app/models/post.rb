@@ -66,7 +66,6 @@ class Post < ApplicationRecord
         medias = ENV['GENE_NEWS'].split(',')
         medias.each do |media|
             begin
-                p media
             uri = ("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
             request =  HTTParty.get(uri, timeout: 120)
             rows_hash = JSON.parse(request)
@@ -87,7 +86,7 @@ class Post < ApplicationRecord
                 )
             end
             rescue Net::ReadTimeout
-              p media+" timeout"
+            #   p media+" timeout"
             end
         end
     end

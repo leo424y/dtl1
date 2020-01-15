@@ -14,6 +14,6 @@ s.every '10m' do
   Post.ct_api_import
 end
 
-s.every '1h' do
+s.every '30m' do
   Post.news_api_import
 end
