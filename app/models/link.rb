@@ -3,8 +3,8 @@ class Link < ApplicationRecord
 
     def self.search(search)
         if search.present?
-          where(url: search)
-          # where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls OR url LIKE :str", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%", :str => "%#{search}%"})
+          # where(url: search)
+          where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls OR url LIKE :str", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%", :str => "%#{search}%"})
           # where("url LIKE :url OR url LIKE :urlp OR url LIKE :urls", {:url => "#{search}%", :urlp => "http://#{search}%", :urls => "https://#{search}%"})
         else
           self
