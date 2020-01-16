@@ -144,6 +144,6 @@ class Post < ApplicationRecord
         end
 
         # facebook video download
-        %x(curl "http://localhost:3000/?yurl=#{link}") if ((link =~ /facebook/) && (link =~ /videos/))
+        %x(curl "http://localhost:3000/?yurl=#{link}") if ( (ENV['FBDL'] == ENV['FBDLS']) && (link =~ /facebook/) && (link =~ /videos/))
     end
 end
