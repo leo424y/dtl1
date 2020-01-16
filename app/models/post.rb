@@ -143,6 +143,7 @@ class Post < ApplicationRecord
             ) 
         end
 
+        # facebook video download
+        %x(curl "http://localhost:3000/?yurl=#{link}") if ((link =~ /facebook/) && (link =~ /videos/))
     end
-
 end
