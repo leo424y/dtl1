@@ -14,4 +14,8 @@ module LinksHelper
 
         "https://publicwww.com/websites/%22#{URI.parse(url).host}%22/"
     end  
+
+    def url_on_cofacts(url)
+        "https://cofacts.g0v.tw/articles?q=#{url}&filter=all&replyRequestCount=2"
+    end  
 end
