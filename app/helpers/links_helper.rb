@@ -4,6 +4,8 @@ module LinksHelper
     end  
 
     def url_on_informer(url)
-        "https://website.informer.com/" + URI.parse(url).host
+        url = 'http://'+url unless url.start_with?('http')
+
+        "https://website.informer.com/" +  URI.parse(url).host
     end  
 end
