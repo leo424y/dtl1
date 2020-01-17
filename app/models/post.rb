@@ -60,9 +60,6 @@ class Post < ApplicationRecord
 
     def self.news_api_import
         require 'net/http'
-        # uri = URI.parse("#{ENV['NEWS_API_ENDPOINT']}/media.php")
-        # request = Net::HTTP.get(uri)
-        # medias = request.delete('[]"').split(',')
         medias = ENV['GENE_NEWS'].split(',')
         medias.each do |media|
             begin
@@ -79,7 +76,7 @@ class Post < ApplicationRecord
                     row_hash['url'], 
                     media,
                     row_hash['create_time'],
-                    row_hash['ctime'],
+                    row_hash['create_time'],
                     row_hash['description'],
                     '',
                     'api'
@@ -87,6 +84,32 @@ class Post < ApplicationRecord
             end
             rescue Net::ReadTimeout
             #   p media+" timeout"
+            end
+        end
+    end
+
+    def self.pablo_api_import
+        require 'net/http'
+        words = ENV['PABLO_KEYWORDS'].split(',')
+        words.each do |word|
+            uri = URI.parse("#{ENV['PABLO_API_KEYWORD']}&keyword=#{URI.escape(word)}&position=1&emotion=1&startTime=#{Date.today.strftime("%Y-%m-%d")}&endTime=#{Date.today.strftime("%Y-%m-%d")}&pageIndex=1&pageRows=50")
+            response = Net::HTTP.get_response(uri)
+            rows_hash = JSON.parse(response.body)['body']['list']
+            rows_hash.each do |row_hash|
+                write_posts(
+                    row_hash, 
+                    row_hash['articleId'], 
+                    'pablo', 
+                    row_hash['url'], 
+                    row_hash['title'],
+                    row_hash['url'], 
+                    [row_hash['siteName'],row_hash['creator']].join(' '),
+                    row_hash['pubTime'],
+                    row_hash['pubTime'],
+                    row_hash['content'],
+                    '',
+                    'api'
+                )
             end
         end
     end

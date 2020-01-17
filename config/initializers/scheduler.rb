@@ -17,3 +17,9 @@ s.every '30m' do
   Post.ct_api_import
   Post.news_api_import
 end
+
+s.every '1d' do
+  Post.pablo_api_import
+end
+
+
