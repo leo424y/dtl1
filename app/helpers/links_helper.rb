@@ -21,7 +21,8 @@ module LinksHelper
 
     def the_host_of(url)
         url.slice!('https://')
+        url.delete!(':')
         url = 'http://' + url unless url.start_with?('http://')
         URI.parse(url).host
-    end
+    end 
 end
