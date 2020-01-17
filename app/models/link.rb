@@ -12,12 +12,28 @@ class Link < ApplicationRecord
     end
 
     def self.search_context(description)
+      if description.include? '+'
+        description = description.split('+')
+      else
+        description = [description]
+      end
+
+      description_orig = description.map{|x| "%#{x}%"}
+      
+      description_sim = description.map{|x| "%#{Tradsim::to_sim x}%"}
+      description_trad = description.map{|x| "%#{Tradsim::to_trad x}%"}
+
       if description.present?
-        where("archive ->> 'link_description' LIKE ANY(ARRAY[:description, :description_sim, :description_trad])", description: "%#{description}%", description_sim: "%#{Tradsim::to_sim (description)}%", description_trad: "%#{Tradsim::to_trad (description)}%" )
+        where("
+          archive ->> 'link_description' LIKE ALL(ARRAY[:description]) OR 
+          archive ->> 'link_description' LIKE ALL(ARRAY[:s]) OR
+          archive ->> 'link_description' LIKE ALL(ARRAY[:t]) 
+          ", description: description_orig, s: description_sim, t: description_trad)
       else
         self
       end
     end
+
     # def self.top_group
     #   group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| (n[1]> 7)&&(n[0] != nil) } 
     # end
