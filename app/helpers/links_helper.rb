@@ -4,18 +4,24 @@ module LinksHelper
     end  
 
     def url_on_informer(url)
-        url = 'http://'+url unless url.start_with?('http')
-
-        "https://website.informer.com/" +  URI.parse(url).host
+        host_url = the_host_of(url)
+        "https://website.informer.com/#{host_url}"
     end  
 
     def url_on_publicwww(url)
-        url = 'http://'+url unless url.start_with?('http')
-
-        "https://publicwww.com/websites/%22#{URI.parse(url).host}%22/"
+        host_url = the_host_of(url)
+        "https://publicwww.com/websites/%22#{host_url}%22/"
     end  
 
     def url_on_cofacts(url)
         "https://cofacts.g0v.tw/articles?q=#{url}&filter=all&replyRequestCount=2"
     end  
+
+    private
+
+    def the_host_of(url)
+        url.slice!('https://')
+        url = 'http://' + url unless url.start_with?('http://')
+        URI.parse(url).host
+    end
 end
