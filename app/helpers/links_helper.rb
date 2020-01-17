@@ -20,10 +20,9 @@ module LinksHelper
     private
 
     def the_host_of(url)
-        temp_url = url.slice!("https://")
-        temp_url = temp_url.slice!("http://")
-        temp_url = temp_url.delete(':') if temp_url.include?(':')
-        temp_url = "http://#{url}" unless url.start_with?('http://')
-        URI.parse(temp_url).host
+        temp_url = url.start_with?(':') ? url.gsub(':','') : url
+        temp_url = temp_url.gsub('https://','').gsub('http://','')
+        temp_url = "http://#{temp_url}"
+        temp_url.split('/')[2]
     end 
 end
