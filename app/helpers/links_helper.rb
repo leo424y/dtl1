@@ -8,4 +8,10 @@ module LinksHelper
 
         "https://website.informer.com/" +  URI.parse(url).host
     end  
+
+    def url_on_publicwww(url)
+        url = 'http://'+url unless url.start_with?('http')
+
+        "https://publicwww.com/websites/%22#{URI.parse(url).host}%22/"
+    end  
 end
