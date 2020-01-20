@@ -69,7 +69,7 @@ class Post < ApplicationRecord
             rows_hash.each do |row_hash|
                 write_posts(
                     row_hash, 
-                    [media,row_hash['creator']].join(' '),
+                    media,
                     'news', 
                     row_hash['url'], 
                     row_hash['title'],
@@ -98,7 +98,7 @@ class Post < ApplicationRecord
             rows_hash.each do |row_hash|
                 write_posts(
                     row_hash, 
-                    [row_hash['siteName'],row_hash['creator']].join(' '),
+                    row_hash['siteName'],
                     'pablo', 
                     row_hash['url'], 
                     row_hash['title'],
@@ -129,7 +129,7 @@ class Post < ApplicationRecord
         import_type
     )
         node = Node.find_or_create_by(
-            url: (source == 'facebook') ? "https://www.facebook.com/#{platform_id}" : user_name,
+            url: (source == 'facebook') ? "https://www.facebook.com/#{platform_id}" : platform_id,
             archive: {
                 name: platform_id, 
                 source: source, 
