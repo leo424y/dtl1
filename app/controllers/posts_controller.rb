@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
     def index
-        @posts = (params[:url].present? || params[:title].present? ? Post.all : Post.none)
+        @posts = (params[:url].present? || params[:description].present? ? Post.all : Post.none)
         
         @posts = @posts.search(params[:url]) if params[:url].present? 
-        @posts = @posts.search_context(params[:title], 'title') if params[:title].present? 
+        @posts = @posts.search_context(params[:description], 'title') if params[:description].present? 
          
         @posts = @posts.search_date(params) if (params[:start_date].present? || params[:end_date].present? )
 
