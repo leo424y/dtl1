@@ -1,0 +1,4 @@
+<tr>
+    <%= render "layouts/ct", params: {ct: params[:link][:url]} %>
+    <td><%= link_to "↖ (#{params[:link][:counts]}) #{params[:link][:url]}", "#{params[:link][:url]}", target: "_blank" %></td>
+</tr>

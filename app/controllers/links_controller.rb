@@ -1,12 +1,19 @@
 class LinksController < ApplicationController
     def index
+      # Get Links
       @links = (params[:url].present? || params[:description].present? ? Link.all : Link.none)
 
       @links = @links.search(params[:url]) if params[:url].present? 
       @links = @links.search_context(params[:description]) if params[:description].present? 
       @links = @links.search_date(params) if (params[:start_date].present? || params[:end_date].present? )
-      @links = @links.includes(:post).order(created_at: :desc)
+
+
+      # Get Link statics
+      @link_by_counts = @links.top_group
+      @link_by_domains = @links.top_domain
       
+      
+      @links = @links.includes(:post).order(created_at: :desc)
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @links }
@@ -14,12 +21,12 @@ class LinksController < ApplicationController
     end
 end
 
-# TODO 
-# @link_tops = @links.top_group
-# @link_domains = @links.top_domain
 
+
+# TODO
+# # Node statics
 # @nodes = Node.pluck(:archive)
-
+      
 # @old_nodes = []
 # @new_nodes = []
 

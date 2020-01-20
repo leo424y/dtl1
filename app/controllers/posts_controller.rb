@@ -7,7 +7,8 @@ class PostsController < ApplicationController
           @posts.search_date(params)
         else
           @posts
-        end        
+        end      
+          
         respond_to do |format|
           format.html # index.html.erb
           format.xml  { render xml: @posts }

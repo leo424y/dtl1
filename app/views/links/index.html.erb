@@ -13,6 +13,23 @@
 <h4><%= @links.count %> Results</h4>
 
 <table>
+<% @link_by_domains.each do |link| %>
+    <%= render "links/group", params: {link: {url: link[0], counts: link[1]}} %>
+<% end %>
+</table>
+
+<hr>
+
+<table>
+<% @link_by_counts.each do |link| %>
+    <%= render "links/group", params: {link: {url: link[0], counts: link[1]}} %>
+<% end %>
+</table>
+
+<table>
+
+<hr>
+
 <% @links.each do |link| %>
 <tr>
     <td><%= link_to '↖', "#{link.url}", target: "_blank" %></td>
