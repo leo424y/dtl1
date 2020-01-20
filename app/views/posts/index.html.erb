@@ -1,11 +1,24 @@
+<h4><%= link_to 'DoubleThink Lab DB', root_path %></h4>
+
+<%= form_tag posts_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :url, params[:url], placeholder: 'Url' %>
+    <%= text_field_tag :title, params[:title], placeholder: 'Post Content' %>
+    <%= text_field_tag :start_date, params[:start_date], placeholder: 'Start Date' %>
+    <%= text_field_tag :end_date, params[:end_date], placeholder: 'End Date' %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<h4><%= @posts.count %> Results</h4>
+
 <table>
 <% @posts.each do |post| %>
 <tr>
-      <td><%= link_to '↖', post.url, target: '_blank' %></td>
-      <td><%= link_to tw_time(post.date), post_path(post), title: post.archive %></td>
-      <td><%= link_to post.title ? post.title.truncate(20) : 'post', post_path(post) %></td>
-      <td><%= post.score %></td>
-      <td><%= link_to post.url.split('/')[3..4].join('/'), post.url, target: '_blank'  %></td>
-    </tr>
+    <td><%= link_to '↖', post.url, target: '_blank' %></td>
+    <td><%= link_to tw_time(post.date), post_path(post), title: post.archive %></td>
+    <td><%= link_to post.title ? post.title.truncate(20) : 'post', post_path(post) %></td>
+    <td><%= post.score %></td>
+</tr>
 <% end %>
 </table>
