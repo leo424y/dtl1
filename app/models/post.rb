@@ -69,12 +69,12 @@ class Post < ApplicationRecord
             rows_hash.each do |row_hash|
                 write_posts(
                     row_hash, 
-                    row_hash['newsid'], 
+                    [media,row_hash['creator']].join(' '),
                     'news', 
                     row_hash['url'], 
                     row_hash['title'],
                     row_hash['url'], 
-                    media,
+                    [media,row_hash['creator']].join(' '),
                     row_hash['create_time'],
                     row_hash['create_time'],
                     row_hash['description'],
@@ -98,7 +98,7 @@ class Post < ApplicationRecord
             rows_hash.each do |row_hash|
                 write_posts(
                     row_hash, 
-                    row_hash['articleId'], 
+                    [row_hash['siteName'],row_hash['creator']].join(' '),
                     'pablo', 
                     row_hash['url'], 
                     row_hash['title'],
