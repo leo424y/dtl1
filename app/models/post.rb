@@ -24,11 +24,16 @@ class Post < ApplicationRecord
     end
 
     def self.ct_api_import
+        ct_api_import_by('posts','date', 100)
+        ct_api_import_by('posts','overperforming', 10)
+    end
+
+    def self.ct_api_import_by(endpoints, sort_by, count)
         require 'net/https'
         token = ENV['CT_TOCKEN']
         list_ids = ['1290974','1290972']
         list_ids.each do |list_id|
-            uri = URI("https://api.crowdtangle.com/posts?token=#{token}&listIds=#{list_id}&startDate=#{Date.today.strftime("%Y-%m-%d")}&sortBy=date&count=100")
+            uri = URI("https://api.crowdtangle.com/#{endpoints}?token=#{token}&listIds=#{list_id}&startDate=#{Date.today.strftime("%Y-%m-%d")}&sortBy=date&count=100")
             request = Net::HTTP.get_response(uri)
             rows_hash = JSON.parse(request.body)['result']['posts'] if request.is_a?(Net::HTTPSuccess)
             rows_hash.each do |row_hash|
@@ -72,7 +77,7 @@ class Post < ApplicationRecord
                     row_hash['description'],
                     '',
                     'api'
-                )
+                ) if row_hash['create_time'].to_date == Date.today
             end
             rescue Net::ReadTimeout
             #   p media+" timeout"
