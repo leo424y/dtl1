@@ -7,7 +7,8 @@ class PostsController < ApplicationController
          
         @posts = @posts.search_date(params) if (params[:start_date].present? || params[:end_date].present? )
 
-          
+        @posts = @posts.order(date: :desc)  
+
         respond_to do |format|
           format.html # index.html.erb
           format.xml  { render xml: @posts }
