@@ -49,7 +49,7 @@ class Post < ApplicationRecord
                     row_hash['updated'],
                     row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : row_hash['message'],
                     row_hash['score'],
-                    'api'
+                    'api_ct_' + sort_by
                 )
             end
         end
@@ -76,7 +76,7 @@ class Post < ApplicationRecord
                     row_hash['create_time'],
                     row_hash['description'],
                     '',
-                    'api'
+                    'api_news_media'
                 ) if row_hash['create_time'].to_date == Date.today
             end
             rescue Net::ReadTimeout
@@ -105,7 +105,7 @@ class Post < ApplicationRecord
                     row_hash['pubTime'],
                     row_hash['content'],
                     '',
-                    'api'
+                    'api_pablo_keywords'
                 )
             end
         end
