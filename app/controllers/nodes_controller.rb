@@ -2,7 +2,7 @@ class NodesController < ApplicationController
     def index        
         @nodes = 
         if params[:start_date].present?  || params[:end_date].present? 
-          Node.search_date(params)
+          Node.search_date(params, 'created_at')
         else
           Node.includes(:posts).order(created_at: :desc).limit(100)
         end        

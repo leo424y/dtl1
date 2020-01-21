@@ -1,17 +1,17 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  def self.search_date(params)
+  def self.search_date(params, date_column)
     if params[:start_date].present? && params[:end_date].present? 
       start_date = params[:start_date].to_date.beginning_of_day
       end_date = params[:end_date].to_date.end_of_day
-      where(:created_at => start_date..end_date)
+      where( date_column.to_sym => start_date..end_date)
     elsif params[:start_date].present?  
       start_date = params[:start_date].to_date.beginning_of_day
-      where("created_at >= :start_date", start_date: start_date)
+      where("#{date_column} >= :start_date", start_date: start_date)
     elsif params[:end_date].present? 
       end_date = params[:end_date].to_date.end_of_day
-      where("created_at <= :end_date", end_date: end_date)
+      where("#{date_column} <= :end_date", end_date: end_date)
     end
   end  
 

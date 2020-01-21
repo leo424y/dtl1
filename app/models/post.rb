@@ -153,6 +153,7 @@ class Post < ApplicationRecord
             post.links.create!(
                 url: link, 
                 archive: {
+                    date: date,
                     link_description: message && link_description ? "#{message}_#{link_description}" : message
                 }
             ) 

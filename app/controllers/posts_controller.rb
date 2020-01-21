@@ -5,7 +5,7 @@ class PostsController < ApplicationController
         @posts = @posts.search(params[:url]) if params[:url].present? 
         @posts = @posts.search_context(params[:description], 'title') if params[:description].present? 
          
-        @posts = @posts.search_date(params) if (params[:start_date].present? || params[:end_date].present? )
+        @posts = @posts.search_date(params, 'date') if (params[:start_date].present? || params[:end_date].present? )
 
         @posts = @posts.order(date: :desc)  
 
