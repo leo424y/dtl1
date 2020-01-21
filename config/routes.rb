@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :farms
   resources :ctlinks 
+  resources :domains do
+    resources :nodes
+  end  
   resources :nodes do
     resources :posts
   end

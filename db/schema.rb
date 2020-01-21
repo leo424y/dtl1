@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_22_035620) do
+ActiveRecord::Schema.define(version: 2020_01_21_035621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "domains", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "url"
+    t.jsonb "archive", default: "{}", null: false
+    t.uuid "node_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_domains_on_created_at"
+    t.index ["node_id"], name: "index_domains_on_node_id"
+    t.index ["url"], name: "index_domains_on_url"
+  end
 
   create_table "links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
@@ -32,6 +43,8 @@ ActiveRecord::Schema.define(version: 2019_12_22_035620) do
     t.jsonb "archive", default: "{}", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "domain_id"
+    t.index ["domain_id"], name: "index_nodes_on_domain_id"
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

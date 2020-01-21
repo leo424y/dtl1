@@ -49,7 +49,7 @@ class Post < ApplicationRecord
                     row_hash['updated'],
                     row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : row_hash['message'],
                     row_hash['score'],
-                    'api_ct_' + sort_by
+                    sort_by
                 )
             end
         end
@@ -60,9 +60,9 @@ class Post < ApplicationRecord
         medias = ENV['GENE_NEWS'].split(',')
         medias.each do |media|
             begin
-            uri = ("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
-            request =  HTTParty.get(uri, timeout: 120)
-            rows_hash = JSON.parse(request)
+            uri = URI("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
+            request = Net::HTTP.get_response(uri)
+            rows_hash = JSON.parse(request.body)
             rows_hash.each do |row_hash|
                 write_posts(
                     row_hash, 
@@ -76,11 +76,11 @@ class Post < ApplicationRecord
                     row_hash['create_time'],
                     row_hash['description'],
                     '',
-                    'api_news_media'
+                    'media'
                 ) if row_hash['create_time'].to_date == Date.today
-            end
+            end if rows_hash
             rescue Net::ReadTimeout
-            #   p media+" timeout"
+             p media+" timeout"
             end
         end
     end
@@ -105,7 +105,7 @@ class Post < ApplicationRecord
                     row_hash['pubTime'],
                     row_hash['content'],
                     '',
-                    'api_pablo_keywords'
+                    'keywords'
                 )
             end
         end
@@ -125,10 +125,15 @@ class Post < ApplicationRecord
         score,
         import_type
     )
-        node = Node.find_or_create_by(
-            url: (source == 'facebook') ? "https://www.facebook.com/#{platform_id}" : platform_id,
+        domain_url = URI.parse(url).host
+        domain = Domain.find_or_create_by!(
+            url: domain_url
+        )
+        
+        node_url = (source == 'facebook') ? "https://www.facebook.com/#{platform_id}" : domain_url
+        node = domain.nodes.find_or_create_by!(
+            url: node_url,
             archive: {
-                name: platform_id, 
                 source: source, 
                 user_name: user_name
             }

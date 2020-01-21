@@ -1,0 +1,9 @@
+<%= @domain.created_at %>
+<%= @domain.url %>
+<table>
+<% @domain.nodes.each do |node| %>
+<tr>
+    <td><%= link_to node.archive['user_name'], node_path(node) %></td>
+</tr>
+<% end %>
+</table>

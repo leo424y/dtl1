@@ -1,0 +1,8 @@
+<table>
+<% @domains.each do |domain| %>
+<tr>
+    <td><%= domain.created_at %></td>
+    <td><%= link_to domain.url, domain_path(domain) %></td>
+</tr>
+<% end %>
+</table>
