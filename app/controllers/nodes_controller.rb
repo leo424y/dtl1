@@ -4,7 +4,7 @@ class NodesController < ApplicationController
         if params[:start_date].present?  || params[:end_date].present? 
           Node.search_date(params)
         else
-          Node.all.order(created_at: :desc)
+          Node.all.order(created_at: :desc).limit(100)
         end        
         respond_to do |format|
           format.html # index.html.erb
@@ -12,4 +12,9 @@ class NodesController < ApplicationController
           format.json { render json: @nodes }
         end
     end
+
+    def show
+      @node = Node.find(params[:id])
+    end
+
 end
