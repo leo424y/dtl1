@@ -1,6 +1,7 @@
 <table>
 <% @nodes.each do |node| %>
 <tr>
+    <td><%= node.created_at %></td>
     <td><%= link_to node.archive['user_name'] || node.archive['name'], node.url %></td>
     <td><%= node.posts.count %></td>
     <td><%= node.posts.average(:score) %></td>

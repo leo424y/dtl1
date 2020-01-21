@@ -4,7 +4,7 @@ class NodesController < ApplicationController
         if params[:start_date].present?  || params[:end_date].present? 
           Node.search_date(params)
         else
-          Node.all
+          Node.all.order(created_at: :desc)
         end        
         respond_to do |format|
           format.html # index.html.erb
