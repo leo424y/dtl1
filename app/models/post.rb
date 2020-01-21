@@ -33,7 +33,7 @@ class Post < ApplicationRecord
         token = ENV['CT_TOCKEN']
         list_ids = ['1290974','1290972']
         list_ids.each do |list_id|
-            uri = URI("https://api.crowdtangle.com/#{endpoints}?token=#{token}&listIds=#{list_id}&startDate=#{Date.today.strftime("%Y-%m-%d")}&sortBy=date&count=100")
+            uri = URI("https://api.crowdtangle.com/#{endpoints}?token=#{token}&listIds=#{list_id}&startDate=#{Date.today.strftime("%Y-%m-%d")}&sortBy=#{sort_by}&count=#{count}")
             request = Net::HTTP.get_response(uri)
             rows_hash = JSON.parse(request.body)['result']['posts'] if request.is_a?(Net::HTTPSuccess)
             rows_hash.each do |row_hash|
