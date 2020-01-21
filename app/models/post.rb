@@ -66,7 +66,7 @@ class Post < ApplicationRecord
                     row_hash['url'], 
                     [media, row_hash['title'], row_hash['tags'].join(' '), row_hash['creator'], row_hash['description']].join(' '),
                     row_hash['url'], 
-                    [media,row_hash['creator']].join(' '),
+                    row_hash['creator'],
                     row_hash['create_time'],
                     row_hash['create_time'],
                     row_hash['description'],
