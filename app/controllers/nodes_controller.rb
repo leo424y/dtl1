@@ -5,7 +5,10 @@ class NodesController < ApplicationController
           Node.search_date(params, 'created_at')
         else
           Node.includes(:posts).order(created_at: :desc).limit(100)
-        end        
+        end
+        
+        @nodes = @nodes.search_context(params[:description], "archive ->> 'user_name'") if params[:description].present? 
+
         respond_to do |format|
           format.html # index.html.erb
           format.xml  { render xml: @nodes }
