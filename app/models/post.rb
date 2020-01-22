@@ -110,7 +110,8 @@ class Post < ApplicationRecord
 
     def self.pablo_api_import
         require 'net/http'
-        words = ENV['PABLO_KEYWORDS'].split(',')
+        words = Pablo.pluck(:word)
+        words = words + words.map{|w| Tradsim::to_sim w}
         words.each do |word|
             uri = URI.parse("#{ENV['PABLO_API_KEYWORD']}&keyword=#{URI.escape(word)}&position=1&emotion=1&startTime=#{Date.today.strftime("%Y-%m-%d")}&endTime=#{Date.today.strftime("%Y-%m-%d")}&pageIndex=1&pageRows=50")
             response = Net::HTTP.get_response(uri)

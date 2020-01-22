@@ -1,0 +1,2 @@
+class Pablo < ApplicationRecord
+end
