@@ -2,6 +2,29 @@ class Post < ApplicationRecord
     belongs_to :node
     has_many :links
 
+    def self.yt_import(file)
+        require 'csv'
+        CSV.foreach(file.path, headers: true) do |row|
+            row_hash = row.to_hash
+            time = (Time.at row_hash['time'].to_i).strftime("%Y-%m-%d")
+            row_hash['time'] = time
+            write_posts(
+                row_hash, 
+                row_hash['id'], 
+                'youtube', 
+                'https://youtu.be/'+row_hash['id'], 
+                row_hash['id'], 
+                'https://youtu.be/'+row_hash['id'], 
+                'youtube', 
+                time,
+                time,
+                row_hash['view'], 
+                row_hash['view'], 
+                'csv'
+            )
+        end
+    end
+
     def self.import(file)
         require 'csv'
         CSV.foreach(file.path, headers: true) do |row|
@@ -159,6 +182,11 @@ class Post < ApplicationRecord
                     }
                 ) 
             end
+        elsif source == 'youtube'
+            post.links.find_or_create_by!(
+                url: link,
+                archive: row_hash
+            )
         else
             post.links.create!(
                 url: link, 

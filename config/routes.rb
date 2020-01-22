@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :posts do
     collection {post :import}
+    collection {post :youtube_import}
     collection {get :api}
     collection {get :dashboard}
   end

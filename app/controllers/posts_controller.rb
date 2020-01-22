@@ -25,6 +25,15 @@ class PostsController < ApplicationController
         end
     end
 
+    def youtube_import
+        if params[:file]
+            Post.yt_import(params[:file]) 
+            redirect_to dashboard_posts_path, notice: 'Post from csv imported'
+        else
+            redirect_to dashboard_posts_path, notice: 'No CSV'
+        end
+    end
+
     def api
         Post.ct_api_import
         
