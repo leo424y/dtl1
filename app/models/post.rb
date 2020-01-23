@@ -162,42 +162,46 @@ class Post < ApplicationRecord
                 user_name: user_name
             }
         )
-        post = node.posts.find_or_create_by!(
-            archive: row_hash.merge({
-                import_type: import_type
-            }), 
-            url: url, 
-            title: message, 
-            link: link, 
+
+        post = node.posts.find_or_create_by(url: url) 
+        if post.archive == '{}'
+            post.update(archive: {data: [row_hash.merge({
+                    import_type: import_type
+                })]
+            },
+            title: message,
+            link: link ,
             date: date,
             updated: updated,
-            score: score
-        )
-
-        if row_hash['expandedLinks']
-            row_hash['expandedLinks'].each_with_index do |e,i|
+            score: score,
+            )
+            # Create Links
+            if row_hash['expandedLinks']
+                row_hash['expandedLinks'].each_with_index do |e,i|
+                    post.links.create!(
+                        url: e['expanded'], 
+                        archive: {
+                            link_description: message && link_description ? "#{message}_#{link_description}" : message
+                        }
+                    ) 
+                end
+            else
                 post.links.create!(
-                    url: e['expanded'], 
+                    url: link, 
                     archive: {
+                        date: date,
                         link_description: message && link_description ? "#{message}_#{link_description}" : message
                     }
                 ) 
             end
-        elsif source == 'youtube'
-            post.links.find_or_create_by!(
-                url: link,
-                archive: row_hash
-            )
         else
-            post.links.create!(
-                url: link, 
-                archive: {
-                    date: date,
-                    link_description: message && link_description ? "#{message}_#{link_description}" : message
-                }
-            ) 
+            post.update(archive: {data: (post.archive['data'] ? (post.archive['data'] << row_hash) : row_hash)})            
+            post.title = message
+            post.link = link 
+            post.date = date
+            post.updated = updated
+            post.score = score        
         end
-
         # facebook video download
         %x(curl "http://localhost:3000/?yurl=#{link}") if ( (ENV['FBDL'] == ENV['FBDLS']) && (link =~ /facebook/) && (link =~ /videos/))
     end

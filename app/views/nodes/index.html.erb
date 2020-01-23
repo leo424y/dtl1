@@ -3,7 +3,10 @@
 <% end %>
 
 <table>
+
 <% @nodes.each do |node| %>
+  <% cache node do %>
+
 <tr>
     <td><%= node.created_at %></td>
     <td><%= link_to node.archive['user_name'], node_path(node) %></td>
@@ -11,5 +14,6 @@
     <td><%= node.posts.average(:score) %></td>
     <td><%= node.archive['source'] %></td>
 </tr>
+<% end %>
 <% end %>
 </table>
