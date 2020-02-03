@@ -1,7 +1,8 @@
 <p>
 <%= text_field_tag :url, params[:url], placeholder: 'Url' %>
 <%= text_field_tag :description, params[:description], placeholder: 'Keywords (ex. 台灣+阿瑞)' %>
-<%= text_field_tag :start_date, params[:start_date], placeholder: 'Start Date (ex. 2020-01-10)' %>
-<%= text_field_tag :end_date, params[:end_date], placeholder: 'End Date (ex. 2020-01-11)' %>
+<%= date_field_tag :start_date, params[:start_date] %> ~
+<%= date_field_tag :end_date, params[:end_date] %>
 <%= submit_tag "Search", :name => nil %>
 </p>
+
