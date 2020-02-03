@@ -1,4 +1,5 @@
 <%= form_tag links_path, :method => 'get' do %>
+  <%= text_field_tag :url, params[:url], placeholder: 'Url' %>
   <%= render "layouts/search", params: params %>
 <% end %>
 
@@ -26,8 +27,10 @@
 <tr>
     <td><%= link_to '↖', "#{link.url}", target: "_blank" %></td>
     <%= render "layouts/ct", params: {ct: link.url} %>
+    <% if link.post %>
     <td><%= link_to link.post.date, post_path(id: link.post_id), title: link.post.archive %></td>
     <td><%= link_to link.post.title ? link.post.title.truncate(30) : link.post.node.archive['name'], link.post.url, target: "_blank" %></td>
+    <% end %>
     <td><%= link_to (link.url ? link.url.truncate(30) : ''), (link.url ? link.url : ''), target: '_blank' %></td>
 </tr>
 <% end %>
