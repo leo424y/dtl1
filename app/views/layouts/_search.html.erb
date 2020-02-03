@@ -1,5 +1,10 @@
 <%= text_field_tag :description, params[:description], placeholder: 'Keywords (ex. 台灣+阿瑞)' %>
+<% if params[:start_date] || params[:end_date] %>
+<%= date_field_tag :start_date, params[:start_date] %> ~
+<%= date_field_tag :end_date, params[:end_date] %>
+<% else %>
 <%= date_field_tag :start_date, params[:start_date], value: Date.today %> ~
 <%= date_field_tag :end_date, params[:end_date], value: Date.today %>
+<% end %>
 <%= submit_tag "Search", :name => nil %>
 
