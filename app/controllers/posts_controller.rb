@@ -7,8 +7,19 @@ class PostsController < ApplicationController
          
         @posts = @posts.search_date(params, 'date') if (params[:start_date].present? || params[:end_date].present? )
 
-        # @posts = @posts.order(date: :desc)  
-        @posts = @posts.order(score: :desc)  
+        @posts = @posts.includes(:node).order(node_id: :desc)
+        # @posts = @posts.order(score: :desc)  
+
+        @post_source= @posts.group(:node).count
+
+        @type_counts = []
+         @post_source.each do |n|
+            @type_counts << [n[0]['archive']['source'],n[1]]
+         end
+
+         @type_counts = @type_counts.group_by {|i| i[0]}
+         @type_counts = @type_counts.map{|i| [i[0],i[1].sum{|x| x[1]}] }
+
 
         respond_to do |format|
           format.html # index.html.erb

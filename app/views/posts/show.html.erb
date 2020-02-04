@@ -9,7 +9,7 @@
         <td><%= link_to 'CT', url_on_ct(link.url), target: "_blank" %></td>
         <td><%= link_to link.url.truncate(30), links_path(url: link.url) %></td>
     <% end %>
-    <td><%= link_to link.post.title.truncate(10), link.post.url, target: "_blank" if link.post.title %></td>
+    <td><%= link_to link.post.title, link.post.url, target: "_blank" if link.post.title %></td>
     <td><%= link.post.score %></td>
 </tr>
 <% end %>

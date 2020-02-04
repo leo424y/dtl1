@@ -4,14 +4,19 @@
 <% end %>
 
 <h4><%= @posts.count %> Results</h4>
+<h5><% @type_counts.each do |t| %>
+<%= "#{t[0]}: #{t[1]}, " %>
+<% end %>
+</h5>
 
 <table>
 <% @posts.each do |post| %>
 <tr>
     <td><%= link_to '↖', post.url, target: '_blank' %></td>
     <td><%= link_to post.updated, post_path(post), title: post.archive %></td>
-    <td><%= link_to post.title ? post.title.truncate(20) : 'post', post_path(post) %></td>
-    <td><%= post.score %></td>
+    <td><%= post.node.archive['source'] %></td>
+    <td><%= link_to post.title ? post.title.truncate(40) : 'post', post_path(post) %></td>
+    <td><%# post.score %></td>
 </tr>
 <% end %>
 </table>
