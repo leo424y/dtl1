@@ -9,4 +9,8 @@ module ApplicationHelper
         model = r[0].split('/')[-1]
         "#{request.base_url}/#{model}.csv?#{r[1]}"
     end
+
+    def title(text)
+        content_for :title, text
+    end
 end
