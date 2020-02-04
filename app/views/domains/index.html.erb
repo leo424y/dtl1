@@ -1,3 +1,6 @@
+<%= form_tag domains_path, :method => 'get' do %>
+  <%= render "layouts/search", params: params %>
+<% end %>
 <table>
 <% @domains.each do |domain| %>
 <tr>
