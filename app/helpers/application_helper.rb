@@ -13,4 +13,8 @@ module ApplicationHelper
     def title(text)
         content_for :title, text
     end
+
+    def has_params
+        params[:start_date] || params[:end_date]
+    end   
 end

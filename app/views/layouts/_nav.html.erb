@@ -6,5 +6,5 @@
 <%# link_to 'IMPORT', dashboard_posts_path %> | 
 <%= link_to 'ADMIN', '/fin' %> | 
 <%= link_to '.', ENV['LIVE']+request.original_fullpath %>
-<%= link_to '↓ CSV', csv_url(request.original_fullpath), placeholder: 'Download this result as CSV' %>
+<%= link_to '↓ CSV', csv_url(request.original_fullpath), placeholder: 'Download this result as CSV' if (has_params) %>
 </h4>
