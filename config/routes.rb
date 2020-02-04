@@ -17,5 +17,5 @@ Rails.application.routes.draw do
     collection {get :dashboard}
   end
   resources :links
-  root to: "links#index"
+  root to: "posts#index"
 end
