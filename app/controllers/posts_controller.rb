@@ -14,6 +14,7 @@ class PostsController < ApplicationController
           format.html # index.html.erb
           format.xml  { render xml: @posts }
           format.json { render json: @posts }
+          format.csv { send_data @posts.to_csv("id url link title date updated archive node_id score created_at updated_at"), filename: "posts-#{Date.today}-params-#{params.inspect}.csv" }
         end
     end    
 

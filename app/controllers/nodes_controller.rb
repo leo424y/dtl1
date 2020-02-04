@@ -13,6 +13,7 @@ class NodesController < ApplicationController
           format.html # index.html.erb
           format.xml  { render xml: @nodes }
           format.json { render json: @nodes }
+          format.csv { send_data @nodes.to_csv("id url archive created_at updated_at domain_id"), filename: "nodes-#{Date.today}-params-#{params.inspect}.csv" }
         end
     end
 

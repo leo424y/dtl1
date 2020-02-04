@@ -1,6 +1,18 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  def self.to_csv(header)
+    attributes = header.split(" ")
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |result|
+        csv << attributes.map{ |attr| result.send(attr) }
+      end
+    end
+  end
+
   def self.search_date(params, date_column)
     if params[:start_date].present? && params[:end_date].present? 
       start_date = params[:start_date].to_date.beginning_of_day

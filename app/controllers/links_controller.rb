@@ -17,6 +17,7 @@ class LinksController < ApplicationController
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @links }
+        format.csv { send_data @links.to_csv("id url archive created_at updated_at post_id"), filename: "links-#{Date.today}-params-#{params.inspect}.csv" }
       end
     end
 end
