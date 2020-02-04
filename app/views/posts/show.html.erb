@@ -3,12 +3,12 @@
 <table>
 <% @post.links.each do |link| %> 
 <tr>
-    <td><%= link_to "↖ #{link.url}", link.url, target: '_blank' %></td>
     <% if link.url %>
         <td><%= link_to 'CT', url_on_ct(link.url), target: "_blank" %></td>
         <td><%= link_to link.post.updated || link.post.date, links_path(url: link.url) %></td>
     <% end %>
     <td><%= link.post.score %></td>
+    <td><%= link_to "🔗 #{link.url}", link.url, target: '_blank' %></td>
 </tr>
 <% end %>
 </table>
