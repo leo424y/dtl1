@@ -1,15 +1,13 @@
 <%= tw_time(@post.date) %>
-
+<%= link_to @post.title, @post.url, target: "_blank" if @post.title %>
 <table>
-<% @post.links.each do |link| %>
+<% @post.links.each do |link| %> 
 <tr>
-    <td><%= link_to '↖', link.url, target: '_blank' %></td>
-    <td><%= tw_time link.post.updated || link.post.date %></td>
+    <td><%= link_to "↖ #{link.url}", link.url, target: '_blank' %></td>
     <% if link.url %>
         <td><%= link_to 'CT', url_on_ct(link.url), target: "_blank" %></td>
-        <td><%= link_to link.url.truncate(30), links_path(url: link.url) %></td>
+        <td><%= link_to link.post.updated || link.post.date, links_path(url: link.url) %></td>
     <% end %>
-    <td><%= link_to link.post.title, link.post.url, target: "_blank" if link.post.title %></td>
     <td><%= link.post.score %></td>
 </tr>
 <% end %>

@@ -15,8 +15,9 @@
     <td><%= link_to '↖', post.url, target: '_blank' %></td>
     <td><%= link_to post.updated, post_path(post), title: post.archive %></td>
     <td><%= post.node.archive['source'] %></td>
-    <td><%= link_to post.title ? post.title.truncate(40) : 'post', post_path(post) %></td>
+    <td><%= post.title ? post.title.truncate(40) : 'post' %></td>
     <td><%# post.score %></td>
 </tr>
+
 <% end %>
 </table>
