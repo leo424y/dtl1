@@ -7,10 +7,9 @@ class PostsController < ApplicationController
          
         @posts = @posts.search_date(params, 'date') if (params[:start_date].present? || params[:end_date].present? )
 
-        @posts = @posts.includes(:node).order(node_id: :desc)
-        # @posts = @posts.order(score: :desc)  
-
         @post_source= @posts.group(:node).count
+
+        @posts = @posts.order(date: :desc)  
 
         @type_counts = []
          @post_source.each do |n|
@@ -20,6 +19,8 @@ class PostsController < ApplicationController
          @type_counts = @type_counts.group_by {|i| i[0]}
          @type_counts = @type_counts.map{|i| [i[0],i[1].sum{|x| x[1]}] }
 
+         @first_date = @posts.last.updated
+         @last_date = @posts.first.updated
 
         respond_to do |format|
           format.html # index.html.erb
