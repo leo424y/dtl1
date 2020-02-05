@@ -17,4 +17,15 @@ module ApplicationHelper
     def has_params
         params[:start_date] || params[:end_date]
     end   
+
+    def media_icon x
+        case x
+        when 'facebook'
+            '📘'
+        when 'pablo'
+            '🇨🇳'
+        when 'news'
+            '📰'
+        end
+    end
 end

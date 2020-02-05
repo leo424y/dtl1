@@ -14,7 +14,7 @@
 <tr>
     <td><%= link_to '🔗', post.url, target: '_blank' %></td>
     <td><%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %></td>
-    <td><%= post.node.archive['source'] %></td>
+    <td><%= media_icon(post.node.archive['source']) %></td>
     <td><%= post.title ? post.title.truncate(40) : 'post' %></td>
     <td><%# post.score %></td>
 </tr>
