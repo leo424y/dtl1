@@ -1,6 +1,6 @@
 <%= tw_time(@post.date) %>
 <%= @post.score %>
-<%= link_to "🔗 #{@post.url}", target: "_blank" %>
+<%= link_to "🔗 #{@post.url}", @post.url, target: "_blank" %>
 <table>
 <% @post.links.each do |link| %> 
 <tr>
