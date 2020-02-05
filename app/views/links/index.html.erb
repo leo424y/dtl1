@@ -1,5 +1,6 @@
 <%= form_tag links_path, :method => 'get' do %>
   <%= text_field_tag :url, params[:url], placeholder: 'Url' %>
+  <%= text_field_tag :description, params[:description], placeholder: 'Keywords (ex. 台灣+阿瑞)' %>
   <%= render "layouts/search", params: params %>
 <% end %>
 
