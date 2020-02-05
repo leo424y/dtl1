@@ -3,8 +3,8 @@
 <table>
 <% @node.posts.each do |post| %>
 <tr>
-    <td><%= tw_time post.updated || post.date %></td>
-    <td><%= link_to post.title, post.url, target: "_blank" if post.title %></td>
+    <td><%= link_to(post.date, post.url, target: "_blank") %></td>
+    <td><%= post.title %></td>
 </tr>
 <% end %>
 </table>
