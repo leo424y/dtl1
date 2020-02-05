@@ -1,8 +1,9 @@
 <%= @domain.created_at %>
-<%= @domain.url %>
+<%= link_to nil, 'http://'+@domain.url, target: '_blank' %>
 <table>
-<% @domain.nodes.each do |node| %>
+<% @domain.nodes.order_by_posts_count.each do |node| %>
 <tr>
+    <td><%= link_to node.posts.count, node_path(node) %></td>
     <td><%= link_to node.archive['user_name'], node_path(node) %></td>
 </tr>
 <% end %>
