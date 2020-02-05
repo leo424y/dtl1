@@ -1,14 +1,10 @@
 class DomainsController < ApplicationController
     def index        
         @domains = 
-        if params[:start_date].present?  || params[:end_date].present? 
-          Domain.search_date(params, 'created_at')
+        if params[:start_date].present? || params[:end_date].present? 
+          Domain.search_date(params, 'created_at').order_by_nodes_count
         else
-          Domain.
-          select("domains.*, count(nodes.id) AS nodes_count").
-          joins(:nodes).                                                   
-          group("domains.id").
-          order("nodes_count DESC")
+          Domain.order_by_nodes_count
         end        
         respond_to do |format|
           format.html # index.html.erb
@@ -20,5 +16,6 @@ class DomainsController < ApplicationController
 
     def show
       @domain = Domain.find(params[:id])
+
     end
 end
