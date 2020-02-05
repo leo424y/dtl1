@@ -4,7 +4,11 @@ class DomainsController < ApplicationController
         if params[:start_date].present?  || params[:end_date].present? 
           Domain.search_date(params, 'created_at')
         else
-          Domain.includes(:nodes).order(created_at: :desc)
+          Domain.
+          select("domains.*, count(nodes.id) AS nodes_count").
+          joins(:nodes).                                                   
+          group("domains.id").
+          order("nodes_count DESC")
         end        
         respond_to do |format|
           format.html # index.html.erb
