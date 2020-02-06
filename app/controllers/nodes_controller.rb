@@ -1,13 +1,14 @@
 class NodesController < ApplicationController
     def index        
-        @nodes = 
         if params[:start_date].present?  || params[:end_date].present? 
-          Node.search_date(params, 'created_at').order_by_posts_count
+          @nodes = Node.search_date(params, 'created_at')
+          @nodes = @nodes.search_context(params[:description], "archive ->> 'user_name'") if params[:description].present? 
+          @nodes_count = @nodes.count
+          @nodes = @nodes.order_by_posts_count
         else
-          Node.includes(:posts).order(created_at: :desc).limit(100).order_by_posts_count
+          @nodes = Node.none
+          @nodes_count = Node.count
         end
-        
-        @nodes = @nodes.search_context(params[:description], "archive ->> 'user_name'") if params[:description].present? 
 
         respond_to do |format|
           format.html # index.html.erb

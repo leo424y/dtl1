@@ -2,20 +2,19 @@
   <%= text_field_tag :description, params[:description], placeholder: 'Keywords (ex. 台灣+阿瑞)' %>
   <%= render "layouts/search", params: params %>
 <% end %>
-<h4><%= @nodes.sum(&:posts_count) %> Results (Nodes)</h4>
+<h4><%= @nodes_count %> Results (Nodes)</h4>
 
 <table>
 
 <% @nodes.each do |node| %>
   <% cache node do %>
-
-<tr>
-    <td><%= node.created_at %></td>
-    <td><%= link_to node.archive['user_name'], node_path(node) %></td>
-    <td><%= node.posts.count %></td>
-    <td><%= node.posts.average(:score) %></td>
-    <td><%= node.archive['source'] %></td>
-</tr>
-<% end %>
+  <tr>
+      <td><%= node.created_at %></td>
+      <td><%= link_to node.archive['user_name'], node_path(node) %></td>
+      <td><%= node.posts.count %></td>
+      <td><%= node.posts.average(:score) %></td>
+      <td><%= node.archive['source'] %></td>
+  </tr>
+  <% end %>
 <% end %>
 </table>
