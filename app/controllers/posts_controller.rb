@@ -22,6 +22,11 @@ class PostsController < ApplicationController
          @first_date = (params[:start_date].present? || params[:end_date].present? ) ? @posts.last.updated : nil
          @last_date = (params[:start_date].present? || params[:end_date].present? ) ? @posts.first.updated : nil
 
+         @posts_date = @posts.pluck(:updated).map{|x| Date.parse(x).strftime("%Y-%m-%d") }.group_by { |month| month }.map{ |month, xs|
+            [month,
+             xs.count]   # true
+          }
+
         respond_to do |format|
           format.html # index.html.erb
           format.xml  { render xml: @posts }

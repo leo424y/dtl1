@@ -8,10 +8,19 @@
 <h5><%= "#{@last_date}" %></h5>
 
 
-<h5><% @type_counts.each do |t| %>
+<h5>
+
+<% @type_counts.each do |t| %>
 <%= "#{t[0]}: #{t[1]}, " %>
 <% end %>
 </h5>
+
+<h5>
+<% @posts_date.each do |pd| %>
+  <%= "#{pd[0]}: #{pd[1]}" %><br>
+<% end %>
+</h5>
+
 
 
 <table>
