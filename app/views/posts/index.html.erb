@@ -17,7 +17,7 @@
 
 <h5>
 <% @posts_date.each do |pd| %>
-  <%= "#{pd[0]}: #{pd[1]}" %><br>
+  <%= link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {start_date: pd[0], end_date: pd[0]}) %><br>
 <% end %>
 </h5>
 
