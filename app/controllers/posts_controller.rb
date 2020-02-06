@@ -19,8 +19,8 @@ class PostsController < ApplicationController
          @type_counts = @type_counts.group_by {|i| i[0]}
          @type_counts = @type_counts.map{|i| [i[0],i[1].sum{|x| x[1]}] }
 
-         @first_date = @posts.last.updated
-         @last_date = @posts.first.updated
+         @first_date = (params[:start_date].present? || params[:end_date].present? ) ? @posts.last.updated : nil
+         @last_date = (params[:start_date].present? || params[:end_date].present? ) ? @posts.first.updated : nil
 
         respond_to do |format|
           format.html # index.html.erb
