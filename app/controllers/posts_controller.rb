@@ -19,8 +19,8 @@ class PostsController < ApplicationController
          @type_counts = @type_counts.group_by {|i| i[0]}
          @type_counts = @type_counts.map{|i| [i[0],i[1].sum{|x| x[1]}] }
 
-         @first_date = (params[:start_date].present? || params[:end_date].present? ) ? @posts.last.updated : nil
-         @last_date = (params[:start_date].present? || params[:end_date].present? ) ? @posts.first.updated : nil
+         @first_date = ( @posts.first && (params[:start_date].present? || params[:end_date].present? )) ? @posts.last.updated : nil
+         @last_date = (@posts.last && (params[:start_date].present? || params[:end_date].present?)) ? @posts.first.updated : nil
 
          @posts_date = @posts.pluck(:updated).map{|x| Date.parse(x).strftime("%Y-%m-%d") }.group_by { |month| month }.map{ |month, xs|
             [month,
