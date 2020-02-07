@@ -8,3 +8,30 @@
 <%= link_to '.', ENV['LIVE']+request.original_fullpath %>
 <%= render "layouts/csv_dl" if has_params %>
 </h4>
+
+
+
+<h4>
+  <input class="js-copytextarea"></input>
+  <button class="js-textareacopybtn" style="vertical-align:top;">Copy</button>
+<h4>
+
+<script>
+var copyTextarea =  document.querySelector('.js-copytextarea');
+copyTextarea.value = document.URL;
+
+var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  copyTextarea.focus();
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
+</script>
