@@ -6,12 +6,12 @@
   <%= link_to "#{x} ❌", posts_path(params: {description: params[:description].gsub("#{x}+",'').gsub("#{x}",''), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) %>
 <% end if params[:description] %>
 
-<% @genes.each do |g| %>
-  <% if g[1]['tag'] %>
-  <% word = URI.decode g[1]['tag'] %>
-  <%= link_to word, posts_path(params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) unless params[:description].split('+').include? word %>
+
+<% (@genes.map{|x| x[1]['tag']}+ENV['GENE_NEWS'].split(',')).each do |g| %>
+  <% word = (g ? (URI.decode g) : '') %>
+  <%= link_to word, posts_path(params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) unless params[:description] && (params[:description].split('+').include? word) %>
 <% end %>
-<% end %>
+
 <h4><%= @posts.count %> Results (Posts) </h4>
 <h5><%= "#{@first_date}" %></h5>
 <h5><%= "#{@last_date}" %></h5>
