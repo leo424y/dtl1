@@ -2,6 +2,7 @@
   <%= render "layouts/search_txt", params: params %>
   <%= render "layouts/search", params: params %>
 <% end %>
+<%= link_to '❌', posts_path %>
 <% @genes.each do |g| %>
   <% if g[1]['tag'] %>
   <% word = URI.decode g[1]['tag'] %>
