@@ -1,13 +1,14 @@
 <%= tw_time(@post.date) %>
+<%= @post.title %>
 <%= @post.score %>
-<%= link_to "🔗 #{@post.url}", @post.url, target: "_blank" %>
+<%= link_to "🔗 #{URI.decode @post.url}", @post.url, target: "_blank" %>
 <table>
 <% @post.links.each do |link| %> 
 <tr>
     <% if link.url %>
         <td><%= link_to 'CT', url_on_ct(link.url), target: "_blank" %></td>
         <td><%= link_to link.post.updated || link.post.date, links_path(url: link.url) %></td>
-        <td><%= link_to "🔗 #{link.url}", link.url, target: '_blank' %></td>
+        <td><%= link_to "🔗 #{URI.decode link.url}", link.url, target: '_blank' %></td>
     <% end %>
 </tr>
 <% end %>
