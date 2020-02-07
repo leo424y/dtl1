@@ -5,7 +5,7 @@
 <% @genes.each do |g| %>
   <% if g[1]['tag'] %>
   <% word = URI.decode g[1]['tag'] %>
-  <%= link_to word, posts_path(params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: @genes[:date], end_date:  @genes[:date]}) %>
+  <%= link_to word, posts_path(params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) %>
 <% end %>
 <% end %>
 <h4><%= @posts.count %> Results (Posts) </h4>
