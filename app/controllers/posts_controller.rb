@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
     def index
+        @genes = Gene.import('tag_hot_rank.php', {date: Date.today.strftime("%Y-%m-%d")}).to_hash
+
+
         @posts = (params[:url].present? || params[:description].present? || params[:start_date].present? || params[:end_date].present? ? Post.all : Post.none)
         
         @posts = @posts.search(params[:url]) if params[:url].present? 
