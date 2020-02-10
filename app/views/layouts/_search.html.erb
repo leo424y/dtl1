@@ -7,4 +7,21 @@
 <%= date_field_tag :end_date, params[:end_date], value: Date.today %>
 <% end %>
 <%= submit_tag "Search", :name => nil %>
+<% if params[:description].present? %>
+in 
+<%= button_tag(type: 'submit', :name => "start_date", value: Date.today-3.days) do %>
+  3 days
+<% end %>
 
+<%= button_tag(type: 'submit', :name => "start_date", value: Date.today-7.days) do %>
+  7 days
+<% end %>
+
+<%= button_tag(type: 'submit', :name => "start_date", value: Date.today-30.days) do %>
+  30 days
+<% end %>
+
+<%= button_tag(type: 'submit', :name => "start_date", value: Date.today-90.days) do %>
+  90 days
+<% end %>
+<% end %>
