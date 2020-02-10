@@ -32,15 +32,10 @@
 
 
 
-<table>
 <% @posts.each do |post| %>
-<tr>
-    <td><%= link_to '🔗', post.url, target: '_blank' %></td>
-    <td><%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %></td>
-    <td><%= media_icon(post.node.archive['source']) %></td>
-    <td><%= post.title ? post.title.truncate(40) : 'post' %></td>
-    <td><%# post.score %></td>
-</tr>
-
+    <div class='test' style="text-overflow:ellipsis;">
+      <%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
+      <%= link_to media_icon(post.node.archive['source']), post.url, target: '_blank' %>
+      <%= post.title ? post.title : 'post' %>
+    </div>
 <% end %>
-</table>
