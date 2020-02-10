@@ -12,7 +12,7 @@
   <%= link_to word, posts_path(params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) unless params[:description] && (params[:description].split('+').include? word) %>
 <% end %>
 
-<h4><%= @posts.count %> Results (Posts) </h4>
+<h4><%= @posts_count %> Results (Posts) </h4>
 <h5><%= "#{@first_date}" %></h5>
 <h5><%= "#{@last_date}" %></h5>
 

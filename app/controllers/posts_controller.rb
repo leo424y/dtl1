@@ -6,6 +6,7 @@ class PostsController < ApplicationController
         @posts = (params[:url].present? || params[:description].present? || params[:start_date].present? || params[:end_date].present? ? Post.all : Post.none)
         
         @posts = @posts.search(params[:url]) if params[:url].present? 
+
         @posts = @posts.search_context(params[:description], 'title') if params[:description].present? 
          
         @posts = @posts.search_date(params, 'date') if (params[:start_date].present? || params[:end_date].present? )
@@ -29,6 +30,7 @@ class PostsController < ApplicationController
             [month,
              xs.count]   # true
           }
+          @posts_count= @posts.count
 
         respond_to do |format|
           format.html # index.html.erb
