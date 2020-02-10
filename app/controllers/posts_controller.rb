@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
         @post_source= @posts.group(:node).count
 
-        @posts = @posts.order(date: :desc)  
+        @posts = @posts.order(date: :desc)
 
         @type_counts = []
          @post_source.each do |n|
@@ -69,5 +69,11 @@ class PostsController < ApplicationController
 
     def show
         @post=Post.find(params[:id])
+
+        respond_to do |format|
+          format.html # index.html.erb
+          format.xml  { render xml: @post }
+          format.json { render json: @post }
+        end
     end
 end
