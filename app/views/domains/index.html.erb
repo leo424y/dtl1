@@ -1,7 +1,7 @@
 <%= form_tag domains_path, :method => 'get' do %>
   <%= render "layouts/search", params: params %>
 <% end %>
-<h4><%= @domains.sum(&:nodes_count) %> Results (Domains)</h4>
+<h4><%= @domains_count %> Results (Domains)</h4>
 
 <table>
 <% @domains.each do |domain| %>
