@@ -30,6 +30,7 @@ in
 <% end %>
 
 <% end %>
+<br>
 
 <% params[:description].split('+').each do |x| %>
   <%= link_to "#{x} ❌", controller: request.path_info.gsub('/',''), action: 'index', params: {description: params[:description].gsub("#{x}+",'').gsub("#{x}",''), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]} %>
