@@ -2,15 +2,6 @@
   <%= render "layouts/search_txt", params: params %>
   <%= render "layouts/search", params: params %>
 <% end %>
-<% params[:description].split('+').each do |x| %>
-  <%= link_to "#{x} ❌", posts_path(params: {description: params[:description].gsub("#{x}+",'').gsub("#{x}",''), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) %>
-<% end if params[:description] %>
-
-
-<% (@genes.map{|x| x[1]['tag']}+ENV['GENE_NEWS'].split(',')).each do |g| %>
-  <% word = (g ? (URI.decode g) : '') %>
-  <%= link_to word, posts_path(params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) unless params[:description] && (params[:description].split('+').include? word) %>
-<% end %>
 
 <h4><%= @posts_count %> Results (Posts) </h4>
 <h5><%= "#{@first_date}" %></h5>
@@ -29,8 +20,6 @@
   <%= link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %><br>
 <% end %>
 </h5>
-
-
 
 <% @posts.each do |post| %>
     <div class='test' style="text-overflow:ellipsis;">

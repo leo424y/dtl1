@@ -1,5 +1,7 @@
 class LinksController < ApplicationController
     def index
+      @genes = Gene.import('tag_hot_rank.php', {date: params[:start_date] || Date.today.strftime("%Y-%m-%d")}).to_hash
+
       # Get Links
       @links = (params[:url].present? || params[:description].present? || params[:start_date].present? || params[:end_date].present? ? Link.all : Link.none)
 
