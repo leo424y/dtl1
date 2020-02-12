@@ -2,11 +2,15 @@
   <%= render "layouts/search_txt", params: params %>
   <%= render "layouts/search", params: params %>
 <% end %>
+<h4>
+<% @post_tags.each do |x| %>
+  <%= link_to "#{x[0]}(#{x[1]})", posts_path(params: {description: params[:description]+'+'+x[0], start_date: params[:start_date], end_date: params[:end_date]}) if x[0] %>
+<% end %>
+<h4>
 
 <h4><%= @posts_count %> Results (Posts) </h4>
 <h5><%= "#{@first_date}" %></h5>
 <h5><%= "#{@last_date}" %></h5>
-
 
 <h5>
 <% @type_counts.each do |t| %>
