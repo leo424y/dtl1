@@ -32,6 +32,7 @@ class PostsController < ApplicationController
           }
           @posts_count= @posts.count
 
+        @post_tags= @posts.pluck(:archive).map{|x|x[:data][0][:tags]}
         respond_to do |format|
           format.html # index.html.erb
           format.xml  { render xml: @posts }
