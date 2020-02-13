@@ -36,7 +36,9 @@ in
   <%= link_to "#{x} ❌", controller: request.path_info.gsub('/',''), action: 'index', params: {description: params[:description].gsub("#{x}+",'').gsub("#{x}",''), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]} %>
 <% end if params[:description] %>
 
-<% (@genes.map{|x| x[1]['tag']}+ENV['GENE_NEWS'].split(',')-['各地分網', '閱讀', '鉅亨網']).each do |g| %>
+<% (@genes.map{|x| x[1]['tag'] }+ENV['GENE_NEWS'].split(',')).each do |g| %>
   <% word = (g ? (URI.decode g) : '') %>
-  <%= link_to word, controller: request.path_info.gsub('/','').present? ? request.path_info.gsub('/','') : 'posts', action: 'index', params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) unless params[:description] && (params[:description].split('+').include? word %>
+  <% unless ['各地分網', '閱讀', '鉅亨網'].include? word %>
+    <%= link_to word, controller: request.path_info.gsub('/','').present? ? request.path_info.gsub('/','') : 'posts', action: 'index', params: {description: (params[:description] ? word+'+'+params[:description] : word), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) unless (params[:description] && (params[:description].split('+').include? word) %>
+  <% end %>
 <% end  %>
