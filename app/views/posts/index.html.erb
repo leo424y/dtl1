@@ -20,10 +20,21 @@
 </h5>
 
 <h5>
+<% @date = ['x'] %>
+<% @count = ['counts'] %>
+
 <% @posts_date.each do |pd| %>
+  <% @date << pd[0] %>
+  <% @count << pd[1] %>
   <%= link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %><br>
 <% end %>
 </h5>
+<%= @date %>
+<%= @count %>
+
+
+<div id="post_count_chart"></div>
+
 
 <% @posts.each do |post| %>
     <div class='test' style="text-overflow:ellipsis;">
@@ -32,3 +43,28 @@
       <%= post.title ? post.title : 'post' %>
     </div>
 <% end %>
+
+<script>
+var chart = bb.generate({
+  data: {
+    x: "x",
+    columns: [
+      	"<%= @date %>",
+	["counts", 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
+
+      // "<%= @date %>",
+      // "<%= @count %>"
+    ]
+  },
+  axis: {
+    x: {
+      type: "timeseries",
+      tick: {
+        count: 10,
+        format: "%Y-%m-%d"
+      }
+    }
+  },
+  bindto: "#post_count_chart"
+});
+</script>
