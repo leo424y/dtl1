@@ -28,25 +28,10 @@
   <% @count << pd[1] %>
   <%= link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %><br>
 <% end %>
-</h5>
-<%= @date %>
-<%= @count %>
 
-
-<div id="post_count_chart"></div>
-
-
-<% @posts.each do |post| %>
-    <div class='test' style="text-overflow:ellipsis;">
-      <%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
-      <%= link_to media_icon(post.node.archive['source']), post.url, target: '_blank' %>
-      <%= post.title ? post.title : 'post' %>
-    </div>
-<% end %>
-
+<% if @posts_date.count > 0 %>
+<div id='post_count_chart'></div>
 <script>
-console.log("<%= @date.join(',') %>")
-console.log("<%= @date.join(',') %>".split(',') )
 var chart = bb.generate({
   data: {
     x: "x",
@@ -69,3 +54,15 @@ var chart = bb.generate({
   bindto: "#post_count_chart"
 });
 </script>
+<% end %>
+
+</h5>
+
+<% @posts.each do |post| %>
+    <div class='test' style="text-overflow:ellipsis;">
+      <%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
+      <%= link_to media_icon(post.node.archive['source']), post.url, target: '_blank' %>
+      <%= post.title ? post.title : 'post' %>
+    </div>
+<% end %>
+
