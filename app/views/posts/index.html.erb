@@ -45,13 +45,14 @@
 <% end %>
 
 <script>
+console.log("<%= @date.join(',') %>")
+console.log("<%= @date.join(',') %>".split(',') )
 var chart = bb.generate({
   data: {
     x: "x",
     columns: [
-      	"<%= @date %>",
-	["counts", 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
-
+        "<%= @date.join(',') %>".split(','),
+        "<%= @count.join(',') %>".split(',')
       // "<%= @date %>",
       // "<%= @count %>"
     ]
@@ -60,7 +61,7 @@ var chart = bb.generate({
     x: {
       type: "timeseries",
       tick: {
-        count: 10,
+        count: "<%= @posts_date.count %>",
         format: "%Y-%m-%d"
       }
     }
