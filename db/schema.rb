@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_035620) do
+ActiveRecord::Schema.define(version: 2020_02_14_061246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -66,11 +66,13 @@ ActiveRecord::Schema.define(version: 2020_01_22_035620) do
     t.decimal "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "source"
     t.index ["created_at"], name: "index_posts_on_created_at"
     t.index ["date"], name: "index_posts_on_date"
     t.index ["link"], name: "index_posts_on_link"
     t.index ["node_id"], name: "index_posts_on_node_id"
     t.index ["score"], name: "index_posts_on_score"
+    t.index ["source"], name: "index_posts_on_source"
     t.index ["updated"], name: "index_posts_on_updated"
     t.index ["url"], name: "index_posts_on_url"
   end

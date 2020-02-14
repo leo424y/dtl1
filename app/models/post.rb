@@ -174,6 +174,7 @@ class Post < ApplicationRecord
             date: date,
             updated: updated,
             score: score,
+            source: source,
             )
             # Create Links
             if row_hash['expandedLinks']
@@ -200,7 +201,8 @@ class Post < ApplicationRecord
             post.link = link 
             post.date = date
             post.updated = updated
-            post.score = score        
+            post.score = score     
+            post.source = source   
         end
         # facebook video download
         %x(curl "http://localhost:3000/?yurl=#{link}") if ( (ENV['FBDL'] == ENV['FBDLS']) && (link =~ /facebook/) && (link =~ /videos/))
