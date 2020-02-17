@@ -1,11 +1,11 @@
 
-<%= link_to '📎', 'https://cofacts.g0v.tw/article/'+@response['id'], target: '_blank' %>
-<%= @response['text']%>
-<% @response['hyperlinks'].each do |rh| %>
+<%= link_to '📎', 'https://cofacts.g0v.tw/article/'+@cofacts_response['id'], target: '_blank' %>
+<%= @cofacts_response['text']%>
+<% @cofacts_response['hyperlinks'].each do |rh| %>
 <%= link_to rh['url'], rh['url'], target: '_blank' %>
 <% end %>
 <blockquote>
-<% @response['articleReplies'].each do |ra| %>
+<% @cofacts_response['articleReplies'].each do |ra| %>
 <div class='test' style="text-overflow:ellipsis;">
 <%= link_to '📎', 'https://cofacts.g0v.tw/reply/'+ra['reply']['id'], target: '_blank' %>
 <%= ra['reply']['text'] %>

@@ -9,9 +9,14 @@
 <% end %>
 </h4>
 
+<% if @cofacts_response %>
+<h4>Cofacts Results</h4>
+<%= render "layouts/cofact" %>
+<% end %>
+
 <h4><%= @posts_count %> Results (Posts) </h4>
-<h5><%= "#{@first_date}" %></h5>
-<h5><%= "#{@last_date}" %></h5>
+<h5><%= "#{@first_date}" %> (First Time)</h5>
+<h5><%= "#{@last_date}" %> (Last Time)</h5>
 
 <h5>
 <% @type_counts.each do |t| %>
@@ -58,7 +63,6 @@ var chart = bb.generate({
 
 </h5>
 
-<%= render "layouts/cofact" if @response %>
 
 <% @posts.each do |post| %>
     <div class='test' style="text-overflow:ellipsis;">
