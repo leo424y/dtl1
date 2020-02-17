@@ -58,7 +58,7 @@ var chart = bb.generate({
 
 </h5>
 
-<%= render "layouts/cofact" %>
+<%= render "layouts/cofact" if @response %>
 
 <% @posts.each do |post| %>
     <div class='test' style="text-overflow:ellipsis;">

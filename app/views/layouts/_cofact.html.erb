@@ -1,16 +1,17 @@
-<%= @response['id'] %>
+
+<%= link_to '📎', 'https://cofacts.g0v.tw/article/'+@response['id'], target: '_blank' %>
 <%= @response['text']%>
-<%= @response['hyperlinks'] %>
+<% @response['hyperlinks'].each do |rh| %>
+<%= link_to rh['url'], rh['url'], target: '_blank' %>
+<% end %>
+<blockquote>
 <% @response['articleReplies'].each do |ra| %>
-<%= ra['reply']['id'] %>
+<div class='test' style="text-overflow:ellipsis;">
+<%= link_to '📎', 'https://cofacts.g0v.tw/reply/'+ra['reply']['id'], target: '_blank' %>
 <%= ra['reply']['text'] %>
 <%= ra['reply']['type'] %>
-<%= ra['reply']['reference'] %>
-<% end %>
-
-
-<div class='test' style="text-overflow:ellipsis;">
-<%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
-<%= link_to media_icon( post.source || post.node.archive['source']), post.url, target: '_blank' %>
-<%= post.title ? post.title : 'post' %>
+<%= link_to ra['reply']['reference'] %>
 </div>
+<% end %>
+</blockquote>
+
