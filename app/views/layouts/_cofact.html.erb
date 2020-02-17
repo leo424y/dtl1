@@ -1,0 +1,16 @@
+<%= @response['id'] %>
+<%= @response['text']%>
+<%= @response['hyperlinks'] %>
+<% @response['articleReplies'].each do |ra| %>
+<%= ra['reply']['id'] %>
+<%= ra['reply']['text'] %>
+<%= ra['reply']['type'] %>
+<%= ra['reply']['reference'] %>
+<% end %>
+
+
+<div class='test' style="text-overflow:ellipsis;">
+<%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
+<%= link_to media_icon( post.source || post.node.archive['source']), post.url, target: '_blank' %>
+<%= post.title ? post.title : 'post' %>
+</div>

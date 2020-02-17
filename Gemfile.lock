@@ -202,6 +202,9 @@ GEM
     rubyzip (2.0.0)
     rufus-scheduler (3.6.0)
       fugit (~> 1.1, >= 1.1.6)
+    rumors-api-client (0.3.3)
+      httparty (~> 0.16)
+      tf-idf-similarity (~> 0.1)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.2.1)
@@ -227,6 +230,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     temple (0.8.2)
+    tf-idf-similarity (0.2.0)
+      unicode_utils (~> 1.4)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -236,6 +241,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    unicode_utils (1.4.0)
     web-console (4.0.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -272,6 +278,7 @@ DEPENDENCIES
   rails (~> 6.0.2)
   rails_admin (~> 2.0)
   rufus-scheduler
+  rumors-api-client
   sass-rails (>= 6)
   selenium-webdriver
   spring

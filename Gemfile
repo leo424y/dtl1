@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'httparty'
 gem 'tradsim'
 gem 'rails_admin', '~> 2.0'
+gem 'rumors-api-client'
 
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -32,6 +32,11 @@ class PostsController < ApplicationController
           }
           @posts_count= @posts.count
 
+          # cofact
+        rumor = "行政院最新公告～元旦放七天嘍！收到這訊息。千萬別點閱，因為有病毒，已有朋友中獎了，請大家告訴大家!如果有收到，元旦放七天，的那個是釣魚網站，別點。"
+
+        @response = (Rumors::Api::Client.search rumor)
+
         @post_tags= @posts.pluck(:archive).map{|x|x['data'][0]['tags'] if x['data'] && x['data'][0]}.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1 ; h }.sort {|a1,a2| a2[1].to_i <=> a1[1].to_i }
         respond_to do |format|
           format.html # index.html.erb

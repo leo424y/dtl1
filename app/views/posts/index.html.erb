@@ -58,6 +58,8 @@ var chart = bb.generate({
 
 </h5>
 
+<%= render "layouts/cofact" %>
+
 <% @posts.each do |post| %>
     <div class='test' style="text-overflow:ellipsis;">
       <%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
