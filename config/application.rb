@@ -24,3 +24,14 @@ module Dtl1
     # the framework and any gems in your application.
   end
 end
+
+module Rumors
+  module Api
+    module Client
+      class Base
+        # Monkey patch lower SIMILARITY to get more result
+        SIMILARITY = 0.01
+      end
+    end
+  end
+end

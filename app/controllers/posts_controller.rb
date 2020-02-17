@@ -33,7 +33,7 @@ class PostsController < ApplicationController
           @posts_count= @posts.count
 
         # cofact
-        rumor = params[:url] || params[:description]
+        rumor = params[:description] || params[:url]
         @cofacts_response = (Rumors::Api::Client.search rumor) if rumor
 
         @post_tags= @posts.pluck(:archive).map{|x|x['data'][0]['tags'] if x['data'] && x['data'][0]}.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1 ; h }.sort {|a1,a2| a2[1].to_i <=> a1[1].to_i }
