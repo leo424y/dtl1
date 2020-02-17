@@ -1,13 +1,17 @@
 
-<%= link_to '📎', 'https://cofacts.g0v.tw/article/'+@cofacts_response['id'], target: '_blank' %>
-<%= @cofacts_response['text']%>
-<% @cofacts_response['hyperlinks'].each do |rh| %>
-<%= link_to rh['url'], rh['url'], target: '_blank' %>
-<% end %>
-<blockquote>
-<% @cofacts_response['articleReplies'].each do |ra| %>
+<% @cofacts_responses.each do |c|%>
+
 <div class='test' style="text-overflow:ellipsis;">
-<%= link_to '📎', 'https://cofacts.g0v.tw/reply/'+ra['reply']['id'], target: '_blank' %>
+<%= link_to '🔗', 'https://cofacts.g0v.tw/article/'+c['id'], target: '_blank' %>
+<% c['hyperlinks'].each do |rh| %>
+<%= link_to '📎', rh['url'], target: '_blank' %>
+<% end %>
+<%= c['text']%>
+</div>
+<blockquote>
+<% c['articleReplies'].each do |ra| %>
+<div class='test' style="text-overflow:ellipsis;">
+<%= link_to '🔗', 'https://cofacts.g0v.tw/reply/'+ra['reply']['id'], target: '_blank' %>
 <%= ra['reply']['text'] %>
 <%= ra['reply']['type'] %>
 <%= link_to ra['reply']['reference'] %>
@@ -15,3 +19,4 @@
 <% end %>
 </blockquote>
 
+<% end %>
