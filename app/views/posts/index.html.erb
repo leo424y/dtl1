@@ -5,7 +5,7 @@
 <h4>
 <%= @post_tags.count %> Related Tags <br>
 <% @post_tags.each do |x| %>
-  <%= link_to "#{x[0]}(#{x[1]})", posts_path(params: {description: params[:description]+'+'+x[0], start_date: params[:start_date], end_date: params[:end_date]}) if x[0] && x[1] > 1 %>
+  <%= link_to "#{x[0]}(#{x[1]})", posts_path(params: {description: (params[:description].present? ? params[:description]+ '+' + x[0] : x[0]), start_date: params[:start_date], end_date: params[:end_date]}) if x[0] && x[1] > 1 %>
 <% end %>
 </h4>
 <% if @cofacts_responses %>
