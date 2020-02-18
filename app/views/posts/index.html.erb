@@ -67,6 +67,9 @@ var chart = bb.generate({
     <div class='test' style="text-overflow:ellipsis;">
       <%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
       <%= link_to media_icon( post.source || post.node.archive['source']), post.url, target: '_blank' %>
+      <% if post.source = 'news' && @posts_count < 100 %>
+        <div class="fb-like" data-href="<%= post.link %>" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="false"></div>
+      <% end %>
       <%= post.title ? post.title : 'post' %>
     </div>
 <% end %>
