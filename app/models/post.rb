@@ -209,7 +209,7 @@ class Post < ApplicationRecord
                         post = node.posts.find_or_create_by(url: link) 
                         post.update(
                             archive: youtube_meta,            
-                            title: youtube_meta['title'],
+                            title: "#{youtube_meta['title']}_#{youtube_meta['description']}",
                             link: youtube_meta['webpage_url'],
                             date: youtube_meta['upload_date'],
                             updated: updated,
