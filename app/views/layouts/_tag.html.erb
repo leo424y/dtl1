@@ -1,0 +1,25 @@
+<h4>
+Top Tags <%= params[:start_date] || 'Today' %>
+<br>
+<% params[:description].split('+').each do |x| %>
+  <%= link_to "#{x} ❌", controller: request.path_info.gsub('/',''), action: 'index', params: {description: params[:description].gsub("#{x}+",'').gsub("#{x}",''), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]} %>
+<% end if params[:description] %>
+
+<% (@genes.map{|x| x[1]['tag'] }+ENV['GENE_NEWS'].split(',')).each do |g| %>
+  <% word = (g ? (URI.decode g) : '') %>
+  <% unless ['各地分網', '閱讀', '鉅亨網'].include? word %>
+    <%= link_to is_name(word), controller: request.path_info.gsub('/','').present? ? request.path_info.gsub('/','') : 'posts', action: 'index', params: {description: word, start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]}) unless (params[:description] && (params[:description].split('+').include? word) %>
+  <% end %>
+<% end  %>
+</h4>
+
+<h4>
+<%= @post_tags.count %> Related Tags <br>
+<% @post_tags.each do |x| %>
+  <%= link_to "#{x[0]}(#{x[1]})", posts_path(params: {description: (params[:description].present? ? params[:description]+ '+' + x[0] : x[0]), start_date: params[:start_date], end_date: params[:end_date]}) if x[0] && x[1] > 1 %>
+<% end %>
+</h4>
+<% if @cofacts_responses %>
+<h4>Cofacts Results</h4>
+<%= render "layouts/cofact" %>
+<% end %>
