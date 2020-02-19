@@ -29,8 +29,9 @@
     <%= link_to '🔗', "#{link.url}", target: "_blank" %></td>
     <%= render "layouts/ct", params: {ct: link.url} %>
     <% if link.post %>
-    <%= link_to link.post.date, post_path(id: link.post_id), title: link.post.archive %></td>
-    <%= link_to link.post.title ? link.post.title : link.post.node.archive['name'], link.post.url, target: "_blank" %></td>
+      <%= link_to link.post.date, post_path(id: link.post_id), title: link.post.archive %></td>
+      <%# link_to link.post.title ? link.post.title : link.post.node.archive['name'], link.post.url, target: "_blank" %></td>
+      <%= link.post.title ? link.post.title : link.post.node.archive['name'] %></td>
     <% end %>
     <%= link_to (link.url ? link.url : ''), (link.url ? link.url : ''), target: '_blank' %>
 </div>
