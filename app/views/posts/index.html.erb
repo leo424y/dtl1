@@ -1,7 +1,7 @@
 <%= form_tag posts_path, :method => 'get' do %>
-  <%= render "layouts/search_txt", params: params %>
-  <%= render "layouts/search", params: params %>
-  <%= render "layouts/tag", params: params %>
+  <%= render "layouts/search_txt" %>
+  <%= render "layouts/search" %>
+  <%= render "layouts/tag" %>
 <% end %>
 
 <h4><%= @posts_count %> Results (Posts) </h4>
