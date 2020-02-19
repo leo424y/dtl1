@@ -15,8 +15,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/1.10.2/billboard.pkgd.js"></script>
 <!-- 1) Load D3.js and billboard.js separately -->
 
-
-  
       <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GAID'] %>"></script>
     <script>
@@ -28,18 +26,17 @@
     </script>
           <!-- Global site tag (gtag.js) - Google Analytics -->
 
-<%# https://developers.facebook.com/docs/plugins/like-button/ %>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v6.0&appId=<%= ENV['FBAPPID']%>&autoLogAppEvents=1"></script>
-<%# https://developers.facebook.com/docs/plugins/like-button/ %>
-
-
     <title><%= content_for?(:title) ? "DTL_#{content_for(:title)}" : "DTL" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%# https://developers.facebook.com/docs/plugins/like-button/ %>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v6.0&appId=<%= ENV['FBAPPID']%>&autoLogAppEvents=1"></script>
+    <%# https://developers.facebook.com/docs/plugins/like-button/ %>
   </head>
 
   <body>
