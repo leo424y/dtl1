@@ -165,26 +165,74 @@ class Post < ApplicationRecord
 
         post = node.posts.find_or_create_by(url: url) 
         if post.archive == '{}'
-            post.update(archive: {data: [row_hash.merge({
+            post.update(
+                archive: {data: [row_hash.merge({
                     import_type: import_type
-                })]
-            },
-            title: message,
-            link: link ,
-            date: date,
-            updated: updated,
-            score: score,
-            source: source,
+                })]},
+                title: message,
+                link: link ,
+                date: date,
+                updated: updated,
+                score: score,
+                source: source,
             )
             # Create Links
             if row_hash['expandedLinks']
                 row_hash['expandedLinks'].each_with_index do |e,i|
-                    post.links.create!(
-                        url: e['expanded'], 
-                        archive: {
-                            link_description: message && link_description ? "#{message}_#{link_description}" : message
-                        }
-                    ) 
+                    if e['expanded'] =~ /youtube.com|youtu.be/
+                        youtube_meta = JSON.parse(%x(youtube-dl -J "#{link}"))
+                        
+                        # create the link belongs to facebook post
+                        post.links.create!(
+                            url: youtube_meta['webpage_url'], 
+                            archive: {
+                                date: date,
+                                link_description: "#{youtube_meta['title']}_#{youtube_meta['description']}"
+                            }.merge(youtube_meta)
+                        )
+        
+                        domain_url = 'https://www.youtube.com/'
+                        domain = Domain.find_or_create_by!(
+                            url: domain_url
+                        )
+                        
+                        node_url = youtube_meta['uploader_url']
+                        node = domain.nodes.find_or_create_by!(
+                            url: node_url,
+                            archive: {
+                                source: 'youtube', 
+                                user_name: youtube_meta['uploader'],
+                                user_id: youtube_meta['uploader_id']
+                            }
+                        )
+                
+                        post = node.posts.find_or_create_by(url: link) 
+                        post.update(
+                            archive: youtube_meta,            
+                            title: youtube_meta['title'],
+                            link: youtube_meta['webpage_url'],
+                            date: youtube_meta['upload_date'],
+                            updated: updated,
+                            score: '',
+                            source: 'youtube',
+                        )
+        
+                        # create the link belongs to itself
+                        post.links.create!(
+                            url: youtube_meta['webpage_url'], 
+                            archive: {
+                                date: date,
+                                link_description: "#{youtube_meta['title']}_#{youtube_meta['description']}"
+                            }.merge(youtube_meta)
+                        )
+                    else
+                        post.links.create!(
+                            url: e['expanded'], 
+                            archive: {
+                                link_description: message && link_description ? "#{message}_#{link_description}" : message
+                            }
+                        ) 
+                    end
                 end
             else
                 post.links.create!(
@@ -196,13 +244,15 @@ class Post < ApplicationRecord
                 ) 
             end
         else
-            post.update(archive: {data: (post.archive['data'] ? (post.archive['data'] << row_hash) : row_hash)})            
-            post.title = message
-            post.link = link 
-            post.date = date
-            post.updated = updated
-            post.score = score     
-            post.source = source   
+            post.update(
+                archive: {data: (post.archive['data'] ? (post.archive['data'] << row_hash) : row_hash)},            
+                title: message,
+                link: link,
+                date: date,
+                updated: updated,
+                score: score,
+                source: source,
+            )
         end
         # facebook video download
         %x(curl "http://localhost:3000/?yurl=#{link}") if ( (ENV['FBDL'] == ENV['FBDLS']) && (link =~ /facebook/) && (link =~ /videos/))
