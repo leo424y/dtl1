@@ -12,7 +12,7 @@ Top Tags <%= params[:start_date] || 'Today' %>
 
 <h4>
 <%= @post_tags.count %> Related Tags <br>
-<% tags = params[:description].split('+') %>
+<% tags = params[:description] ? params[:description].split('+') : '' %>
 
 <% tags.each do |x| %>
   <%= link_to "#{is_name x} ❌".html_safe, controller: request.path_info.gsub('/',''), action: 'index', params: {description: params[:description].gsub("#{x}+",'').gsub("#{x}",''), start_date: params[:start_date] || @genes[:date], end_date: params[:end_date] || @genes[:date]} %>
