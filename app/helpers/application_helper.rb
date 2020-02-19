@@ -26,6 +26,8 @@ module ApplicationHelper
             '🇨🇳'
         when 'news'
             '📰'
+        when 'youtube'
+            '⏯️ '
         end
     end
 
