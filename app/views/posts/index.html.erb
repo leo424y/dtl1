@@ -18,11 +18,11 @@
 <% @date = ['x'] %>
 <% @count = ['counts'] %>
 
-<%# @posts_date.each do |pd| %>
-  <%# @date << pd[0] %>
-  <%# @count << pd[1] %>
-  <%# link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %><br>
-<%# end %>
+<% @posts_date.each do |pd| %>
+  <% @date << pd[0] %>
+  <% @count << pd[1] %>
+  <%# link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %>
+<% end %>
 
 <% if @posts_date.count > 0 %>
 <div id='post_count_chart'></div>
