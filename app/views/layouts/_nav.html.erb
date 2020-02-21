@@ -1,13 +1,17 @@
-<h4><%= link_to '[DoubleThink Lab DB]', root_path %> | 
-<%= link_to 'LINK', links_path(params.to_enum.to_h) %> |
-<%= link_to 'POST', posts_path(params.to_enum.to_h) %> |
-<%= link_to 'NODE', nodes_path(params.to_enum.to_h) %> |
-<%= link_to 'DOMAIN', domains_path %> | 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+<%= link_to 'DoubleThink Lab DB', root_path, class: "navbar-brand" %> 
+<%= link_to 'LINK', links_path(params.to_enum.to_h), class: "nav-item nav-link" %>
+<%= link_to 'POST', posts_path(params.to_enum.to_h), class: "nav-item nav-link" %>
+<%= link_to 'NODE', nodes_path(params.to_enum.to_h), class: "nav-item nav-link" %>
+<%= link_to 'DOMAIN', domains_path %>
 <%# link_to 'IMPORT', dashboard_posts_path %> 
 <%# link_to 'ADMIN', '/fin' %> 
 <%# link_to '.', ENV['ALLOW_DOMAIN']+request.original_fullpath %>
 <%= render "layouts/csv_dl" if has_params %>
-</h4>
+</nav>
 
 <h3>
 <%= content_for?(:title) ? "DTL_#{content_for(:title)}" : "DTL" %>
