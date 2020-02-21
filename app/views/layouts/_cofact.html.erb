@@ -7,7 +7,7 @@
 <%# c['updatedAt'].to_date %>
 <% c['hyperlinks'].each do |rh| %>
 <%= link_to '📎', rh['url'], target: '_blank' %>
-<% end %>
+<% end if c['hyperlinks'] %>
 <%= c['text']%>
 </div>
 <blockquote>
@@ -19,7 +19,7 @@
 <%= ra['reply']['type'] %>
 <%= link_to ra['reply']['reference'] %>
 </div>
-<% end %>
+<% end if c['articleReplies'] %>
 </blockquote>
 
 <% end %>
