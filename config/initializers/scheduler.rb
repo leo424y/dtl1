@@ -30,7 +30,11 @@ s.every '1m' do
 end
 
 s.every '1d' do 
-  Post.pablo_api_import
+  begin
+    Post.pablo_api_import
+  rescue => error
+    p error
+  end  
 end
 
 
