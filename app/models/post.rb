@@ -84,7 +84,12 @@ class Post < ApplicationRecord
         medias = ENV['GENE_NEWS'].split(',')
         medias.each do |media|
             begin
-            uri = URI("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
+                url = URI("#{ENV['NEWS_API_ENDPOINT']}/news_dump.php?media=#{media}")
+                begin
+                  uri = URI.parse(url)
+                rescue URI::InvalidURIError
+                  uri = URI.parse(URI.escape(url))
+                end                
             request = Net::HTTP.get_response(uri)
             rows_hash = JSON.parse(request.body)
             rows_hash.each do |row_hash|

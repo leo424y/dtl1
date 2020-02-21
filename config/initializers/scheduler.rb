@@ -19,7 +19,9 @@ s.every '30m' do
   rescue => error
     p error
   end
-  
+end  
+
+s.every '1m' do
   begin
     Post.news_api_import
   rescue => error
