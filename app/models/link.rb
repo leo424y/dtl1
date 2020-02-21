@@ -1,5 +1,7 @@
 class Link < ApplicationRecord
     belongs_to :post
+    paginates_per 50
+
 
     def self.top_group
       group(:url).count.sort {|a,b| b[1] <=> a[1]}.select { |n| (n[1]> 7)&&(n[0] != nil) } 

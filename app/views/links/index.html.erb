@@ -23,7 +23,8 @@
 
 
 <hr>
-
+<% if @links.any? %>
+<%= paginate @links %>
 <% @links.each do |link| %>
 <div class='test' style="text-overflow:ellipsis;">
     <%= link_to '🔗', "#{link.url}", target: "_blank" %></td>
@@ -35,4 +36,9 @@
     <% end %>
     <%= link_to (link.url ? link.url : ''), (link.url ? link.url : ''), target: '_blank' %>
 </div>
+<% end %>
+<%= paginate @links %>
+
+<% else %>
+  <%= 'No result' %>
 <% end %>

@@ -37,6 +37,9 @@ class PostsController < ApplicationController
         @cofacts_responses = (Rumors::Api::Client.search rumor) if rumor
 
         @post_tags= @posts.pluck(:archive).map{|x|x['data'][0]['tags'] if x['data'] && x['data'][0]}.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1 ; h }.sort {|a1,a2| a2[1].to_i <=> a1[1].to_i }
+
+        @posts = @posts.page params[:page]
+        
         respond_to do |format|
           format.html # index.html.erb
           format.xml  { render xml: @posts }

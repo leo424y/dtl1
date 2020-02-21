@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
     belongs_to :node
     has_many :links
+    paginates_per 50
 
     def self.yt_import(file)
         require 'csv'

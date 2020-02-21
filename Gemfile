@@ -37,6 +37,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'csv'
 gem 'rufus-scheduler'
 gem 'bootstrap', '~> 4.4.1'
+gem 'kaminari'
 
 
 group :development, :test do
