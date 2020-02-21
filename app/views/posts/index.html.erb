@@ -7,20 +7,22 @@
 <% if @posts.any? %>
   <h3>Reslut Summarize</h3>
   <%= @posts_count %> Results (Posts) 
-  <%= "#{@first_date}" %> (First Time)
-  <%= "#{@last_date}" %> (Last Time)
+  From <%= "#{@first_date}" %>
+  to <%= "#{@last_date}" %>
   <% @type_counts.each do |t| %>
-  <%= "#{t[0]}: #{t[1]}, " %>
-  <% end %>
+  <%# "#{t[0]}: #{t[1]}, " %>
+<% end %>
+
+<br><br>
 
 <% @date = ['x'] %>
 <% @count = ['counts'] %>
 
-<% @posts_date.each do |pd| %>
-  <% @date << pd[0] %>
-  <% @count << pd[1] %>
-  <%= link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %><br>
-<% end %>
+<%# @posts_date.each do |pd| %>
+  <%# @date << pd[0] %>
+  <%# @count << pd[1] %>
+  <%# link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %><br>
+<%# end %>
 
 <% if @posts_date.count > 0 %>
 <div id='post_count_chart'></div>

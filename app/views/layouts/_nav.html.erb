@@ -1,21 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
 <%= link_to 'DoubleThink Lab DB', root_path, class: "navbar-brand" %> 
-<%= link_to 'LINK', links_path(params.to_enum.to_h), class: "nav-item nav-link" %>
+      </li>
+      <li class="nav-item">
 <%= link_to 'POST', posts_path(params.to_enum.to_h), class: "nav-item nav-link" %>
+      </li>
+      <li class="nav-item">
+<%= link_to 'LINK', links_path(params.to_enum.to_h), class: "nav-item nav-link" %>
+      </li>
+      <li class="nav-item">
 <%= link_to 'NODE', nodes_path(params.to_enum.to_h), class: "nav-item nav-link" %>
+      </li>
+      <li class="nav-item">
 <%= link_to 'DOMAIN', domains_path, class: "nav-item nav-link" %>
+      </li>
+    </ul>
+  </div>
 <%# link_to 'IMPORT', dashboard_posts_path %> 
 <%# link_to 'ADMIN', '/fin' %> 
 <%# link_to '.', ENV['ALLOW_DOMAIN']+request.original_fullpath %>
 <%= render "layouts/csv_dl" if has_params %>
 </nav>
-
-<h3>
-<%= content_for?(:title) ? "DTL_#{content_for(:title)}" : "DTL" %>
-</h3>
 
 <%# <h4>
   <input readonly="readonly" class="js-copytextarea"></input>
