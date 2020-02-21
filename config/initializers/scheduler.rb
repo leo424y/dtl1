@@ -14,11 +14,20 @@ s = Rufus::Scheduler.singleton
 # end
 
 s.every '30m' do
-  Post.ct_api_import
-  Post.news_api_import
+  begin
+    Post.ct_api_import
+  rescue => error
+    p error
+  end
+  
+  begin
+    Post.news_api_import
+  rescue => error
+    p error
+  end
 end
 
-s.every '1d' do
+s.every '1d' do 
   Post.pablo_api_import
 end
 
