@@ -3,9 +3,9 @@
 <%= link_to 'POST', posts_path(params.to_enum.to_h) %> |
 <%= link_to 'NODE', nodes_path(params.to_enum.to_h) %> |
 <%= link_to 'DOMAIN', domains_path %> | 
-<%# link_to 'IMPORT', dashboard_posts_path %> | 
-<%= link_to 'ADMIN', '/fin' %> | 
-<%= link_to '.', ENV['LIVE']+request.original_fullpath %>
+<%# link_to 'IMPORT', dashboard_posts_path %> 
+<%# link_to 'ADMIN', '/fin' %> 
+<%# link_to '.', ENV['ALLOW_DOMAIN']+request.original_fullpath %>
 <%= render "layouts/csv_dl" if has_params %>
 </h4>
 
