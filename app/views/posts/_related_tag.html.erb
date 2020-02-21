@@ -1,5 +1,6 @@
-<h4>
-<%= @post_tags.count %> Related Tags <br>
+<h3>
+<%= @post_tags.count %> Related Tags
+</h3>
 
 <% if params[:description].present? %>
   <% tags = params[:description] ? params[:description].split('+') : '' %>
@@ -16,8 +17,7 @@
 
 <% end %>
 
-</h4>
 <% if @cofacts_responses %>
-<h4>Cofacts Results</h4>
+<h3>Cofacts Results</h3>
 <%= render "layouts/cofact" %>
 <% end %>

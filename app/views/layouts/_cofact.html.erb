@@ -1,6 +1,8 @@
 
 <% @cofacts_responses.each do |c|%>
 
+<% if (params['start_date']..params['end_date']).cover? c['createdAt'].to_date %>
+
 <div class='test' style="text-overflow:ellipsis;">
 <%= link_to '🔗', 'https://cofacts.g0v.tw/article/'+c['id'], target: '_blank' %>
 <%= c['createdAt'].to_date %>
@@ -21,5 +23,7 @@
 </div>
 <% end if c['articleReplies'] %>
 </blockquote>
+
+<% end %>
 
 <% end %>

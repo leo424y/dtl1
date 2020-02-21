@@ -4,17 +4,15 @@
   <%= render "layouts/tag" %>
 <% end %>
 
-<h4><%= @posts_count %> Results (Posts) </h4>
-<h5><%= "#{@first_date}" %> (First Time)</h5>
-<h5><%= "#{@last_date}" %> (Last Time)</h5>
+<% if @posts.any? %>
+  <h3>Reslut Summarize</h3>
+  <%= @posts_count %> Results (Posts) 
+  <%= "#{@first_date}" %> (First Time)
+  <%= "#{@last_date}" %> (Last Time)
+  <% @type_counts.each do |t| %>
+  <%= "#{t[0]}: #{t[1]}, " %>
+  <% end %>
 
-<h5>
-<% @type_counts.each do |t| %>
-<%= "#{t[0]}: #{t[1]}, " %>
-<% end %>
-</h5>
-
-<h5>
 <% @date = ['x'] %>
 <% @count = ['counts'] %>
 
@@ -51,9 +49,6 @@ var chart = bb.generate({
 </script>
 <% end %>
 
-</h5>
-
-
 <% @posts.each do |post| %>
     <div class='test' style="text-overflow:ellipsis;">
       <%= post.link ? (link_to post.updated, post_path(post), title: post.archive) : post.updated %>
@@ -65,3 +60,6 @@ var chart = bb.generate({
     </div>
 <% end %>
 
+<% else %>
+  <%= 'No result' %>
+<% end %>

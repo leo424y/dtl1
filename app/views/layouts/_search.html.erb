@@ -8,7 +8,7 @@
 <% end %>
 <%= submit_tag "Search", :name => nil %>
 <% if params[:description].present? || @domains || @nodes %>
-<br> 
+<br><br> 
 <%= button_tag(type: 'submit', :name => "start_date", value: params[:end_date].to_date-3.days) do %>
   3 days
 <% end %>
@@ -32,4 +32,4 @@
 <%= params[:end_date] %>
 <% end %>
 
-<br>
+<br><br>
