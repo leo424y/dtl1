@@ -124,6 +124,8 @@ module Rumors
                       reply {
                         id
                         text
+                        createdAt
+                        updatedAt    
                         type
                         reference
                       }

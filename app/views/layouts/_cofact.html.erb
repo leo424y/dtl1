@@ -14,6 +14,7 @@
 <% c['articleReplies'].each do |ra| %>
 <div class='test' style="text-overflow:ellipsis;">
 <%= link_to '🔗', 'https://cofacts.g0v.tw/reply/'+ra['reply']['id'], target: '_blank' %>
+<%= c['createdAt'].to_date %>
 <%= ra['reply']['text'] %>
 <%= ra['reply']['type'] %>
 <%= link_to ra['reply']['reference'] %>
