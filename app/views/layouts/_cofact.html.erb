@@ -3,6 +3,8 @@
 
 <div class='test' style="text-overflow:ellipsis;">
 <%= link_to '🔗', 'https://cofacts.g0v.tw/article/'+c['id'], target: '_blank' %>
+<%= c['createdAt'].to_date %>
+<%# c['updatedAt'].to_date %>
 <% c['hyperlinks'].each do |rh| %>
 <%= link_to '📎', rh['url'], target: '_blank' %>
 <% end %>
