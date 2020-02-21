@@ -9,7 +9,9 @@
 <%= render "layouts/csv_dl" if has_params %>
 </h4>
 
-
+<h3>
+<%= content_for?(:title) ? "DTL_#{content_for(:title)}" : "DTL" %>
+</h3>
 
 <%# <h4>
   <input readonly="readonly" class="js-copytextarea"></input>
