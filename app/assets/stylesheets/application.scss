@@ -19,6 +19,10 @@
 div.test {
     white-space:nowrap; 
     overflow:hidden; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 8px;
+    margin-left: 8px;
 }
 
 .col-1 {width: 8.33%;}
@@ -45,4 +49,11 @@ div.test {
     body {
       font-size: 50px;
     }
+  }
+
+  div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 15px;
+    margin-left: 8px;
   }
