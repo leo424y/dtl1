@@ -17,7 +17,7 @@ class LinksController < ApplicationController
       
       @links = @links.includes(:post).order(created_at: :desc)
 
-      @links = @links.page params[:page]
+      @links_by_page = @links.page params[:page]
 
       respond_to do |format|
         format.html # index.html.erb

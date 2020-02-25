@@ -4,17 +4,14 @@
 <% end %>
 <h4><%= @nodes_count %> Results (Nodes)</h4>
 
-<table>
-
 <% @nodes.each do |node| %>
+<div class='test' style="text-overflow:ellipsis;">
   <% cache node do %>
-  <tr>
-      <td><%= node.created_at %></td>
-      <td><%= link_to node.archive['user_name'], node_path(node) %></td>
-      <td><%= node.posts.count %></td>
-      <td><%= node.posts.average(:score) %></td>
-      <td><%= node.archive['source'] %></td>
-  </tr>
+      <%= node.created_at %>
+      <%= node.posts.average(:score).to_i %>
+      <%= node.archive['source'] %>
+      <%= "(#{node.posts.count})" %>
+      <%= link_to node.archive['user_name'], node_path(node) %>
   <% end %>
+</div>
 <% end %>
-</table>
