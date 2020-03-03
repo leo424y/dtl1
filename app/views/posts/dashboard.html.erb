@@ -7,9 +7,17 @@
 <br>
 <%= button_to "CrowdTangle API UPDATE", api_posts_path, method: :get %>
 <br>
+
 <h4>Import YT views</h4>
 <%= form_tag youtube_import_posts_path, multipart: true do %>
     <%= file_field_tag :file %>
     <%= submit_tag "Import CSV from Youtube view counts" %>
+<% end %>
+<br>
+
+<h4>Import PTT</h4>
+<%= form_tag ptt_import_posts_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import CSV from PTT archive" %>
 <% end %>
 <br>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :posts do
     collection {post :import}
     collection {post :youtube_import}
+    collection {post :ptt_import}
     collection {get :api}
     collection {get :dashboard}
   end

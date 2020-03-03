@@ -1,7 +1,41 @@
+# write_posts
+# row_hash, 
+# platform_id, 
+# source, 
+# url, 
+# message, 
+# link, 
+# user_name, 
+# date, 
+# updated, 
+# link_description,
+# score,
+# import_type
 class Post < ApplicationRecord
     belongs_to :node
     has_many :links
     paginates_per 50
+
+    def self.ptt_import(file)
+        require 'csv'
+        CSV.foreach(file.path, headers: true) do |row|
+            row_hash = row.to_hash
+            write_posts(
+                row_hash, 
+                row_hash['aid'].delete('"'), 
+                'ptt', 
+                row_hash['url'].delete('"'), 
+                row_hash['title'].delete('"') + row_hash ['keyword'].delete('"') + row_hash['body'].delete('"') + row_hash['from_ip'].delete('"'), 
+                row_hash['image_links'].delete('"') + row_hash['related_links'].delete('"'), 
+                row_hash['author_id'].delete('"'), 
+                row_hash['time'].delete('"').to_date.strftime("%Y-%m-%d"), 
+                row_hash['time'].delete('"').to_date.strftime("%Y-%m-%d"), 
+                row_hash['title'].delete('"') + row_hash ['keyword'].delete('"') + row_hash['body'].delete('"') + row_hash['from_ip'].delete('"'), 
+                row_hash['count_like'],
+                'csv'
+            )
+        end
+    end
 
     def self.yt_import(file)
         require 'csv'

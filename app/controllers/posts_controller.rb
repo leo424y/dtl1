@@ -66,6 +66,15 @@ class PostsController < ApplicationController
         end
     end
 
+    def ptt_import
+        if params[:file]
+            Post.ptt_import(params[:file]) 
+            redirect_to dashboard_posts_path, notice: 'Post from csv imported'
+        else
+            redirect_to dashboard_posts_path, notice: 'No CSV'
+        end
+    end
+
     def api
         Post.ct_api_import
         
