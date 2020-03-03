@@ -26,7 +26,7 @@ class Post < ApplicationRecord
                 'ptt', 
                 row_hash['url'].delete('"'), 
                 row_hash['title'].delete('"') + row_hash ['keyword'].delete('"') + row_hash['body'].delete('"') + row_hash['from_ip'].delete('"'), 
-                row_hash['image_links'].delete('"') + row_hash['related_links'].delete('"'), 
+                [row_hash['image_links'].delete('"') , row_hash['related_links'].delete('"')], 
                 row_hash['author_id'].delete('"'), 
                 row_hash['time'].delete('"').to_date.strftime("%Y-%m-%d"), 
                 row_hash['time'].delete('"').to_date.strftime("%Y-%m-%d"), 
