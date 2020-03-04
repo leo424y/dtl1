@@ -6,7 +6,7 @@ class LinksController < ApplicationController
       @links = (params[:url].present? || params[:description].present? || params[:start_date].present? || params[:end_date].present? ? Link.all : Link.none)
 
       @links = @links.search(params[:url]) if params[:url].present? 
-      @links = @links.search_context(params[:description], "archive ->> 'link_description'") if params[:description].present? 
+      # @links = @links.search_context(params[:description], "archive ->> 'link_description'") if params[:description].present? 
       @links = @links.search_date(params, 'created_at') if (params[:start_date].present? || params[:end_date].present? )
 
 
