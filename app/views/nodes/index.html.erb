@@ -1,5 +1,5 @@
 <%= form_tag nodes_path, :method => 'get' do %>
-  <%= text_field_tag :description, params[:description], placeholder: 'Keywords (ex. 台灣+阿瑞)' %>
+  <%# text_field_tag :description, params[:description], placeholder: 'Keywords (ex. 台灣+阿瑞)' %>
   <%= render "layouts/search" %>
 <% end %>
 <h4><%= @nodes_count %> Results (Nodes)</h4>
@@ -9,7 +9,7 @@
   <% cache node do %>
       <%= node.created_at %>
       <%= node.posts.average(:score).to_i %>
-      <%= node.archive['source'] %>
+      <%= node.archive['source']  %>
       <%= "(#{node.posts.count})" %>
       <%= link_to node.archive['user_name'], node_path(node) %>
   <% end %>

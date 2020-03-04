@@ -2,7 +2,7 @@ class NodesController < ApplicationController
     def index        
         if params[:start_date].present?  || params[:end_date].present? 
           @nodes = Node.search_date(params, 'created_at')
-          @nodes = @nodes.search_context(params[:description], "archive ->> 'user_name'") if params[:description].present? 
+          #@nodes = @nodes.search_context(params[:description], "archive ->> 'user_name'") if params[:description].present? 
           @nodes_count = @nodes.count
           @nodes = @nodes.order_by_posts_count
         else
