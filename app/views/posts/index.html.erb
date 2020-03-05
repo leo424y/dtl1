@@ -15,17 +15,16 @@
 
 <br><br>
 
+<% if @posts_date_news.count > 0 %>
 <% @date = ['x'] %>
-<% @count = ['counts'] %>
+<% @count = ['NEWS counts'] %>
 
-<% @posts_date.each do |pd| %>
+<% @posts_date_news.each do |pd| %>
   <% @date << pd[0] %>
   <% @count << pd[1] %>
   <%# link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %>
 <% end %>
-
-<% if @posts_date.count > 0 %>
-<div id='post_count_chart'></div>
+<div id='post_count_chart_news'></div>
 <script>
 var chart = bb.generate({
   data: {
@@ -41,15 +40,52 @@ var chart = bb.generate({
     x: {
       type: "timeseries",
       tick: {
-        count: "<%= @posts_date.count %>",
+        count: "<%= @posts_date_news.count %>",
         format: "%Y-%m-%d"
       }
     }
   },
-  bindto: "#post_count_chart"
+  bindto: "#post_count_chart_news"
 });
 </script>
 <% end %>
+
+<% if @posts_date_social.count > 0 %>
+<% @date = ['x'] %>
+<% @count = ['Facebook counts'] %>
+
+<% @posts_date_social.each do |pd| %>
+  <% @date << pd[0] %>
+  <% @count << pd[1] %>
+  <%# link_to "#{pd[0]}: #{pd[1]}", posts_path(params: {description: params[:description], start_date: pd[0], end_date: pd[0]}) %>
+<% end %>
+<div id='post_count_chart_social'></div>
+<script>
+var chart = bb.generate({
+  data: {
+    x: "x",
+    columns: [
+        "<%= @date.join(',') %>".split(','),
+        "<%= @count.join(',') %>".split(',')
+      // "<%= @date %>",
+      // "<%= @count %>"
+    ]
+  },
+  axis: {
+    x: {
+      type: "timeseries",
+      tick: {
+        count: "<%= @posts_date_social.count %>",
+        format: "%Y-%m-%d"
+      }
+    }
+  },
+  bindto: "#post_count_chart_social"
+});
+</script>
+<% end %>
+
+
 
 <%= paginate @posts %>
 

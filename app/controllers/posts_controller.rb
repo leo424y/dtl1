@@ -30,6 +30,18 @@ class PostsController < ApplicationController
             [month,
              xs.count]   # true
           }
+
+          @posts_date_social = @posts.where(source: 'facebook').pluck(:updated).map{|x| Date.parse(x).strftime("%Y-%m-%d") }.group_by { |month| month }.map{ |month, xs|
+            [month,
+             xs.count]   # true
+          }
+
+          @posts_date_news = @posts.where(source: 'news').pluck(:updated).map{|x| Date.parse(x).strftime("%Y-%m-%d") }.group_by { |month| month }.map{ |month, xs|
+            [month,
+             xs.count]   # true
+          }
+
+
           @posts_count= @posts.count
 
         # cofact
