@@ -16,6 +16,9 @@
       <li class="nav-item">
 <%= link_to 'DOMAIN', domains_path, class: "nav-item nav-link" %>
       </li>
+      <li class="nav-item">
+<%= link_to '🗄️', row_data_url, class: "nav-item nav-link", placeholder: 'Row Data' if @post || @link || @node || @domain %>
+      </li>      
     </ul>
   </div>
 <%# link_to 'IMPORT', dashboard_posts_path %> 
