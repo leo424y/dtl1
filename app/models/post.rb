@@ -107,7 +107,7 @@ class Post < ApplicationRecord
                     row_hash['updated'],
                     row_hash['title'] && row_hash['description'] ? (row_hash['title'] + "__" + row_hash['description']) : row_hash['message'],
                     row_hash['score'],
-                    sort_by
+                    list_id
                 )
             end
         end
