@@ -1,4 +1,16 @@
 module ApplicationHelper
+
+    def ptt_search x
+        require 'elasticsearch'
+
+        client = Elasticsearch::Client.new log: true
+
+        # if you specify Elasticsearch host
+        client = Elasticsearch::Client.new url: ENV['PTT_HOST'], log: true
+
+        client.search q: x
+    end
+
     def tw_time(x)
         # x.to_time ? (x.to_time + 8.hours).to_datetime : x
         x
