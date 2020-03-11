@@ -12,14 +12,28 @@
 </div>
 <% end %>
 
+
 <hr>
 
 <h4><%= @link_by_counts.count %> Results (Link Groups)</h4>
+<% @ids = ct_list_ids '1290974' %>
+<table id="hotgroup">
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
 <% @link_by_counts.each do |link| %>
-<div class='test' style="text-overflow:ellipsis;">
     <%= render "links/group", params: {link: {url: link[0], counts: link[1]}} %>
-</div>
 <% end %>
+</tbody>
+</table>
 
 
 <hr>
@@ -43,3 +57,11 @@
 <% else %>
   <%= 'No result' %>
 <% end %>
+
+<script>
+$(document).ready(function() {
+    $('#hotgroup').DataTable({
+          lengthMenu: [[50, 25, 10, -1], [50, 25, 10, "All"]]
+    });
+} );
+</script>
