@@ -2,7 +2,6 @@
   <%= text_field_tag :url, params[:url], placeholder: 'URL' %>
   <%# text_field_tag :description, params[:description], placeholder: 'Keywords (ex. 台灣+阿瑞)' %>
   <%= render "layouts/search" %>
-  <%= render "layouts/tag" %>
 <% end %>
 
 <h4><%= @link_by_domains.count %> Results (Domain)</h4>
