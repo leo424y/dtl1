@@ -67,7 +67,7 @@ class Post < ApplicationRecord
             write_posts(
                 row_hash, 
                 row_hash['Facebook Id'], 
-                'facebook', 
+                'facebook group', 
                 row_hash['URL'], 
                 row_hash['Message'], 
                 row_hash['Link'], 
@@ -77,7 +77,7 @@ class Post < ApplicationRecord
                 row_hash['Description'],
                 row_hash['Overperforming Score'],
                 'csv'
-            )
+            ) if row_hash['URL']
         end
     end
 

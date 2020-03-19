@@ -68,21 +68,22 @@ module Rumors
           contents = parse_content
           return if contents.nil? || contents.empty?
           article_id = nil
-
-          if @urls.any?
-            article_id = compare_urls(contents)
-          else
-            most_likes = calculate_similarity(contents)
-            # return unless most_like[:score] > SIMILARITY
-            article_ids = most_likes.map {|most_like| most_like[:article_id]}
-          end
-
-          if article_ids.any?
-            find_articles = []
-            article_ids.each do |article_id|
-              find_articles << find_article(article_id)
+          if @urls && article_ids
+            if @urls.any?
+              article_id = compare_urls(contents)
+            else
+              most_likes = calculate_similarity(contents)
+              # return unless most_like[:score] > SIMILARITY
+              article_ids = most_likes.map {|most_like| most_like[:article_id]}
             end
-            find_articles
+
+            if article_ids.any?
+              find_articles = []
+              article_ids.each do |article_id|
+                find_articles << find_article(article_id)
+              end
+              find_articles
+            end
           end
         end        
       end
