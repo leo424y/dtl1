@@ -68,7 +68,7 @@ module Rumors
           contents = parse_content
           return if contents.nil? || contents.empty?
           article_id = nil
-          if @urls && article_ids
+          if @urls
             if @urls.any?
               article_id = compare_urls(contents)
             else
