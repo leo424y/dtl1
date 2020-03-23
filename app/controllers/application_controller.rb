@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    #before_action :protect
+    before_action :protect
 
     def protect
       @ips = ENV['IPOK'].split(',')
