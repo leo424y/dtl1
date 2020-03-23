@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
 
     def protect
       @ips = ENV['IPOK'].split(',')
-      unless @ips.include? request.remote_ip
-         render action: "unauth"
+      unless request.remote_ip.start_with? *@ips
+        render action: "unauth"
       end
     end
     
