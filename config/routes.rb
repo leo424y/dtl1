@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     collection {post :ptt_import}
     collection {get :api}
     collection {get :dashboard}
+    collection {get :search}
   end
   resources :links
   root to: "posts#index"

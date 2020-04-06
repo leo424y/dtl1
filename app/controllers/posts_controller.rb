@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+    def search
+    end
+
     def index
         @genes = Gene.import('tag_hot_rank.php', {date: params[:start_date] || Date.today.strftime("%Y-%m-%d")}).to_hash
 
