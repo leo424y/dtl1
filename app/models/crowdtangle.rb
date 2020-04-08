@@ -9,7 +9,6 @@ class Crowdtangle < ApplicationRecord
         rows_hash = JSON.parse(request.body)['result']['posts'] if request.is_a?(Net::HTTPSuccess)    
             {
                     source: 'crowdtangle',
-                    query: uri,
                     params: params,
                     status: 200,
                     count: rows_hash.count, 
@@ -18,7 +17,6 @@ class Crowdtangle < ApplicationRecord
         rescue
             {
                     source: 'crowdtangle',
-                    query: uri,
                     params: params,
                     status: 'timeout',
             }

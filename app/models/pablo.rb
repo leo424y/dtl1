@@ -8,7 +8,6 @@ class Pablo < ApplicationRecord
             {
                     source: 'pablo',
                     params: params,
-                    query: uri,
                     status: 200,
                     count: rows_hash.count, 
                     posts: rows_hash,
@@ -17,7 +16,6 @@ class Pablo < ApplicationRecord
             {
                     source: 'pablo',
                     params: params,
-                    query: uri,
                     status: 'timeout',
             }
         end
