@@ -6,19 +6,19 @@ class Pablo < ApplicationRecord
             response = Timeout::timeout(28) { Net::HTTP.get_response(uri)}
             rows_hash = JSON.parse(response.body)['body']['list'].select{|k| k['pubTime'].split(' ')[0].to_date.between?(params[:start_date].to_date, params[:end_date].to_date)}
             {
-                result: {
                     source: 'pablo',
+                    params: params,
+                    query: uri,
                     status: 200,
                     count: rows_hash.count, 
                     posts: rows_hash,
-                }
             }
         rescue
             {
-                result: {
                     source: 'pablo',
+                    params: params,
+                    query: uri,
                     status: 'timeout',
-                }
             }
         end
     end

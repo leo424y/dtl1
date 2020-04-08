@@ -1,6 +1,16 @@
 class PostsController < ApplicationController
     def search
-        @results = params[:description] ? Pablo.result(params) : {}
+        @results = params[:description] ? 
+        {
+            result: {
+            platform: [
+                Crowdtangle.result(params) ,
+                Pablo.result(params) ,
+            ],
+            }
+        } :
+        {}
+
         respond_to do |format|
             format.html 
             format.json { render json: @results }
