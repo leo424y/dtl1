@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     def search
-        @results = Pablo.result(params)
+        @results = params[:description] ? Pablo.result(params) : {}
         respond_to do |format|
             format.html 
             format.json { render json: @results }
