@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     collection {get :api}
     collection {get :dashboard}
     collection {get :search}
+    collection {get :news}
   end
   resources :links
   root to: "posts#index"

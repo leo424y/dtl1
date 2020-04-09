@@ -4,8 +4,9 @@ class PostsController < ApplicationController
         {
             result: {
             platform: [
+                News.result(params) ,
                 Crowdtangle.result(params) ,
-                Pablo.result(params) ,
+                Pablo.result(params),
             ],
             }
         } :
@@ -14,6 +15,14 @@ class PostsController < ApplicationController
         respond_to do |format|
             format.html 
             format.json { render json: @results }
+        end
+    end
+
+    def news 
+        @posts = Post.search_date(params, 'date') if (params[:start_date].present? || params[:end_date].present? )
+        @posts = @posts.search_context(params[:description], 'title') if params[:description].present? 
+        respond_to do |format|
+          format.json { render json: @posts }
         end
     end
 
@@ -68,7 +77,7 @@ class PostsController < ApplicationController
 
         @post_tags= @posts.pluck(:archive).map{|x|x['data'][0]['tags'] if x['data'] && x['data'][0]}.flatten.inject(Hash.new(0)) { |h, e| h[e] += 1 ; h }.sort {|a1,a2| a2[1].to_i <=> a1[1].to_i }
 
-        @posts = @posts.page params[:page]
+        # @posts = @posts.page params[:page]
         
         respond_to do |format|
           format.html # index.html.erb

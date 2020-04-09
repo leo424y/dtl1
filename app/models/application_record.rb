@@ -1,6 +1,15 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  def self.api_result platform, params, rows_hash
+    {
+      source: platform,
+      params: params,
+      count: rows_hash.is_a?(Array) ? rows_hash.count : 0, 
+      # posts: rows_hash,
+    }
+  end
+
   def self.to_csv(header)
     attributes = header.split(" ")
 

@@ -87,7 +87,7 @@ var chart = bb.generate({
 
 
 
-<%= paginate @posts %>
+<%# paginate @posts %>
 
 <% @posts.each do |post| %>
     <div class='test' style="text-overflow:ellipsis;">
@@ -99,7 +99,7 @@ var chart = bb.generate({
       <%= post.title ? post.title : 'post' %>
     </div>
 <% end %>
-<%= paginate @posts %>
+<%# paginate @posts %>
 
 <% else %>
   <%= 'No result' %>
