@@ -6,7 +6,7 @@ class PostsController < ApplicationController
             platform: [
                 News.result(params) ,
                 Crowdtangle.result(params) ,
-                Pablo.result(params),
+                # Pablo.result(params),
             ],
             }
         } :
