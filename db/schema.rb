@@ -55,6 +55,32 @@ ActiveRecord::Schema.define(version: 2020_02_14_061246) do
     t.index ["word"], name: "index_pablos_on_word"
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.uuid "uid"
+    t.string "uname"
+    t.string "pid"
+    t.string "ptitle"
+    t.string "ptype"
+    t.string "pdescription"
+    t.string "ptime"
+    t.string "mtime"
+    t.string "url"
+    t.string "platform"
+    t.string "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["mtime"], name: "index_pages_on_mtime"
+    t.index ["pid"], name: "index_pages_on_pid"
+    t.index ["platform"], name: "index_pages_on_platform"
+    t.index ["ptime"], name: "index_pages_on_ptime"
+    t.index ["ptitle"], name: "index_pages_on_ptitle"
+    t.index ["ptype"], name: "index_pages_on_ptype"
+    t.index ["score"], name: "index_pages_on_score"
+    t.index ["uid"], name: "index_pages_on_uid"
+    t.index ["uname"], name: "index_pages_on_uname"
+    t.index ["url"], name: "index_pages_on_url"
+  end
+
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
     t.string "link"
