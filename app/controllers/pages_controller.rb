@@ -1,19 +1,21 @@
-class PagesController < ApplicationController
-    include Response
-    skip_before_action :verify_authenticity_token
+# frozen_string_literal: true
 
-    def create
-        @page = Page.new(page_params)
-        if @page.save
-            json_response(@page, :created)
-        else 
-            json_response({status: 'not saved'})
-        end
+class PagesController < ApplicationController
+  include Response
+  skip_before_action :verify_authenticity_token
+
+  def create
+    @page = Page.new(page_params)
+    if @page.save
+      json_response(@page, :created)
+    else
+      json_response(status: 'not saved')
     end
+  end
 end
 
-private 
+private
 
 def page_params
-    params.require(:pages).permit(:uname, :pid, :ptitle, :ptype, :pdescription, :ptime, :mtime, :url, :platform, :score)
+  params.require(:pages).permit(:uname, :pid, :ptitle, :ptype, :pdescription, :ptime, :mtime, :url, :platform, :score)
 end

@@ -5,10 +5,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :farms
   resources :pablos
-  resources :pages do
-    collection { post :import }
-    collection { get :api }
-  end
+  resources :pages
   resources :ctlinks
   resources :domains do
     resources :nodes
