@@ -1,14 +1,14 @@
-class ApplicationController < ActionController::Base
-    before_action :protect
+# frozen_string_literal: true
 
-    def protect
-      @ips = ENV['IPOK'].split(',')
-      unless request.remote_ip.start_with? *@ips
-        render action: "unauth"
-      end
-    end
-    
-    def unauth
-        render "pages/unauth"
-    end
+class ApplicationController < ActionController::Base
+  before_action :protect
+
+  def protect
+    @ips = ENV['IPOK'].split(',')
+    render action: 'unauth' unless request.remote_ip.start_with? *@ips
+  end
+
+  def unauth
+    render 'pages/unauth'
+  end
 end
