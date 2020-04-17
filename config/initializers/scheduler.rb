@@ -38,3 +38,10 @@ s.every '1d' do
 end
 
 
+# s.every '1d' do 
+#   begin
+#     Platform.run_api
+#   rescue => error
+#     p error
+#   end  
+# end

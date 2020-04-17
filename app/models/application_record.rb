@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
       source: platform,
       params: params,
       count: rows_hash.is_a?(Array) ? rows_hash.count : rows_hash, 
-      # posts: rows_hash,
+      posts: rows_hash,
     }
   end
 
