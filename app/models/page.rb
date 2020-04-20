@@ -26,7 +26,7 @@ class Page < ApplicationRecord
           ptime: ct['date'],
           mtime: ct['updated'],
           url: ct['postUrl'],
-          link: ct['expandedLinks'][0]['expanded'],
+          link: ct['expandedLinks'] ? ct['expandedLinks'][0]['expanded'] : ct['link'],
           platform: ct['platform'],
           score: ct['score'],
         }
