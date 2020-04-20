@@ -3,6 +3,9 @@
 class Page < ApplicationRecord
   validates_uniqueness_of :url
   before_save :default_uid
+
+  scope :created_between, lambda {|start_date, end_date| where("created_at >= ? AND created_at <= ?", start_date, end_date )}
+
   def default_uid
     self.uid ||= SecureRandom.uuid # note self.status = 'P' if self.status.nil? might be safer (per @frontendbeauty)
   end
@@ -23,7 +26,7 @@ class Page < ApplicationRecord
           ptime: ct['date'],
           mtime: ct['updated'],
           url: ct['postUrl'],
-          link: ct['link'],
+          link: ct['expandedLinks'][0]['expanded'],
           platform: ct['platform'],
           score: ct['score'],
         }
@@ -38,5 +41,9 @@ class Page < ApplicationRecord
       start_date: Date.today.strftime('%Y-%m-%d'), 
       end_date: Date.today.strftime('%Y-%m-%d')
       })
+  end
+
+  def self.count_daily_domain
+    where(ptype: 'link').where.not(link: nil).created_between(Time.now-1.day, Time.now)
   end
 end
