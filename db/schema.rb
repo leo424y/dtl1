@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_14_061246) do
+ActiveRecord::Schema.define(version: 2020_04_20_035621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 2020_02_14_061246) do
     t.string "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "link"
+    t.index ["link"], name: "index_pages_on_link"
     t.index ["mtime"], name: "index_pages_on_mtime"
     t.index ["pid"], name: "index_pages_on_pid"
     t.index ["platform"], name: "index_pages_on_platform"

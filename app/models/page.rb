@@ -23,6 +23,7 @@ class Page < ApplicationRecord
           ptime: ct['date'],
           mtime: ct['updated'],
           url: ct['postUrl'],
+          link: ct['link'],
           platform: ct['platform'],
           score: ct['score'],
         }

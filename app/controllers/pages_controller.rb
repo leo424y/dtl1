@@ -17,5 +17,5 @@ end
 private
 
 def page_params
-  params.require(:pages).permit(:uname, :pid, :ptitle, :ptype, :pdescription, :ptime, :mtime, :url, :platform, :score)
+  params.require(:pages).permit(:uname, :pid, :ptitle, :ptype, :pdescription, :ptime, :mtime, :url, :link, :platform, :score)
 end
