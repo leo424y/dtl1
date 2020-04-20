@@ -25,7 +25,4 @@ Rails.application.routes.draw do
   resources :links
   root to: 'posts#index'
   resources :links
-  resources :platforms do
-    collection { get :import }
-  end
 end

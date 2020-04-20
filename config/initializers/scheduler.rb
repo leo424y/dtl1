@@ -7,7 +7,6 @@ require 'rufus-scheduler'
 #
 s = Rufus::Scheduler.singleton
 
-
 # Stupid recurrent task...
 #
 # s.every '10m' do
@@ -37,11 +36,10 @@ s.every '1d' do
   end  
 end
 
-
-# s.every '1d' do 
-#   begin
-#     Platform.run_api
-#   rescue => error
-#     p error
-#   end  
-# end
+s.every '1h' do 
+  begin
+    Page.run_api
+  rescue => error
+    p error
+  end  
+end
