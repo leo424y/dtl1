@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :farms
   resources :pablos
-  resources :pages
   resources :ctlinks
   resources :domains do
     resources :nodes
@@ -24,5 +23,7 @@ Rails.application.routes.draw do
   end
   resources :links
   root to: 'posts#index'
-  resources :links
+  defaults format: :json do
+    resources :pages
+  end
 end
