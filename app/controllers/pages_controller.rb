@@ -33,7 +33,7 @@ def page_params
 end
 
 def get_host_without_www(url)
-  url = url[1..-1] if url.start_with? ':'
+  url = url.split('://')[1]
   url = url.encode(Encoding.find('ASCII'), encoding_options)
   url = "http://#{url}" if URI.parse(url).scheme.nil?
   host = URI.parse(url).host.downcase
