@@ -10,8 +10,8 @@ class Page < ApplicationRecord
     self.uid ||= SecureRandom.uuid # note self.status = 'P' if self.status.nil? might be safer (per @frontendbeauty)
   end
 
-  def self.run_api
-    @terms = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d')).to_hash.first(6)
+  def self.run_api offset = 0
+    @terms = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d')).select.with_index{|x,i| x if i>offset*5-1}.first(5)
     @terms.each do |t|
       @tag =  URI.decode t[1]['tag']
 
@@ -19,7 +19,7 @@ class Page < ApplicationRecord
       @ct_data[:posts].each do |ct|
         @ct_data_page = {
           uname: ct['account']['url'],
-          pid: ct['platformId'],
+          pid: ct['id'],
           ptitle: ct['title'],
           ptype: ct['type'],
           pdescription: ['📝: ',ct['description'],'💬: ',ct['message']].join,
@@ -30,7 +30,7 @@ class Page < ApplicationRecord
           platform: ct['platform'],
           score: ct['score'],
         }
-        Page.create @ct_data_page
+        Page.create @ct_data_page if ct['type'] = 'link'
       end
     end
   end

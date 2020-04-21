@@ -11,7 +11,6 @@ class PagesController < ApplicationController
       domains << get_host_without_www(p.link)
     end
     grouped_domains = domains.group_by(&:capitalize).map {|k,v| [k, v.length]}.sort_by { |w| -w[1] }
-
     json_response({result: grouped_domains})
   end
 

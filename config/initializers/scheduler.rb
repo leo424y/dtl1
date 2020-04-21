@@ -36,9 +36,9 @@ s.every '1d' do
   end  
 end
 
-s.every '1h' do 
+s.every '1m' do 
   begin
-    Page.run_api
+    Page.run_api Time.now.strftime('%M').to_i
   rescue => error
     p error
   end  
