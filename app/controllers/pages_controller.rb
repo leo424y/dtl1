@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     @page.each do |p|
       domains << get_host_without_www(p.link)
     end
-    grouped_domains = domains.group_by(&:capitalize).map {|k,v| [k, v.length]}.sort_by { |w| -w[1] }
+    grouped_domains = domains.group_by(&:capitalize).map {|k,v| [k.downcase, v.length]}.sort_by { |w| -w[1] }
     json_response({result: grouped_domains})
   end
 
@@ -32,10 +32,10 @@ def page_params
 end
 
 def get_host_without_www(url)
-  url = url.split('://')[1]
+  url = url.split('://')[1] if url.include? '://'
   url = url.encode(Encoding.find('ASCII'), encoding_options)
   url = "http://#{url}" if URI.parse(url).scheme.nil?
-  host = URI.parse(url).host.downcase
+  host = URI.parse(url).host ? URI.parse(url).host.downcase : ''
   host.start_with?('www.') ? host[4..-1] : host
 end
 

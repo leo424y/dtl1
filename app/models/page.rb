@@ -30,7 +30,7 @@ class Page < ApplicationRecord
           platform: ct['platform'],
           score: ct['score'],
         }
-        Page.create @ct_data_page if ct['type'] = 'link'
+        Page.create(@ct_data_page) if (ct['type'] == 'link')
       end
     end
   end
