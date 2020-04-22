@@ -1,0 +1,2 @@
+class Byday < ApplicationRecord
+end

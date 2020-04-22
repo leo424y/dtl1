@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   root to: 'posts#index'
   defaults format: :json do
     resources :pages
+    resources :bydays
   end
 end
