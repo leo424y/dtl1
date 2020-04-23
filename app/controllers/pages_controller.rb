@@ -14,7 +14,6 @@ class PagesController < ApplicationController
     json_response({result: grouped_domains})
   end
 
-
   def create
     @page = Page.new(page_params)
     if @page.save
