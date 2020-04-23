@@ -43,3 +43,7 @@ s.every '1m' do
     p error
   end  
 end
+
+s.at '00:00:03' do
+  Page.run_daily_domain_summarize
+end

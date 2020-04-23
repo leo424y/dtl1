@@ -46,4 +46,13 @@ class Page < ApplicationRecord
   def self.count_daily_domain
     where(ptype: 'link').where.not(link: nil).created_between(Time.now-1.day, Time.now)
   end
+
+  def self.run_daily_domain_summarize
+    uri = URI "https://#{ENV['ALLOW_DOMAIN']}/pages/count_daily_domain"
+    request = Net::HTTP.get_response(uri)
+    rows_hash = JSON.parse(request.body)['result']
+    rows_hash.each do |r|
+      Byday.create(name: r[0], data: r[1]) if r[1].to_i > 9
+    end
+  end
 end
