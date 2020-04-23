@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   resources :links
   root to: 'posts#index'
   defaults format: :json do
-    resources :pages
+    resources :pages do
+      collection { get :count_daily_domain }
+    end
     resources :bydays
   end
 end
