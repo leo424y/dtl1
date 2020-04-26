@@ -12,7 +12,7 @@ s = Rufus::Scheduler.singleton
 # s.every '10m' do
 # end
 
-s.every '30m' do
+s.every '6h' do
   begin
     Post.ct_api_import
   rescue => error
