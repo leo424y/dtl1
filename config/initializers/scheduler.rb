@@ -36,13 +36,13 @@ s.every '1d' do
   end  
 end
 
-# s.every '1m' do 
-#   begin
-#     Page.run_api Time.now.strftime('%M').to_i
-#   rescue => error
-#     p error
-#   end  
-# end
+s.every '1m' do 
+  begin
+    Page.run_api Time.now.strftime('%M').to_i
+  rescue => error
+    p error
+  end  
+end
 
 s.at '00:00:03' do
   Page.run_daily_domain_summarize

@@ -40,28 +40,30 @@ class Page < ApplicationRecord
   def self.run_api_pablo
     @gene = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d'))
     @gene.each do |g|
-    @tag = URI.decode g[1]['tag']
-    @pb_data = get_pablo(@tag)
-    if @pb_data[:posts]
-      @pb_data[:posts].each do |d|
-        @pb_data_page = {
-          uname: [d['siteName'], d['creator']].join,
-          pid: d['articleId'],
-          ptitle: d['title'],
-          ptype: 'pablo',
-          pdescription: [' 📡: ', d['siteName'], ' 🗺: ', d['area'], ' 📝: ', d['content']].join,
-          ptime: d['pubTime'],
-          mtime: d['cjTime'],
-          url: d['url'],
-          link: '',
-          platform: d['domain'],
-          score: d['score']
-        }
-        Page.create(@pb_data_page)
-      end
-    else
-      {status: 'timeout'}
+      @tag = URI.decode g[1]['tag']
+      @pb_data = get_pablo(@tag)
+      @pb_data_sim = get_pablo(Tradsim::to_sim @tag)
+      Page.write_pablo(@pb_data[:posts]) if @pb_data[:posts]
+      Page.write_pablo(@pb_data_sim[:posts]) if @pb_data_sim[:posts]
     end
+  end
+
+  def self.write_pablo data
+    data.each do |d|
+      @pb_data_page = {
+        uname: [d['siteName'], d['creator']].join,
+        pid: d['articleId'],
+        ptitle: d['title'],
+        ptype: 'pablo',
+        pdescription: [d['area'], ' ', d['content']].join,
+        ptime: d['pubTime'],
+        mtime: d['cjTime'],
+        url: d['url'],
+        link: '',
+        platform: d['domain'],
+        score: d['score']
+      }
+      Page.create(@pb_data_page)
     end
   end
 
