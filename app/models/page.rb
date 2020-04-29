@@ -37,18 +37,34 @@ class Page < ApplicationRecord
     end
   end
 
-  def self.run_api_pablo(tag_index = 0)
+  def self.run_api_pablo
     @gene = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d'))
-    @tag = URI.decode @gene[tag_index.to_s]['tag']
+    @gene.each do |g|
+    @tag = URI.decode g[1]['tag']
     p @tag
     @pb_data = get_pablo(@tag)
     p @pb_data
     if @pb_data[:posts]
-      @pb_data[:posts].each do |pb|
-        p pb
+      @pb_data[:posts].each do |d|
+        p d
+        @pb_data_page = {
+          uname: [' 📡: ', d['siteName'], d['creator']].join,
+          pid: d['articleId'],
+          ptitle: d['title'],
+          ptype: d['infoType'],
+          pdescription: [' 📡: ', d['siteName'], ' 🗺: ', d['area'], ' 📝: ', d['content']].join,
+          ptime: d['pubTime'],
+          mtime: d['cjTime'],
+          url: d['url'],
+          link: '',
+          platform: d['domain'],
+          score: d['score']
+        }
+        Page.create(@pb_data_page)
       end
     else
       {status: 'timeout'}
+    end
     end
   end
 

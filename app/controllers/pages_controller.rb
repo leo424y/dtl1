@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   include Response
   skip_before_action :verify_authenticity_token
 
+  def index
+  end
+
   def count_daily_domain
     @page = Page.count_daily_domain 
     domains = []
