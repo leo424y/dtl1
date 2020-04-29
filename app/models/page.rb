@@ -41,17 +41,14 @@ class Page < ApplicationRecord
     @gene = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d'))
     @gene.each do |g|
     @tag = URI.decode g[1]['tag']
-    p @tag
     @pb_data = get_pablo(@tag)
-    p @pb_data
     if @pb_data[:posts]
       @pb_data[:posts].each do |d|
-        p d
         @pb_data_page = {
-          uname: [' 📡: ', d['siteName'], d['creator']].join,
+          uname: [d['siteName'], d['creator']].join,
           pid: d['articleId'],
           ptitle: d['title'],
-          ptype: d['infoType'],
+          ptype: 'pablo',
           pdescription: [' 📡: ', d['siteName'], ' 🗺: ', d['area'], ' 📝: ', d['content']].join,
           ptime: d['pubTime'],
           mtime: d['cjTime'],
