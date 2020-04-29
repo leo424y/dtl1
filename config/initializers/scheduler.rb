@@ -45,9 +45,17 @@ s.every '1m' do
 end
 
 s.at '00:00:03' do
-  Page.run_daily_domain_summarize
+  begin
+    Page.run_daily_domain_summarize
+  rescue => error
+    p error
+  end  
 end
 
 s.at '00:00:13' do
-  Page.run_api_pablo
+  begin
+    Page.run_api_pablo
+  rescue => error
+    p error
+  end  
 end
