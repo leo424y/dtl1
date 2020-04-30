@@ -88,7 +88,7 @@ class Page < ApplicationRecord
   end
 
   def self.run_daily_domain_summarize
-    uri = URI "https://#{ENV['ALLOW_DOMAIN']}/pages/count_daily_domain"
+    uri = URI "http://localhost:9999/pages/count_daily_domain"
     request = Net::HTTP.get_response(uri)
     rows_hash = JSON.parse(request.body)['result']
     rows_hash.each do |r|
