@@ -28,15 +28,15 @@ s.every '30m' do
   end
 end
 
-s.every '1d' do 
-  begin
-    Post.pablo_api_import
-  rescue => error
-    p error
-  end  
-end
+# s.every '1d' do 
+#   begin
+#     Post.pablo_api_import
+#   rescue => error
+#     p error
+#   end  
+# end
 
-s.every '1m' do 
+s.every '3m' do 
   begin
     Page.run_api Time.now.strftime('%M').to_i
   rescue => error
@@ -44,7 +44,7 @@ s.every '1m' do
   end  
 end
 
-s.at '00:00:03' do
+s.cron '2 0 * * *' do
   begin
     Page.run_daily_domain_summarize
   rescue => error
@@ -52,7 +52,7 @@ s.at '00:00:03' do
   end  
 end
 
-s.at '00:00:13' do
+s.cron '13 0 * * *' do
   begin
     Page.run_api_pablo
   rescue => error
@@ -61,7 +61,7 @@ s.at '00:00:13' do
 end
 
 
-s.at '00:00:24' do
+s.cron '23 0 * * *' do
   begin
     Page.run_api_serp
   rescue => error
