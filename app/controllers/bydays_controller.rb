@@ -4,7 +4,12 @@ class BydaysController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   include Response
-  def index 
+  def index
+    @selected_date = params[:date].to_date
+    @name = params[:name]
+    @byday = Byday.where(created_at: @selected_date.beginning_of_day..@selected_date.end_of_day)
+    @byday = @byday.where("name LIKE ?", "%#{@name}%") if @name
+    json_response(@byday)
   end
 
   def create
