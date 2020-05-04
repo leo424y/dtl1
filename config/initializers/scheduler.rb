@@ -59,3 +59,12 @@ s.at '00:00:13' do
     p error
   end  
 end
+
+
+s.at '00:00:24' do
+  begin
+    Page.run_api_serp
+  rescue => error
+    p error
+  end  
+end

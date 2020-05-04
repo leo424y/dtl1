@@ -37,6 +37,22 @@ class Page < ApplicationRecord
     end
   end
 
+  def self.run_api_serp
+    @gene = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d'))
+    @gene.each_with_index do |g,i|
+      if i < 10
+        tag = CGI.unescape g[1]['tag']
+        api_add = "#{ENV['SERP_API']}?type=add&keyword="
+        api_delete = "#{ENV['SERP_API']}?type=delete&keyword="
+        delete_tag = '各地分網'
+        Net::HTTP.get_response(URI.parse(api_add + CGI.escape(tag)))
+        Net::HTTP.get_response(URI.parse(api_delete + CGI.escape(delete_tag)))
+        Net::HTTP.get_response(URI.parse(api_add + CGI.escape(Tradsim::to_sim tag)))
+        Net::HTTP.get_response(URI.parse(api_delete + CGI.escape(Tradsim::to_sim delete_tag)))
+      end
+    end
+  end
+
   def self.run_api_pablo
     @gene = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d'))
     @gene.each do |g|
