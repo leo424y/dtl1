@@ -108,7 +108,10 @@ class Page < ApplicationRecord
     request = Net::HTTP.get_response(uri)
     rows_hash = JSON.parse(request.body)['result']
     rows_hash.each do |r|
-      Byday.create(name: r[0], data: r[1]) if r[1].to_i > 9
+      if r[1].to_i > 9
+        Byday.create(name: r[0], data: r[1]) 
+        %x(curl -X POST -H "Content-Type: application/json" -d '{"name": "#{r[0]}","data": "#{r[1]}"}' #{ENV['DTL_API']}/bydays)
+      end
     end
   end
 end
