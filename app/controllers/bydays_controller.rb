@@ -5,10 +5,9 @@ class BydaysController < ApplicationController
 
   include Response
   def index
-    @selected_date = params[:date].to_date
-    @name = params[:name]
-    @byday = Byday.where(created_at: @selected_date.beginning_of_day..@selected_date.end_of_day)
-    @byday = @byday.where("name LIKE ?", "%#{@name}%") if @name
+    @byday = (params[:name] || params[:date]) ? Byday.all : Byday.none
+    @byday = @byday.where(created_at: params[:date].to_date.beginning_of_day..params[:date].to_date.end_of_day) if params[:date]
+    @byday = @byday.where("name LIKE ?", "%#{params[:name]}%") if params[:name]
     json_response(@byday)
   end
 
