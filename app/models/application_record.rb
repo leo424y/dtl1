@@ -59,6 +59,9 @@ class ApplicationRecord < ActiveRecord::Base
     description_trad = description.map{|x| "%#{Tradsim::to_trad x}%"}
 
     if description.present?
+      # where("
+      #   #{search_column} LIKE ALL(ARRAY[:description]) 
+      #   ", description: description_orig)
       where("
         #{search_column} LIKE ALL(ARRAY[:description]) OR 
         #{search_column} LIKE ALL(ARRAY[:s]) OR

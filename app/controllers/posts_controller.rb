@@ -37,6 +37,8 @@ class PostsController < ApplicationController
 
     @posts = (params[:url].present? || params[:description].present? || params[:start_date].present? || params[:end_date].present? ? Post.all : Post.none)
 
+    # @posts = @posts.where("length(title) > 299").where("length(title) < 501")
+
     @posts = @posts.search(params[:url]) if params[:url].present?
 
     if params[:description].present?
