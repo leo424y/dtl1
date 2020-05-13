@@ -40,7 +40,7 @@ class Page < ApplicationRecord
   def self.run_api_serp
     @gene = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d'))
     @gene.each_with_index do |g,i|
-      if i < 10
+      if i < 5
         tag = CGI.unescape g[1]['tag']
         api_add = "#{ENV['SERP_API']}?type=add&keyword="
         api_delete = "#{ENV['SERP_API']}?type=delete&keyword="
