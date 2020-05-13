@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+include ApplicationHelper
 
 class Page < ApplicationRecord
   validates_uniqueness_of :url
@@ -40,8 +41,8 @@ class Page < ApplicationRecord
   def self.run_api_serp
     @gene = Gene.import('tag_hot_rank.php', date: Date.today.strftime('%Y-%m-%d'))
     @gene.each_with_index do |g,i|
-      if i < 5
-        tag = CGI.unescape g[1]['tag']
+      tag = CGI.unescape g[1]['tag'] if g[1]['tag']
+      if (i < 30) && (ApplicationHelper.is_a_name tag)
         api_add = "#{ENV['SERP_API']}?type=add&keyword="
         api_delete = "#{ENV['SERP_API']}?type=delete&keyword="
         delete_tag = '各地分網'
