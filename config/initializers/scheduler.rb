@@ -36,7 +36,7 @@ end
 #   end  
 # end
 
-s.every '3m' do 
+s.every '6m' do 
   begin
     Page.run_api Time.now.strftime('%M').to_i
   rescue => error
