@@ -61,10 +61,10 @@ s.cron '13 0 * * *' do
 end
 
 
-s.cron '23 0 * * *' do
-  begin
-    Page.run_api_serp
-  rescue => error
-    p error
-  end  
-end
+# s.cron '23 0 * * *' do
+#   begin
+#     Page.run_api_serp
+#   rescue => error
+#     p error
+#   end  
+# end
