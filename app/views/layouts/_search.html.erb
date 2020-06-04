@@ -1,6 +1,6 @@
 <% params[:start_date] ||= Date.today %>
 <% params[:end_date] ||= Date.today %>
-<% title params.values[0..-2].join(' - ') %>
+<% to_title params.values[0..-2].join(' - ') %>
 <% if params[:start_date] || params[:end_date] %>
 <%= date_field_tag :start_date, params[:start_date] %> ~
 <%= date_field_tag :end_date, params[:end_date] %>

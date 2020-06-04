@@ -31,7 +31,7 @@ module ApplicationHelper
     "#{request.base_url}/fin/#{model.chomp('s')}/#{id}"
   end
 
-  def title(text)
+  def to_title(text)
     content_for :title, text
   end
 
